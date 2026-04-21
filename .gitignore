@@ -1,0 +1,30 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor droppings
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (just in case a future build step needs it)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Secrets — nothing with credentials should ever be in this repo
+.secrets/
+.env
+.env.*
+*.pem
+*.key
+
+# Wrangler local state
+.wrangler/
+.dev.vars
+
+# Cloudflare Pages will ignore these, but belt-and-suspenders
+_cache/
+.cache/
