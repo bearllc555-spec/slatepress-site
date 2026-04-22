@@ -209,8 +209,8 @@
   @keyframes marq{to{transform:translateX(-50%)}}
 
   /* === METHOD (pinned, scroll-driven) === */
-  .method{position:relative;background:var(--cream);padding-top:80px;scroll-margin-top:20px}
-  .method-eyebrow{padding:40px 0 24px;display:flex;align-items:center;gap:12px}
+  .method{position:relative;background:var(--cream);padding-top:20px;scroll-margin-top:0}
+  .method-eyebrow{padding:12px 0 20px;display:flex;align-items:center;gap:12px}
   .method-title{font-size:clamp(48px,6vw,104px);line-height:.95;letter-spacing:-.02em;font-weight:400;max-width:1000px;margin-bottom:80px}
   .method-title em{font-style:italic;color:var(--ochre)}
   .method-stage{position:relative;height:auto}
@@ -253,7 +253,7 @@
   .art-type .ln.accent{background:var(--ochre);height:20px;width:40%}
 
   /* === WORK GALLERY (draggable / hover-peel) === */
-  .work{padding:160px 0 40px;position:relative}
+  .work{padding:20px 0 40px;position:relative;scroll-margin-top:0}
   .work-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
   .work-head h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;max-width:820px}
   .work-head h2 em{font-style:italic;color:var(--ochre)}
@@ -343,6 +343,8 @@
   .blr-title{font-size:32px;line-height:1.2;letter-spacing:-.01em;color:rgba(245,239,223,.45);transition:color .4s}
   .blr-row.on .blr-title,.blr-row:hover .blr-title{color:var(--cream)}
   .blr-title em{font-style:italic}
+  .blr-title .chr{display:inline-block;opacity:0;transform:translateY(10px);transition:opacity .45s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.2,.8,.2,1)}
+  .blr-title .chr.revealed{opacity:1;transform:translateY(0)}
   .blr-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,239,223,.35);text-align:right}
 
   .blr-preview{position:absolute;right:0;top:0;width:100%;max-width:600px;aspect-ratio:16/10;background:var(--paper);border-radius:4px;color:var(--ink);overflow:hidden;box-shadow:0 40px 100px -20px rgba(0,0,0,.7);transition:top .45s cubic-bezier(.2,.8,.2,1);will-change:top}
@@ -364,7 +366,7 @@
   .blr-slide ul li::before{content:"";width:8px;height:8px;background:var(--ochre);flex:none;translate:0 2px}
 
   /* === PRICING (tilt + magnetic) === */
-  .pricing{padding:180px 0 140px;background:var(--paper);position:relative}
+  .pricing{padding:20px 0 140px;background:var(--paper);position:relative;scroll-margin-top:0}
   .pr-head{margin-bottom:70px}
   .pr-head h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;max-width:820px}
   .pr-head h2 em{font-style:italic;color:var(--ochre)}
@@ -393,7 +395,7 @@
   .pr-card.feat .pr-cta:hover{background:var(--ochre);border-color:var(--ochre);color:var(--cream)}
 
   /* === VOICES (testimonial carousel — interactive) === */
-  .voices{padding:160px 0;background:var(--cream)}
+  .voices{padding:20px 0;background:var(--cream);scroll-margin-top:0}
   .voices h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;margin-bottom:60px;max-width:1000px}
   .voices h2 em{font-style:italic;color:var(--ochre)}
   .voices-stage{position:relative;height:360px;margin-bottom:40px}
@@ -416,7 +418,7 @@
   .vc-arr:hover{background:var(--ink);color:var(--cream);transform:translateY(-2px)}
 
   /* === FAQ === */
-  .faq{padding:160px 0 180px;background:var(--paper)}
+  .faq{padding:20px 0 180px;background:var(--paper);scroll-margin-top:0}
   .faq h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;margin-bottom:70px;max-width:900px}
   .faq h2 em{font-style:italic;color:var(--ochre)}
   .fq{border-top:1px solid var(--rule);overflow:hidden}
@@ -497,8 +499,9 @@
   .cl-card label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
   .cl-card input{width:100%;padding:16px 18px;background:transparent;border:1px solid var(--rule);border-radius:2px;font-family:'Fraunces',serif;font-size:17px;color:var(--ink);outline:none;transition:border-color .3s}
   .cl-card input:focus{border-color:var(--ink)}
-  .cl-card .sub{margin-top:16px;width:100%;padding:16px;background:var(--ink);color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:none;border-radius:2px;transition:background .3s}
-  .cl-card .sub:hover{background:var(--ochre)}
+  .cl-card .sub{margin-top:16px;width:100%;padding:16px;background:var(--ink);color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;border-radius:2px;position:relative;overflow:hidden;isolation:isolate;transition:color .35s}
+  .cl-card .sub::before{content:"";position:absolute;inset:0;background:var(--ochre);transform:translateY(101%);transition:transform .5s cubic-bezier(.7,0,.2,1);z-index:-1}
+  .cl-card .sub:hover::before{transform:translateY(0)}
   .cl-card .fine{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.5}
 
   /* mobile sanity */
@@ -592,20 +595,21 @@
     .film-rule{flex-direction:column;align-items:flex-start;gap:6px;font-size:10px}
 
     /* METHOD */
-    .method{padding-top:60px}
+    .method{padding-top:60px;overflow:hidden}
     .method-eyebrow{padding:20px 24px 16px}
-    .method-title{font-size:clamp(40px,10vw,72px) !important;margin-bottom:40px;padding:0 24px}
-    .method-stage{height:auto}
-    .method-sticky{position:relative;height:auto;padding:20px 0 60px}
-    .method-grid{grid-template-columns:1fr !important;gap:32px !important;padding:0 24px}
-    .mth-left .mth-num{font-size:48px}
-    .mth-head{font-size:32px !important;max-width:100% !important}
-    .mth-body{font-size:15px !important;max-width:100% !important}
-    .mth-meta{flex-direction:column;gap:10px !important;align-items:flex-start !important}
-    .mth-stepper{flex-wrap:wrap;gap:10px !important}
-    .mth-step{min-width:0;padding:10px 14px;font-size:10px}
-    .mth-right{min-height:360px}
-    .mth-card{height:360px !important;transform:none !important}
+    .method-title{font-size:clamp(32px,8vw,56px) !important;margin-bottom:32px;padding:0 24px}
+    .method-stage{height:auto;overflow:hidden}
+    .method-sticky{position:relative;height:auto;padding:20px 0 40px;overflow:hidden}
+    .method-grid{grid-template-columns:1fr !important;gap:24px !important;padding:0 24px;max-width:100%;overflow:hidden}
+    .mth-left{max-width:100%;overflow:hidden}
+    .mth-left .mth-num{font-size:40px}
+    .mth-head{font-size:26px !important;max-width:100% !important}
+    .mth-body{font-size:14px !important;max-width:100% !important;line-height:1.55}
+    .mth-meta{flex-direction:column;gap:8px !important;align-items:flex-start !important;font-size:9px}
+    .mth-stepper{flex-wrap:wrap;gap:8px !important;margin-top:20px !important}
+    .mth-step{min-width:0;padding:8px 12px;font-size:9px;border-radius:999px}
+    .mth-right{min-height:0;padding:0 !important;max-width:100%;overflow:hidden}
+    .mth-card{width:100% !important;max-width:100% !important;height:260px !important;transform:none !important;padding:24px !important}
 
     /* WORK */
     .work{padding:100px 0 40px}
@@ -695,6 +699,129 @@
     .blr-title{font-size:16px !important}
   }
 
+
+  /* ===== DARK MODE ===== */
+  [data-theme="dark"]{
+    --cream: #111010;
+    --cream-2: #1a1918;
+    --paper: #161412;
+    --ink: #efe7d6;
+    --ink-2: #e6dcc6;
+    --ink-soft: #c8bfad;
+    --muted: #7a7570;
+    --rule: #2e2b27;
+    --ochre: #d98937;
+    --ochre-soft: #c2661a;
+  }
+
+  /* Pin intentionally-dark elements so they don't invert */
+  [data-theme="dark"] .builder{background:#0f0e0b !important;color:#efe7d6}
+  [data-theme="dark"] .builder-head h2{color:#efe7d6}
+  [data-theme="dark"] .blr-row{border-top-color:rgba(245,239,223,.1)}
+  [data-theme="dark"] .blr-row:last-child{border-bottom-color:rgba(245,239,223,.1)}
+  [data-theme="dark"] .blr-title{color:rgba(245,239,223,.45)}
+  [data-theme="dark"] .blr-row.on .blr-title, [data-theme="dark"] .blr-row:hover .blr-title{color:#efe7d6}
+  [data-theme="dark"] .blr-num{color:rgba(245,239,223,.4)}
+  [data-theme="dark"] .blr-tag{color:rgba(245,239,223,.35)}
+  [data-theme="dark"] .blr-preview{background:#f5efdf;color:#15171a}
+
+  [data-theme="dark"] .wk-card{background:#15171a;color:#efe7d6}
+  [data-theme="dark"] .wk-reveal{background:#f5efdf;color:#15171a}
+  [data-theme="dark"] .wk-reveal h3{color:#15171a}
+  [data-theme="dark"] .wk-reveal p{color:#3a3d42}
+  [data-theme="dark"] .wk-tag{background:#e6dcc6;color:#3a3d42}
+
+  [data-theme="dark"] .specimen{background:#15171a;color:#efe7d6}
+
+  [data-theme="dark"] .pr-card.feat{background:#15171a !important;color:#efe7d6 !important;border-color:#15171a !important}
+  [data-theme="dark"] .pr-card.feat .pr-list li{color:rgba(245,239,223,.75)}
+  [data-theme="dark"] .pr-card.feat .pr-cta{border-color:#efe7d6;color:#efe7d6}
+  [data-theme="dark"] .pr-card.feat .pr-cta:hover{background:var(--ochre);border-color:var(--ochre);color:#efe7d6}
+  [data-theme="dark"] .pr-card.feat .pr-price .cur{color:rgba(245,239,223,.5)}
+  [data-theme="dark"] .pr-card.feat .pr-cap{color:rgba(245,239,223,.5)}
+  [data-theme="dark"] .pr-card.feat .pr-kk{color:var(--ochre-soft)}
+
+  [data-theme="dark"] .mth-card{background:#15171a}
+
+  [data-theme="dark"] section#cta.cta{background:#0f0e0b}
+
+  /* Nav mobile drawer */
+  [data-theme="dark"] .nav-links{background:var(--cream)}
+
+  /* Logo chip */
+  [data-theme="dark"] .logo-chip{background:var(--cream-2)}
+  [data-theme="dark"] .logo-chip .mk-grid rect{fill:var(--ink)}
+
+  /* Nav CTA button */
+    [data-theme="dark"] .btn.ghost{color:var(--ink);background:#2e2b27;padding:12px 18px;border-radius:2px}
+  [data-theme="dark"] .btn.ghost .underline::after{background:var(--ink)}
+  [data-theme="dark"] .btn.ghost:hover{color:var(--ochre);background:#3a3530}
+  [data-theme="dark"] .btn.ghost:hover .underline::after{background:var(--ochre)}
+[data-theme="dark"] .nav-cta{background:var(--ink);color:var(--cream)}
+  [data-theme="dark"] .nav-cta:hover{background:var(--ochre)}
+
+  /* Main CTAs */
+  [data-theme="dark"] .btn{background:var(--ink);color:var(--cream)}
+  [data-theme="dark"] .btn::before{background:var(--ochre)}
+
+  /* Checklist card */
+  [data-theme="dark"] .cl-card{background:var(--cream-2);border-color:var(--rule)}
+  [data-theme="dark"] .cl-card input{color:var(--ink);border-color:var(--rule)}
+  [data-theme="dark"] .cl-card .sub{background:var(--ink);color:var(--cream)}
+
+  /* Film poster */
+  [data-theme="dark"] .film-poster{background:linear-gradient(135deg,#0a0908 0%,#050403 100%)}
+
+  /* Testimonial avatars */
+  [data-theme="dark"] .vc-av{background:var(--cream-2)}
+
+  /* Siderail */
+  [data-theme="dark"] .siderail a{border-color:var(--ink)}
+  [data-theme="dark"] .siderail a.on{background:var(--ink)}
+  [data-theme="dark"] .siderail a::after{color:var(--ink);background:var(--cream);border-color:var(--rule)}
+
+  /* Work progress */
+  [data-theme="dark"] .work-progress{background:var(--rule)}
+  [data-theme="dark"] .work-progress::after{background:var(--ink)}
+
+  /* PR card non-featured — light in dark mode */
+  [data-theme="dark"] .pr-card:not(.feat){background:#f5efdf;border-color:#cdc3ab;color:#15171a}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-list li{color:#3a3d42}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-cta{border-color:#15171a;color:#15171a}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-cta:hover{background:#15171a;color:#f5efdf}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-kk{color:var(--ochre)}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-name{color:#15171a}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-price{color:#15171a}
+  [data-theme="dark"] .pr-card:not(.feat) .pr-cap{color:#6b6a63}
+  /* Featured card — warm grey in dark mode */
+  [data-theme="dark"] .pr-card.feat{background:#2e2b27 !important;color:#efe7d6 !important;border-color:#3a3530 !important}
+  [data-theme="dark"] .pr-card.feat .pr-tag{background:var(--ochre);color:#f5efdf}
+
+  /* FAQ icon */
+  [data-theme="dark"] .fq .fq-icon::before,[data-theme="dark"] .fq .fq-icon::after{background:var(--ink)}
+  [data-theme="dark"] .fq[open] .fq-icon::before,[data-theme="dark"] .fq[open] .fq-icon::after{background:var(--cream)}
+  [data-theme="dark"] .fq[open] .fq-icon{border-color:var(--ochre)}
+
+  /* Checklist card top rule */
+  [data-theme="dark"] .cl-card::before{background:var(--ochre)}
+
+  /* Theme toggle button */
+  .theme-toggle{
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--rule);background:transparent;
+    display:inline-flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--ink);
+    transition:border-color .3s, background .3s, color .3s, transform .3s;
+    flex:none;
+  }
+  .theme-toggle:hover{border-color:var(--ink);background:var(--ink);color:var(--cream);transform:rotate(20deg)}
+  .theme-toggle svg{width:16px;height:16px;transition:opacity .3s}
+  .theme-toggle .icon-sun{display:none}
+  .theme-toggle .icon-moon{display:block}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:none}
+  [data-theme="dark"] .theme-toggle:hover{background:var(--ink);color:var(--cream-2)}
+
   </style>
 </head>
 <body>
@@ -738,7 +865,11 @@
     <a href="#pricing" class="nav-link">Pricing</a>
     <a href="#voices" class="nav-link">Voices</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="https://slatepress.co/blog/" class="nav-link" target="_blank" rel="noopener">Blog</a>
+    <a href="blog/index.html" class="nav-link">Blog</a>
+    <button class="theme-toggle" id="themeToggleDesktop" type="button" aria-label="Toggle dark mode" style="margin-right:4px">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
     <a href="#cta" class="nav-cta" data-cursor="write" data-contact-modal>Start a project <span>→</span></a>
   </nav>
 </header>
@@ -829,7 +960,7 @@
           <p>The launch film walks through why Slatepress exists and what we ship — ten slides, one idea each, version-controlled in code, exported to PowerPoint, PDF, or the web in seconds.</p>
           <div class="film-rule">
             <span><b>If you're raising</b> · send us your draft</span>
-            <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>
+            <a href="mailto:hello@slatepress.co" data-contact-modal>hello@slatepress.co</a>
           </div>
         </div>
       </div>
@@ -1449,13 +1580,18 @@
     <h2 class="cta-huge reveal d1" id="ctaHuge">
       <span class="sw">Let's</span> <span class="sw ital" style="font-style:italic;color:var(--ochre)">talk.</span>
     </h2>
-    <a href="mailto:hello@slatepress.co" class="cta-mail reveal d2" data-cursor="write">hello@slatepress.co</a>
+    <a href="mailto:hello@slatepress.co" data-contact-modal class="cta-mail reveal d2" data-cursor="write">hello@slatepress.co</a>
     <p class="cta-sub reveal d3 type-in fast">Tell us what you're raising, when you're pitching, and what about the current deck isn't landing. We'll reply with a read on whether we're a fit — usually same day.</p>
 
     <div class="footer">
       <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
-      <div>LinkedIn · X.com · Substack · RSS</div>
-      <div><a href="mailto:hello@slatepress.co" data-cursor="write">hello@slatepress.co →</a></div>
+      <div>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> ·
+        <a href="https://x.com" target="_blank" rel="noopener">X.com</a> ·
+        <a href="https://substack.com" target="_blank" rel="noopener">Substack</a> ·
+        <a href="https://slatepress.co" target="_blank" rel="noopener">RSS</a>
+      </div>
+      <div><a href="mailto:hello@slatepress.co" data-contact-modal data-cursor="write">hello@slatepress.co →</a></div>
     </div>
   </div>
 </section>
@@ -1884,6 +2020,43 @@ function scramble(el, target, dur=600){
   const grid = document.querySelector('#builder .builder-grid');
   if (!preview || !list || !grid) return;
 
+  // Split each .blr-title into .chr spans (once)
+  rows.forEach(row => {
+    const title = row.querySelector('.blr-title');
+    if (!title || title.dataset.split) return;
+    title.dataset.split = '1';
+    const wrapChars = (node) => {
+      if (node.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        [...node.textContent].forEach(c => {
+          const sp = document.createElement('span');
+          sp.className = 'chr';
+          sp.textContent = c === ' ' ? ' ' : c;
+          frag.appendChild(sp);
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === 1){
+        [...node.childNodes].forEach(wrapChars);
+      }
+    };
+    [...title.childNodes].forEach(wrapChars);
+  });
+
+  // Scroll-triggered letter reveal — fires once per row as it enters viewport
+  function revealRowTitle(row){
+    if (row.dataset.titleRevealed) return;
+    row.dataset.titleRevealed = '1';
+    const chars = row.querySelectorAll('.blr-title .chr');
+    chars.forEach((c, i) => {
+      c.style.transitionDelay = (i * 0.038) + 's';
+      requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('revealed')));
+    });
+  }
+  const rowIO = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) revealRowTitle(e.target); });
+  }, {threshold: 0.3, rootMargin: '0px 0px -60px 0px'});
+  rows.forEach(r => rowIO.observe(r));
+
   let cur = 0;
   function set(i){
     if (i === cur) return; cur = i;
@@ -2126,10 +2299,23 @@ function scramble(el, target, dur=600){
   window.addEventListener('resize', () => { if (window.innerWidth > 860) setOpen(false); });
 })();
 </script>
-
-<!-- =================== CONTACT MODAL =================== -->
-<!-- Auto-binds to [data-contact-modal] and mailto:hello@slatepress.co links.
-     Submits to Formspree (hello@slatepress.co), no backend required. -->
 <script defer src="/assets/contact-modal.js?v=26"></script>
+<script>
+/* ===== THEME TOGGLE ===== */
+(() => {
+  const root = document.documentElement;
+  const btns = document.querySelectorAll('.theme-toggle');
+  const saved = localStorage.getItem('sp-theme') || 'light';
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('sp-theme', next);
+    });
+  });
+})();
+</script>
 </body>
 </html>
