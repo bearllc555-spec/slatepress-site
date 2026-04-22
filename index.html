@@ -739,7 +739,7 @@
     <a href="#voices" class="nav-link">Voices</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <a href="https://slatepress.co/blog/" class="nav-link" target="_blank" rel="noopener">Blog</a>
-    <a href="#cta" class="nav-cta" data-cursor="write">Start a project <span>→</span></a>
+    <a href="#cta" class="nav-cta" data-cursor="write" data-contact-modal>Start a project <span>→</span></a>
   </nav>
 </header>
 
@@ -759,7 +759,7 @@
   <p class="hero-sub reveal d2">Pixel-perfect, infinitely iterable, delivered in days — <em>not weeks.</em> For founders who read the deck as part of the pitch, and investors who notice the typography.</p>
 
   <div class="hero-cta-row reveal d3">
-    <a class="btn" href="#cta" data-cursor="write"><span>Start a project</span><span class="arr">→</span></a>
+    <a class="btn" href="#cta" data-cursor="write" data-contact-modal><span>Start a project</span><span class="arr">→</span></a>
     <a class="btn ghost" href="#work" data-cursor="peek"><span class="underline">See the work</span></a>
   </div>
 
@@ -1293,7 +1293,7 @@
           <li>Two-day turnaround on first draft</li>
           <li>Editable by you in PowerPoint or Keynote</li>
         </ul>
-        <a class="pr-cta" href="#cta" data-cursor="write">Start Essential →</a>
+        <a class="pr-cta" href="#cta" data-cursor="write" data-contact-modal>Start Essential →</a>
       </article>
 
       <article class="pr-card feat reveal d2" data-tilt>
@@ -1309,7 +1309,7 @@
           <li>Mobile-responsive investor link</li>
           <li>Light narrative support (structure &amp; copy)</li>
         </ul>
-        <a class="pr-cta" href="#cta" data-cursor="write">Start Studio →</a>
+        <a class="pr-cta" href="#cta" data-cursor="write" data-contact-modal>Start Studio →</a>
       </article>
 
       <article class="pr-card reveal d3" data-tilt>
@@ -1324,7 +1324,7 @@
           <li>Figma handoff for in-house iteration</li>
           <li>Direct collaboration with your board or advisors</li>
         </ul>
-        <a class="pr-cta" href="#cta" data-cursor="write">Start Bespoke →</a>
+        <a class="pr-cta" href="#cta" data-cursor="write" data-contact-modal>Start Bespoke →</a>
       </article>
     </div>
   </div>
@@ -2126,5 +2126,10 @@ function scramble(el, target, dur=600){
   window.addEventListener('resize', () => { if (window.innerWidth > 860) setOpen(false); });
 })();
 </script>
+
+<!-- =================== CONTACT MODAL =================== -->
+<!-- Auto-binds to [data-contact-modal] and mailto:hello@slatepress.co links.
+     Submits to Formspree (hello@slatepress.co), no backend required. -->
+<script defer src="/assets/contact-modal.js?v=26"></script>
 </body>
 </html>
