@@ -92,8 +92,8 @@
   .post-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:6px;line-height:1.6}
   .post-card h2{font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-.015em;font-weight:400;color:var(--ink);margin:0 0 18px;max-width:28ch;transition:color .3s,text-decoration-color .3s;text-decoration:line-through;text-decoration-color:transparent;text-decoration-thickness:2px;text-underline-offset:0}
   .post-card p{font-size:17px;line-height:1.6;color:var(--ink-soft);max-width:56ch;margin:0}
-  .post-card:visited h2{text-decoration-color:var(--ink)}
-  .post-card:visited:hover h2{text-decoration-color:var(--ochre)}
+  .post-card.read h2{text-decoration-color:var(--ink)}
+  .post-card.read:hover h2{text-decoration-color:var(--ochre)}
   .post-tag{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);margin-top:20px}
   .post-tag::before{content:"";width:6px;height:6px;background:var(--ochre);border-radius:50%;flex:none}
   .post-read{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);margin-top:20px;transition:gap .3s}
@@ -304,5 +304,6 @@
 })();
 </script>
 <script defer src="/assets/contact-modal.js?v=26"></script>
+<script defer src="/assets/blog-read.js?v=55"></script>
 </body>
 </html>
