@@ -209,8 +209,8 @@
   @keyframes marq{to{transform:translateX(-50%)}}
 
   /* === METHOD (pinned, scroll-driven) === */
-  .method{position:relative;background:var(--cream);padding-top:20px;scroll-margin-top:0}
-  .method-eyebrow{padding:12px 0 20px;display:flex;align-items:center;gap:12px}
+  .method{position:relative;background:var(--cream);padding-top:80px;scroll-margin-top:20px}
+  .method-eyebrow{padding:40px 0 24px;display:flex;align-items:center;gap:12px}
   .method-title{font-size:clamp(48px,6vw,104px);line-height:.95;letter-spacing:-.02em;font-weight:400;max-width:1000px;margin-bottom:80px}
   .method-title em{font-style:italic;color:var(--ochre)}
   .method-stage{position:relative;height:auto}
@@ -253,7 +253,7 @@
   .art-type .ln.accent{background:var(--ochre);height:20px;width:40%}
 
   /* === WORK GALLERY (draggable / hover-peel) === */
-  .work{padding:20px 0 40px;position:relative;scroll-margin-top:0}
+  .work{padding:160px 0 40px;position:relative}
   .work-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
   .work-head h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;max-width:820px}
   .work-head h2 em{font-style:italic;color:var(--ochre)}
@@ -364,7 +364,7 @@
   .blr-slide ul li::before{content:"";width:8px;height:8px;background:var(--ochre);flex:none;translate:0 2px}
 
   /* === PRICING (tilt + magnetic) === */
-  .pricing{padding:20px 0 140px;background:var(--paper);position:relative;scroll-margin-top:0}
+  .pricing{padding:180px 0 140px;background:var(--paper);position:relative}
   .pr-head{margin-bottom:70px}
   .pr-head h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;max-width:820px}
   .pr-head h2 em{font-style:italic;color:var(--ochre)}
@@ -393,7 +393,7 @@
   .pr-card.feat .pr-cta:hover{background:var(--ochre);border-color:var(--ochre);color:var(--cream)}
 
   /* === VOICES (testimonial carousel — interactive) === */
-  .voices{padding:20px 0;background:var(--cream);scroll-margin-top:0}
+  .voices{padding:160px 0;background:var(--cream)}
   .voices h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;margin-bottom:60px;max-width:1000px}
   .voices h2 em{font-style:italic;color:var(--ochre)}
   .voices-stage{position:relative;height:360px;margin-bottom:40px}
@@ -416,7 +416,7 @@
   .vc-arr:hover{background:var(--ink);color:var(--cream);transform:translateY(-2px)}
 
   /* === FAQ === */
-  .faq{padding:20px 0 180px;background:var(--paper);scroll-margin-top:0}
+  .faq{padding:160px 0 180px;background:var(--paper)}
   .faq h2{font-size:clamp(48px,6vw,96px);line-height:.96;letter-spacing:-.02em;font-weight:400;margin-bottom:70px;max-width:900px}
   .faq h2 em{font-style:italic;color:var(--ochre)}
   .fq{border-top:1px solid var(--rule);overflow:hidden}
@@ -592,21 +592,20 @@
     .film-rule{flex-direction:column;align-items:flex-start;gap:6px;font-size:10px}
 
     /* METHOD */
-    .method{padding-top:60px;overflow:hidden}
+    .method{padding-top:60px}
     .method-eyebrow{padding:20px 24px 16px}
-    .method-title{font-size:clamp(32px,8vw,56px) !important;margin-bottom:32px;padding:0 24px}
-    .method-stage{height:auto;overflow:hidden}
-    .method-sticky{position:relative;height:auto;padding:20px 0 40px;overflow:hidden}
-    .method-grid{grid-template-columns:1fr !important;gap:24px !important;padding:0 24px;max-width:100%;overflow:hidden}
-    .mth-left{max-width:100%;overflow:hidden}
-    .mth-left .mth-num{font-size:40px}
-    .mth-head{font-size:26px !important;max-width:100% !important}
-    .mth-body{font-size:14px !important;max-width:100% !important;line-height:1.55}
-    .mth-meta{flex-direction:column;gap:8px !important;align-items:flex-start !important;font-size:9px}
-    .mth-stepper{flex-wrap:wrap;gap:8px !important;margin-top:20px !important}
-    .mth-step{min-width:0;padding:8px 12px;font-size:9px;border-radius:999px}
-    .mth-right{min-height:0;padding:0 !important;max-width:100%;overflow:hidden}
-    .mth-card{width:100% !important;max-width:100% !important;height:260px !important;transform:none !important;padding:24px !important}
+    .method-title{font-size:clamp(40px,10vw,72px) !important;margin-bottom:40px;padding:0 24px}
+    .method-stage{height:auto}
+    .method-sticky{position:relative;height:auto;padding:20px 0 60px}
+    .method-grid{grid-template-columns:1fr !important;gap:32px !important;padding:0 24px}
+    .mth-left .mth-num{font-size:48px}
+    .mth-head{font-size:32px !important;max-width:100% !important}
+    .mth-body{font-size:15px !important;max-width:100% !important}
+    .mth-meta{flex-direction:column;gap:10px !important;align-items:flex-start !important}
+    .mth-stepper{flex-wrap:wrap;gap:10px !important}
+    .mth-step{min-width:0;padding:10px 14px;font-size:10px}
+    .mth-right{min-height:360px}
+    .mth-card{height:360px !important;transform:none !important}
 
     /* WORK */
     .work{padding:100px 0 40px}
@@ -739,7 +738,7 @@
     <a href="#pricing" class="nav-link">Pricing</a>
     <a href="#voices" class="nav-link">Voices</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="/blog/" class="nav-link" target="_blank" rel="noopener">Blog</a>
+    <a href="https://slatepress.co/blog/" class="nav-link" target="_blank" rel="noopener">Blog</a>
     <a href="#cta" class="nav-cta" data-cursor="write" data-contact-modal>Start a project <span>→</span></a>
   </nav>
 </header>
@@ -830,7 +829,7 @@
           <p>The launch film walks through why Slatepress exists and what we ship — ten slides, one idea each, version-controlled in code, exported to PowerPoint, PDF, or the web in seconds.</p>
           <div class="film-rule">
             <span><b>If you're raising</b> · send us your draft</span>
-            <a href="mailto:hello@slatepress.co" data-contact-modal>hello@slatepress.co</a>
+            <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>
           </div>
         </div>
       </div>
@@ -1456,7 +1455,7 @@
     <div class="footer">
       <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
       <div>LinkedIn · X.com · Substack · RSS</div>
-      <div><a href="mailto:hello@slatepress.co" data-contact-modal data-cursor="write">hello@slatepress.co →</a></div>
+      <div><a href="mailto:hello@slatepress.co" data-cursor="write">hello@slatepress.co →</a></div>
     </div>
   </div>
 </section>

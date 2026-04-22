@@ -1,453 +1,318 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>How to vet a pitch deck design agency — Slatepress</title>
-  <meta name="description" content="Three tests to run on any pitch deck design agency before you send money — plus teardowns of three of the top Google results for the keyword." />
-  <meta property="og:title" content="How to vet a pitch deck design agency: three tests, three teardowns." />
-  <meta property="og:description" content="Three tests to run on any pitch deck design agency before you send money — plus teardowns of three of the top Google results." />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://slatepress.co/blog/how-to-vet-a-pitch-deck-agency/" />
-  <meta property="og:image" content="https://slatepress.co/assets/keelhaul-cover.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="article:published_time" content="2026-04-19" />
-  <meta name="author" content="Slatepress" />
-  <link rel="canonical" href="https://slatepress.co/blog/how-to-vet-a-pitch-deck-agency/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23C2720D'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --ink:       #14181F;
-      --ink-soft:  #2A2F39;
-      --cream:     #F5F1E8;
-      --cream-deep:#EBE5D4;
-      --amber:     #C2720D;
-      --amber-lt:  #E8A84D;
-      --muted:     #6E6B66;
-      --hairline:  #C9C2B1;
-      --white:     #FFFFFF;
-      --f-serif:   Georgia, "Times New Roman", serif;
-      --f-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      --max:       1240px;
-      --max-prose: 680px;
-      --gutter:    clamp(20px, 5vw, 72px);
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: var(--f-sans);
-      font-size: 18px;
-      line-height: 1.65;
-      color: var(--ink-soft);
-      background: var(--cream);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    a { color: var(--amber); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s ease; }
-    a:hover { border-bottom-color: var(--amber); }
-    img { max-width: 100%; display: block; }
-
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-    .prose { max-width: var(--max-prose); margin: 0 auto; }
-
-    /* ---------- top bar ---------- */
-    .topbar { padding: 28px 0 0; }
-    .topbar-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .topbar-row a { color: var(--muted); text-decoration: none; border: 0; }
-    .topbar-row a:hover { color: var(--amber); }
-    .topbar-row .dot {
-      display: inline-block;
-      width: 10px; height: 10px;
-      background: var(--amber);
-      margin-right: 10px;
-      transform: translateY(1px);
-    }
-    .topbar-row .brand { color: var(--ink); }
-    .topbar-row .nav { display: flex; gap: 28px; align-items: center; }
-    .topbar-row .nav a.current { color: var(--amber); }
-
-    /* ---------- article head ---------- */
-    .article-head {
-      padding: clamp(52px, 8vh, 100px) 0 clamp(36px, 5vh, 60px);
-      border-bottom: 1px solid var(--hairline);
-    }
-    .article-head .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--amber);
-      margin-bottom: 24px;
-    }
-    .article-head .eyebrow a { color: var(--amber); border: 0; }
-    .article-head h1 {
-      font-family: var(--f-serif);
-      font-weight: 400;
-      font-size: clamp(36px, 5.4vw, 60px);
-      line-height: 1.08;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-      margin: 0 0 28px;
-      max-width: 22ch;
-    }
-    .article-head .dek {
-      font-family: var(--f-serif);
-      font-style: italic;
-      font-size: clamp(18px, 2.1vw, 22px);
-      line-height: 1.5;
-      color: var(--ink-soft);
-      max-width: 56ch;
-      margin: 0 0 28px;
-    }
-    .article-head .byline {
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    /* ---------- article body ---------- */
-    .article {
-      padding: clamp(48px, 7vh, 88px) 0 clamp(60px, 9vh, 100px);
-    }
-    .article h2 {
-      font-family: var(--f-serif);
-      font-weight: 400;
-      font-size: clamp(26px, 3vw, 34px);
-      line-height: 1.2;
-      color: var(--ink);
-      margin: 56px 0 20px;
-      letter-spacing: -0.005em;
-    }
-    .article h3 {
-      font-family: var(--f-serif);
-      font-weight: 400;
-      font-size: clamp(22px, 2.4vw, 26px);
-      line-height: 1.25;
-      color: var(--ink);
-      margin: 40px 0 14px;
-    }
-    .article p {
-      font-size: 18px;
-      line-height: 1.68;
-      color: var(--ink-soft);
-      margin: 0 0 22px;
-    }
-    .article p.lede {
-      font-family: var(--f-serif);
-      font-style: italic;
-      font-size: 22px;
-      line-height: 1.5;
-      color: var(--ink);
-      margin-bottom: 28px;
-    }
-    .article ul, .article ol {
-      font-size: 18px;
-      line-height: 1.68;
-      color: var(--ink-soft);
-      margin: 0 0 22px;
-      padding-left: 22px;
-    }
-    .article li { margin-bottom: 10px; }
-    .article strong { color: var(--ink); font-weight: 600; }
-    .article blockquote {
-      margin: 28px 0;
-      padding: 4px 0 4px 24px;
-      border-left: 3px solid var(--amber);
-      font-family: var(--f-serif);
-      font-style: italic;
-      font-size: 20px;
-      color: var(--ink);
-    }
-    .article hr {
-      border: 0;
-      border-top: 1px solid var(--hairline);
-      margin: 48px auto;
-      width: 72px;
-    }
-
-    /* ---------- callout ---------- */
-    .callout {
-      background: var(--cream-deep);
-      padding: 28px 32px;
-      margin: 32px 0;
-      border-left: 3px solid var(--amber);
-    }
-    .callout p { margin: 0 0 12px; font-size: 17px; }
-    .callout p:last-child { margin: 0; }
-    .callout .label {
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--amber);
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    /* ---------- CTA block ---------- */
-    .post-cta {
-      background: var(--ink);
-      color: var(--hairline);
-      padding: 48px 40px;
-      margin: 60px 0 0;
-      text-align: left;
-    }
-    .post-cta h3 {
-      font-family: var(--f-serif);
-      font-weight: 400;
-      font-size: 28px;
-      color: var(--white);
-      margin: 0 0 14px;
-    }
-    .post-cta p {
-      color: var(--hairline);
-      margin: 0 0 18px;
-      font-size: 16px;
-      max-width: 52ch;
-    }
-    .post-cta a.cta-link {
-      display: inline-block;
-      color: var(--amber-lt);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      font-size: 16px;
-      border: 0;
-    }
-    .post-cta a.cta-link:hover { color: var(--white); }
-
-    /* ---------- disclosure ---------- */
-    .disclosure {
-      margin-top: 56px;
-      padding-top: 28px;
-      border-top: 1px solid var(--hairline);
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-    .disclosure strong { color: var(--ink-soft); }
-
-    /* ---------- footer ---------- */
-    footer {
-      background: var(--ink);
-      color: var(--hairline);
-      padding: 48px 0 56px;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    footer .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    footer .dot {
-      display: inline-block;
-      width: 10px; height: 10px;
-      background: var(--amber);
-      margin-right: 10px;
-      transform: translateY(1px);
-    }
-    footer a { color: var(--hairline); border: 0; }
-    footer a:hover { color: var(--amber-lt); }
-
-    @media (max-width: 780px) {
-      .topbar-row .nav { gap: 16px; font-size: 10px; }
-      .post-cta { padding: 32px 24px; }
-    }
-  </style>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wd6byt4c1l");
-  </script>
-
-  <!-- JSON-LD article schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "How to vet a pitch deck design agency: three tests, three teardowns.",
-    "datePublished": "2026-04-19",
-    "author": { "@type": "Organization", "name": "Slatepress" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Slatepress",
-      "logo": { "@type": "ImageObject", "url": "https://slatepress.co/assets/keelhaul-cover.png" }
-    },
-    "mainEntityOfPage": "https://slatepress.co/blog/how-to-vet-a-pitch-deck-agency/"
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>How to vet a pitch deck design agency — Slatepress</title>
+<meta name="description" content="Three tests to run on any pitch deck design agency before you send money — plus teardowns of three of the top Google results."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe7d6;--cream-2:#e6dcc6;--paper:#f5efdf;
+    --ink:#15171a;--ink-soft:#3a3d42;--muted:#6b6a63;
+    --rule:#cdc3ab;--ochre:#c2661a;--ochre-soft:#d98937;
   }
-  </script>
+  [data-theme="dark"]{
+    --cream:#111010;--cream-2:#1a1918;--paper:#161412;
+    --ink:#efe7d6;--ink-soft:#c8bfad;--muted:#7a7570;
+    --rule:#2e2b27;--ochre:#d98937;--ochre-soft:#c2661a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-variation-settings:"opsz" 18;-webkit-font-smoothing:antialiased;background:var(--cream);color:var(--ink);overflow-x:hidden}
+  ::selection{background:var(--ochre);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 56px}
+  .prose{max-width:720px;margin:0 auto}
+
+  /* NAV */
+  .nav{padding:22px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule)}
+  .nav-left{display:flex;align-items:center}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-weight:500;letter-spacing:.02em;font-size:16px}
+  .brand-mark{width:28px;height:28px}
+  .brand-mark svg{width:100%;height:100%;display:block}
+  .brand small{color:var(--muted);font-weight:400}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--muted);transition:color .3s}
+  .nav-link:hover,.nav-link.on{color:var(--ink)}
+  .nav-link.on{color:var(--ochre)}
+  .nav-link::before{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ochre);transition:right .4s cubic-bezier(.7,0,.2,1)}
+  .nav-link.on::before{right:0}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;background:var(--ink);color:var(--cream);border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:background .3s}
+  .nav-cta:hover{background:var(--ochre)}
+  .mk-grid rect{fill:var(--ink);opacity:.18;transform-origin:center;animation:gridBloom 3s ease-in-out infinite}
+  .mk-grid rect:nth-child(1){animation-delay:0s}.mk-grid rect:nth-child(2){animation-delay:.1s}.mk-grid rect:nth-child(3){animation-delay:.2s}
+  .mk-grid rect:nth-child(4){animation-delay:.35s}.mk-grid rect:nth-child(5){animation-delay:.15s;fill:var(--ochre);opacity:1}
+  .mk-grid rect:nth-child(6){animation-delay:.25s}.mk-grid rect:nth-child(7){animation-delay:.4s}.mk-grid rect:nth-child(8){animation-delay:.3s}.mk-grid rect:nth-child(9){animation-delay:.45s}
+  @keyframes gridBloom{0%,100%{opacity:.12;transform:scale(.85)}50%{opacity:.9;transform:scale(1)}}
+  .mk-grid .featured{animation:gridFeature 3s ease-in-out infinite !important}
+  @keyframes gridFeature{0%,100%{opacity:.6;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:border-color .3s,background .3s,color .3s,transform .3s;flex:none}
+  .theme-toggle:hover{border-color:var(--ink);background:var(--ink);color:var(--cream);transform:rotate(20deg)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .icon-sun{display:none}
+  .theme-toggle .icon-moon{display:block}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:none}
+
+  /* ARTICLE HEAD */
+  .article-head{padding:80px 0 64px;border-bottom:1px solid var(--rule)}
+  .article-head .back{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);display:inline-flex;align-items:center;gap:8px;margin-bottom:40px;transition:gap .3s}
+  .article-head .back:hover{gap:14px}
+  .article-head .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:28px}
+  .article-head h1{font-size:clamp(40px,5.4vw,72px);line-height:1.06;letter-spacing:-.02em;font-weight:400;font-variation-settings:"opsz" 72;max-width:22ch;margin-bottom:28px}
+  .article-head .dek{font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink-soft);font-style:italic;max-width:58ch;margin-bottom:28px}
+  .article-head .byline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .article-head .byline b{color:var(--ochre);font-weight:500}
+
+  /* ARTICLE BODY */
+  .article{padding:72px 0 100px}
+  .article h2{font-size:clamp(28px,3vw,40px);line-height:1.12;letter-spacing:-.015em;font-weight:400;color:var(--ink);margin:64px 0 22px;padding-top:64px;border-top:1px solid var(--rule)}
+  .article h2:first-child{margin-top:0;padding-top:0;border-top:none}
+  .article h3{font-size:clamp(22px,2.4vw,28px);line-height:1.2;font-weight:400;color:var(--ink);margin:44px 0 16px}
+  .article p{font-size:18px;line-height:1.72;color:var(--ink-soft);margin:0 0 24px}
+  .article p.lede{font-size:21px;line-height:1.55;color:var(--ink);font-style:italic;margin-bottom:32px}
+  .article ul,.article ol{font-size:18px;line-height:1.7;color:var(--ink-soft);margin:0 0 24px;padding-left:22px}
+  .article li{margin-bottom:12px}
+  .article strong{color:var(--ink);font-weight:500}
+  .article em{font-style:italic}
+  .article a{color:var(--ochre);border-bottom:1px solid transparent;transition:border-color .2s}
+  .article a:hover{border-bottom-color:var(--ochre)}
+  .article hr{border:none;border-top:1px solid var(--rule);margin:56px auto;width:80px}
+
+  /* blockquote */
+  .article blockquote{margin:32px 0;padding:6px 0 6px 28px;border-left:3px solid var(--ochre);font-style:italic;font-size:20px;line-height:1.5;color:var(--ink)}
+
+  /* callout */
+  .callout{background:var(--cream-2);border-left:3px solid var(--ochre);padding:28px 32px;margin:32px 0}
+  [data-theme="dark"] .callout{background:var(--cream-2)}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:14px}
+  .callout p{font-size:17px;margin:0 0 10px;color:var(--ink-soft)}
+  .callout p:last-child{margin:0}
+
+  /* post CTA */
+  .post-cta{background:var(--ink);color:var(--cream);padding:48px 44px;margin:64px 0 0;border-radius:4px}
+  .post-cta h3{font-size:28px;font-weight:400;color:var(--cream);margin:0 0 16px}
+  .post-cta p{font-size:16px;color:rgba(239,231,214,.75);margin:0 0 18px;max-width:52ch}
+  .post-cta a{color:var(--ochre-soft);border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .post-cta a:hover{color:var(--cream);border-bottom-color:var(--cream)}
+
+  /* disclosure */
+  .disclosure{margin-top:56px;padding-top:28px;border-top:1px solid var(--rule);font-size:14px;line-height:1.65;color:var(--muted)}
+  .disclosure strong{color:var(--ink-soft)}
+
+  /* progress bar */
+  .read-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:950;background:transparent;pointer-events:none}
+  .read-progress::after{content:"";display:block;height:100%;background:var(--ochre);width:var(--rp,0%);transition:width .1s}
+
+  /* FOOTER */
+  .site-footer{padding:44px 0 56px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .site-footer b{color:var(--ink)}
+  .site-footer a:hover{color:var(--ochre)}
+
+  /* mobile */
+  .nav-toggle{display:none;width:40px;height:40px;border:1px solid var(--rule);border-radius:999px;background:transparent;cursor:pointer;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:1001}
+  .nav-toggle span{display:block;width:16px;height:1.5px;background:var(--ink);transition:transform .3s,opacity .3s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  @media(max-width:860px){
+    .wrap,.nav{padding-left:24px;padding-right:24px}
+    .nav-toggle{display:flex}
+    .nav-links{position:fixed;inset:0;background:var(--cream);flex-direction:column;gap:22px;justify-content:center;align-items:flex-start;padding:80px 32px 40px;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:1000;display:flex !important}
+    .nav-links.open{transform:translateX(0)}
+    .nav-links .nav-link{font-family:'Fraunces',serif;font-size:36px;letter-spacing:-.01em;text-transform:none}
+    .nav-links .nav-cta{margin-top:24px}
+    body.nav-open{overflow:hidden}
+    .article-head{padding:48px 0 40px}
+    .post-cta{padding:32px 24px}
+    .site-footer{flex-direction:column;gap:12px;align-items:flex-start;padding:28px 0 48px}
+    .prose{padding:0}
+  }
+</style>
 </head>
 <body>
 
-  <!-- top bar -->
-  <header class="topbar">
-    <div class="wrap">
-      <div class="topbar-row">
-        <a class="brand" href="/"><span class="dot"></span>SLATEPRESS</a>
-        <nav class="nav">
-          <a href="/#method">Method</a>
-          <a href="/#work">Work</a>
-          <a href="/#pricing">Pricing</a>
-          <a href="/blog/" class="current">Blog</a>
-          <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>
-        </nav>
-      </div>
+<div class="read-progress" id="readProg" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="../../index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 28 28" class="mk-grid">
+          <rect x="4" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="11.25" width="5.5" height="5.5" rx=".6" class="featured"/>
+          <rect x="18.5" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="18.5" width="5.5" height="5.5" rx=".6"/>
+        </svg>
+      </span>
+      <span>SLATEPRESS <small>&nbsp;— MMXXVI</small></span>
+    </a>
+  </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navLinks">
+    <a href="../../index.html#method" class="nav-link">Method</a>
+    <a href="../../index.html#work" class="nav-link">Work</a>
+    <a href="../../index.html#pricing" class="nav-link">Pricing</a>
+    <a href="../index.html" class="nav-link on">Blog</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../../index.html#cta" class="nav-cta">Start a project <span>→</span></a>
+  </nav>
+</header>
+
+<section class="article-head">
+  <div class="wrap">
+    <div class="prose">
+      <a class="back" href="../index.html">← The Slatepress Blog</a>
+      <div class="eyebrow">Competitor teardown</div>
+      <h1>How to vet a pitch deck design agency: three tests, three teardowns.</h1>
+      <p class="dek">Most of the agencies ranking on page one of Google for "pitch deck design service" look identical from the outside. Three quick tests separate the real ones from the template mills — and we run them on three of the top results.</p>
+      <div class="byline">SLATEPRESS · <b>April 19, 2026</b> · 9 min read</div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- article head -->
-  <section class="article-head">
-    <div class="wrap">
-      <div class="prose">
-        <div class="eyebrow"><a href="/blog/">← The Slatepress Blog</a></div>
-        <h1>How to vet a pitch deck design agency: three tests, three teardowns.</h1>
-        <p class="dek">Most of the agencies ranking on page one of Google for "pitch deck design service" look identical from the outside. Three quick tests separate the real ones from the template mills — and we run them on three of the top results.</p>
-        <div class="byline">Slatepress · April 19, 2026 · 9 min read</div>
+<section class="article">
+  <div class="wrap">
+    <div class="prose">
+
+      <p class="lede">You are about to spend somewhere between three and thirty thousand dollars on a deck that will decide whether strangers give your company a million. It is worth twenty minutes to check who you are handing that money to.</p>
+
+      <p>Type "pitch deck design service" into Google and you get a wall of agencies that look the same. Same hero headlines about investor-ready storytelling. Same carousel of logos. Same stat about billions raised. Almost all of them buy ads to sit at the top of the page, which is why the first listing is rarely the best listing — it is the listing with the biggest ad budget this quarter.</p>
+
+      <p>The frustrating part is that the signals you need to separate the real studios from the template mills are sitting on their own homepages, visible to anyone who slows down for a minute. You do not need inside information. You just need three tests.</p>
+
+      <h2>The three tests</h2>
+
+      <h3>1. The math test</h3>
+      <p>Every pitch deck agency advertises a cumulative stat. "We've helped 2,000 startups raise $400M." "$1.5B raised across 10,000 projects." "500+ decks, $200M funded." These numbers are designed to wash over you as credibility. They are also, without exception, divisible.</p>
+      <p>Take the two numbers and divide. If an agency claims $400M raised across 2,000 startups, that is $200,000 per startup. The median US seed round in 2025 was roughly $3M. So either the agency is counting every founder who ever touched a free template as a "startup helped," or the average client is raising a small fraction of a seed round — often a friends-and-family note or a small angel check.</p>
+      <p>Neither version is disqualifying. But the stat is no longer doing what the agency wanted it to do. Do the division every time.</p>
+
+      <h3>2. The portfolio test</h3>
+      <p>Click through to the work section. Are you looking at <em>decks</em>? Actual slides, embedded or linked, that you can read? Or are you looking at logos, laptop mockups, and screenshots of the client's marketing website?</p>
+      <p>A pitch deck agency that cannot show you pitch decks is telling you something. Usually it is that the "portfolio" is a client list — companies who have ever paid for anything, presented as success stories. Sometimes it is that the work is genuinely unimpressive and the agency is leaning on the clients' later success for reflected credibility.</p>
+      <p>The fix is simple. Before you sign anything, ask: <strong>"Send me the last three investor decks you shipped, as PDFs. Not the companies' websites — the actual decks."</strong> If the answer involves a complicated excuse about NDAs — on every single one — you have an answer.</p>
+
+      <h3>3. The copy test</h3>
+      <p>Read the agency's homepage the way you would read a first draft from a contractor. Does the copy have specificity? Does it name a methodology, a process, a measurable outcome? Or is it buzzword soup — "data-driven, story-led, designed to win" — that could be selling pitch decks, SEO, or lawn care?</p>
+      <p>Look for typos on the money pages. An agency whose own homepage contains a spelling error on the contact section is telling you what their QA looks like. Your deck will be proofread by the same process. The stakes are just higher.</p>
+
+      <div class="callout">
+        <span class="label">Shortcut</span>
+        <p>If an agency's lead magnet is a "free custom GPT" that will build your deck for you, take it seriously: they are advertising that their core product can be replicated by a chatbot. Believe them.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- article body -->
-  <section class="article">
-    <div class="wrap">
-      <div class="prose">
+      <h2>Teardown 1 — Pitch Deck Studios</h2>
+      <p>Pitch Deck Studios holds the #1 paid slot on Google for "pitch deck design service" in the US at the time of writing. They are the natural starting point.</p>
+      <p><strong>The math.</strong> Their hero stat is some variant of "4,500 startups" and "$500M+ raised globally." Divide: that is roughly $111,000 in funding per startup helped. In a market where the median seed round is $2–3M and the average pre-seed is closer to $1M, the per-startup number is running well below the floor of a typical seed round. The implication is either (a) they are counting every person who downloaded a free template as a "startup helped," or (b) most of their actual paying clients are closing pre-seed angel notes, not institutional rounds. The flagship stat undercuts itself the moment you do the arithmetic.</p>
+      <p><strong>The portfolio.</strong> Every case-study card on their homepage follows an identical template: black background, centered client logo, funding number in huge type, tiny laptop mockup of the client's website at the bottom. They did not make 4,500 unique case studies. They made one PSD and swapped the logo 4,500 times. The laptop mockups show the clients' marketing sites — not a single slide of the deck Pitch Deck Studios supposedly built is visible from the homepage.</p>
+      <p><strong>The copy.</strong> Their contact section, at the time of our review, contained the phrase "Fell free to reach us." A single-character typo on the page selling writing and design services. It is a small thing, and QA mistakes happen. But on the highest-converting page of a company whose product is words and visuals, it is worth noticing.</p>
+      <p><strong>The lead magnet.</strong> Their largest on-page call to action is "PitchDeckGPT — a free custom ChatGPT" that will generate your deck for you. This is a strange thing for a deck agency to give away, because it tells every visitor that the agency's own view of its product is that a GPT wrapper can do most of it.</p>
 
-        <p class="lede">You are about to spend somewhere between three and thirty thousand dollars on a deck that will decide whether strangers give your company a million. It is worth twenty minutes to check who you are handing that money to.</p>
+      <h2>Teardown 2 — Slidebean</h2>
+      <p>Slidebean has been around longer than most of the category and runs a hybrid model: a DIY deck-building tool plus an agency service for founders who want the team to do the work. The agency page is where to look.</p>
+      <p><strong>The math.</strong> Their public claim is "$500M+ raised" across their client base, with thousands of decks shipped across the platform and agency. The cumulative-stat problem is the same as everyone else's, but Slidebean is more transparent about being a volume shop — they are not pretending to be a boutique, and the volume math works for their actual business model.</p>
+      <p><strong>The portfolio.</strong> The agency page shows real deck examples from real companies. That is the first time in the category you can actually see slides. The deck work is solid — competent, legible, on-brand for the types of startups Slidebean serves — though the design language has a Slidebean house style that transfers from client to client, and you can often tell a Slidebean deck from across the room. For some founders that is fine. For others it defeats the purpose of bespoke work.</p>
+      <p><strong>The real question with a hybrid model.</strong> If the AI-powered software can build your deck, why are you paying for the service? If the service is genuinely essential, why market the software so heavily? The hybrid positioning is coherent as a business but asks the buyer to make a call on where the value actually is. A founder who wants the deck to feel distinct from the 10,000 other Slidebean-generated decks out there needs to ask, directly, how much of their output is template-assembled.</p>
 
-        <p>Type "pitch deck design service" into Google and you get a wall of agencies that look the same. Same hero headlines about investor-ready storytelling. Same carousel of logos. Same stat about billions raised. Almost all of them buy ads to sit at the top of the page, which is why the first listing is rarely the best listing — it is the listing with the biggest ad budget this quarter.</p>
+      <h2>Teardown 3 — Whitepage</h2>
+      <p>Whitepage markets itself as the consulting-led, strategy-first option — the agency for founders who think the deck problem is a narrative problem first and a design problem second. That is a reasonable thesis.</p>
+      <p><strong>The math.</strong> Public claims include "$1.7B+ in fundraising facilitated across 10,000+ completed projects." Divide: $170,000 per project. Same directional issue as the others — if the 10,000 number is real, the per-project funding is well below seed-round scale, which means the "project" count is probably including every consulting engagement, template download, or one-hour review, not just full decks that went to investors and closed rounds.</p>
+      <p><strong>The founder-review claim.</strong> Whitepage's positioning emphasizes that every deck is personally reviewed by their PMP-certified founder. That is a genuinely differentiating promise if it is true. But do the volume math: 10,000 projects, personally reviewed, over roughly a decade in business, equals more than two decks per working day, every working day, for ten years straight — by one person, on top of running the company. Either the "personal review" is lighter than it sounds, or the 10,000 number counts engagements that never reach the founder's desk. Either is fine; both can be clarified in a discovery call.</p>
+      <p><strong>The portfolio.</strong> Whitepage shows more actual slide samples than most competitors, which is a mark in their favor. The design quality is higher than the template-mill baseline. If you believe the strategy-first pitch, this is a more defensible buy than the pure volume shops — but the volume stats on the homepage undercut the bespoke positioning.</p>
 
-        <p>The frustrating part is that the signals you need to separate the real studios from the template mills are sitting on their own homepages, visible to anyone who slows down for a minute. You do not need inside information. You just need three tests.</p>
+      <h2>And the rest of the page</h2>
+      <p>The same pattern repeats down the rest of the search results. Large-breadth design agencies (Superside, Designity, SketchDeck) selling pitch decks as one of many services — fine for commodity design, less well-suited for narrative-sensitive investor work. Pure-play deck shops (SlideGenius, Pitchdeck.com) with longer histories and larger stat claims. AI-first platforms trying to bolt human services on top.</p>
+      <p>Run the three tests on each. The math will usually land the same way. The portfolio will be a mix of real decks and laptop-mockup logo walls. The copy will be buzzword-heavy and broadly interchangeable. That is not an indictment of the whole category — there is real work happening at every one of these agencies — but the signal-to-noise on the public pages is low enough that a founder making a five-figure buying decision should not rely on page one of Google alone.</p>
 
-        <h2>The three tests</h2>
+      <h2>What to ask on a discovery call</h2>
+      <p>Regardless of which agency you are evaluating — including, for the record, this one — these five questions filter the field faster than anything on the homepage:</p>
+      <ol>
+        <li><strong>Send me the last three investor decks you shipped, as PDFs.</strong> Not screenshots of client websites. The actual decks. Offer NDA if that is the real objection.</li>
+        <li><strong>Who specifically will write the narrative?</strong> Get the name and a writing sample. If the answer is "our team," keep pushing.</li>
+        <li><strong>How many founders in my vertical have you worked with in the last twelve months?</strong> Vertical fluency matters more than total volume.</li>
+        <li><strong>What percentage of your clients close their round within six months of shipping the deck?</strong> If they do not track this, that is itself the answer.</li>
+        <li><strong>What does your revision process look like after v1?</strong> The deck is never right on first draft. Agencies that bill heavily per revision are incentivized to ship early, not ship well.</li>
+      </ol>
+      <p>An agency that gives you crisp, specific answers to those five questions has already distinguished itself from most of page one. An agency that gets vague or defensive has told you everything you need.</p>
 
-        <h3>1. The math test</h3>
-
-        <p>Every pitch deck agency advertises a cumulative stat. "We've helped 2,000 startups raise $400M." "$1.5B raised across 10,000 projects." "500+ decks, $200M funded." These numbers are designed to wash over you as credibility. They are also, without exception, divisible.</p>
-
-        <p>Take the two numbers and divide. If an agency claims $400M raised across 2,000 startups, that is $200,000 per startup. The median US seed round in 2025 was roughly $3M. So either the agency is counting every founder who ever touched a free template as a "startup helped," or the average client is raising a small fraction of a seed round — often a friends-and-family note or a small angel check.</p>
-
-        <p>Neither version is disqualifying. But the stat is no longer doing what the agency wanted it to do. Do the division every time.</p>
-
-        <h3>2. The portfolio test</h3>
-
-        <p>Click through to the work section. Are you looking at <em>decks</em>? Actual slides, embedded or linked, that you can read? Or are you looking at logos, laptop mockups, and screenshots of the client's marketing website?</p>
-
-        <p>A pitch deck agency that cannot show you pitch decks is telling you something. Usually it is that the "portfolio" is a client list — companies who have ever paid for anything, presented as success stories. Sometimes it is that the work is genuinely unimpressive and the agency is leaning on the clients' later success for reflected credibility.</p>
-
-        <p>The fix is simple. Before you sign anything, ask: <strong>"Send me the last three investor decks you shipped, as PDFs. Not the companies' websites — the actual decks."</strong> If the answer involves a complicated excuse about NDAs — on every single one — you have an answer.</p>
-
-        <h3>3. The copy test</h3>
-
-        <p>Read the agency's homepage the way you would read a first draft from a contractor. Does the copy have specificity? Does it name a methodology, a process, a measurable outcome? Or is it buzzword soup — "data-driven, story-led, designed to win" — that could be selling pitch decks, SEO, or lawn care?</p>
-
-        <p>Look for typos on the money pages. An agency whose own homepage contains a spelling error on the contact section is telling you what their QA looks like. Your deck will be proofread by the same process. The stakes are just higher.</p>
-
-        <div class="callout">
-          <span class="label">Shortcut</span>
-          <p>If an agency's lead magnet is a "free custom GPT" that will build your deck for you, take it seriously: they are advertising that their core product can be replicated by a chatbot. Believe them.</p>
-        </div>
-
-        <h2>Teardown 1 — Pitch Deck Studios</h2>
-
-        <p>Pitch Deck Studios holds the #1 paid slot on Google for "pitch deck design service" in the US at the time of writing. They are the natural starting point.</p>
-
-        <p><strong>The math.</strong> Their hero stat is some variant of "4,500 startups" and "$500M+ raised globally." Divide: that is roughly $111,000 in funding per startup helped. In a market where the median seed round is $2–3M and the average pre-seed is closer to $1M, the per-startup number is running well below the floor of a typical seed round. The implication is either (a) they are counting every person who downloaded a free template as a "startup helped," or (b) most of their actual paying clients are closing pre-seed angel notes, not institutional rounds. The flagship stat undercuts itself the moment you do the arithmetic.</p>
-
-        <p><strong>The portfolio.</strong> Every case-study card on their homepage follows an identical template: black background, centered client logo, funding number in huge type, tiny laptop mockup of the client's website at the bottom. They did not make 4,500 unique case studies. They made one PSD and swapped the logo 4,500 times. The laptop mockups show the clients' marketing sites — not a single slide of the deck Pitch Deck Studios supposedly built is visible from the homepage.</p>
-
-        <p><strong>The copy.</strong> Their contact section, at the time of our review, contained the phrase "Fell free to reach us." A single-character typo on the page selling writing and design services. It is a small thing, and QA mistakes happen. But on the highest-converting page of a company whose product is words and visuals, it is worth noticing.</p>
-
-        <p><strong>The lead magnet.</strong> Their largest on-page call to action is "PitchDeckGPT — a free custom ChatGPT" that will generate your deck for you. This is a strange thing for a deck agency to give away, because it tells every visitor that the agency's own view of its product is that a GPT wrapper can do most of it.</p>
-
-        <h2>Teardown 2 — Slidebean</h2>
-
-        <p>Slidebean has been around longer than most of the category and runs a hybrid model: a DIY deck-building tool plus an agency service for founders who want the team to do the work. The agency page is where to look.</p>
-
-        <p><strong>The math.</strong> Their public claim is "$500M+ raised" across their client base, with thousands of decks shipped across the platform and agency. The cumulative-stat problem is the same as everyone else's, but Slidebean is more transparent about being a volume shop — they are not pretending to be a boutique, and the volume math works for their actual business model.</p>
-
-        <p><strong>The portfolio.</strong> The agency page shows real deck examples from real companies. That is the first time in the category you can actually see slides. The deck work is solid — competent, legible, on-brand for the types of startups Slidebean serves — though the design language has a Slidebean house style that transfers from client to client, and you can often tell a Slidebean deck from across the room. For some founders that is fine. For others it defeats the purpose of bespoke work.</p>
-
-        <p><strong>The real question with a hybrid model.</strong> If the AI-powered software can build your deck, why are you paying for the service? If the service is genuinely essential, why market the software so heavily? The hybrid positioning is coherent as a business but asks the buyer to make a call on where the value actually is. A founder who wants the deck to feel distinct from the 10,000 other Slidebean-generated decks out there needs to ask, directly, how much of their output is template-assembled.</p>
-
-        <h2>Teardown 3 — Whitepage</h2>
-
-        <p>Whitepage markets itself as the consulting-led, strategy-first option — the agency for founders who think the deck problem is a narrative problem first and a design problem second. That is a reasonable thesis.</p>
-
-        <p><strong>The math.</strong> Public claims include "$1.7B+ in fundraising facilitated across 10,000+ completed projects." Divide: $170,000 per project. Same directional issue as the others — if the 10,000 number is real, the per-project funding is well below seed-round scale, which means the "project" count is probably including every consulting engagement, template download, or one-hour review, not just full decks that went to investors and closed rounds.</p>
-
-        <p><strong>The founder-review claim.</strong> Whitepage's positioning emphasizes that every deck is personally reviewed by their PMP-certified founder. That is a genuinely differentiating promise if it is true. But do the volume math: 10,000 projects, personally reviewed, over roughly a decade in business, equals more than two decks per working day, every working day, for ten years straight — by one person, on top of running the company. Either the "personal review" is lighter than it sounds, or the 10,000 number counts engagements that never reach the founder's desk. Either is fine; both can be clarified in a discovery call.</p>
-
-        <p><strong>The portfolio.</strong> Whitepage shows more actual slide samples than most competitors, which is a mark in their favor. The design quality is higher than the template-mill baseline. If you believe the strategy-first pitch, this is a more defensible buy than the pure volume shops — but the volume stats on the homepage undercut the bespoke positioning.</p>
-
-        <h2>And the rest of the page</h2>
-
-        <p>The same pattern repeats down the rest of the search results. Large-breadth design agencies (Superside, Designity, SketchDeck) selling pitch decks as one of many services — fine for commodity design, less well-suited for narrative-sensitive investor work. Pure-play deck shops (SlideGenius, Pitchdeck.com) with longer histories and larger stat claims. AI-first platforms trying to bolt human services on top.</p>
-
-        <p>Run the three tests on each. The math will usually land the same way. The portfolio will be a mix of real decks and laptop-mockup logo walls. The copy will be buzzword-heavy and broadly interchangeable. That is not an indictment of the whole category — there is real work happening at every one of these agencies — but the signal-to-noise on the public pages is low enough that a founder making a five-figure buying decision should not rely on page one of Google alone.</p>
-
-        <h2>What to ask on a discovery call</h2>
-
-        <p>Regardless of which agency you are evaluating — including, for the record, this one — these five questions filter the field faster than anything on the homepage:</p>
-
-        <ol>
-          <li><strong>Send me the last three investor decks you shipped, as PDFs.</strong> Not screenshots of client websites. The actual decks. Offer NDA if that is the real objection.</li>
-          <li><strong>Who specifically will write the narrative?</strong> Get the name and a writing sample. If the answer is "our team," keep pushing.</li>
-          <li><strong>How many founders in my vertical have you worked with in the last twelve months?</strong> Vertical fluency matters more than total volume.</li>
-          <li><strong>What percentage of your clients close their round within six months of shipping the deck?</strong> If they do not track this, that is itself the answer.</li>
-          <li><strong>What does your revision process look like after v1?</strong> The deck is never right on first draft. Agencies that bill heavily per revision are incentivized to ship early, not ship well.</li>
-        </ol>
-
-        <p>An agency that gives you crisp, specific answers to those five questions has already distinguished itself from most of page one. An agency that gets vague or defensive has told you everything you need.</p>
-
-        <div class="post-cta">
-          <h3>About Slatepress.</h3>
-          <p>We are a boutique pitch-deck studio. Every deck is built in code, pixel-perfect, infinitely iterable, delivered in days. You can see our actual decks, our methodology, and our pricing on the <a class="cta-link" href="/">home page</a>. If you are raising, write us — <a class="cta-link" href="mailto:hello@slatepress.co?subject=Pitch%20deck%20project">hello@slatepress.co</a>.</p>
-        </div>
-
-        <div class="disclosure">
-          <strong>Disclosure.</strong> Slatepress is a competitor to every agency discussed in this post. The claims above are based on each agency's publicly stated numbers and public-facing marketing pages at the time of publication, and on arithmetic applied to those numbers. Opinions are labeled as such. If any agency mentioned believes a specific claim is inaccurate, we will correct it — write to hello@slatepress.co.
-        </div>
-
+      <div class="post-cta">
+        <h3>About Slatepress.</h3>
+        <p>We are a boutique pitch-deck studio. Every deck is built in code, pixel-perfect, infinitely iterable, delivered in days. You can see our actual decks, our methodology, and our pricing on the <a href="../../index.html">home page</a>. If you are raising, write us — <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- footer -->
-  <footer>
-    <div class="wrap">
-      <div class="row">
-        <div><span class="dot"></span>SLATEPRESS · MMXXVI</div>
-        <div><a href="mailto:hello@slatepress.co">hello@slatepress.co</a></div>
+      <div class="disclosure">
+        <strong>Disclosure.</strong> Slatepress is a competitor to every agency discussed in this post. The claims above are based on each agency's publicly stated numbers and public-facing marketing pages at the time of publication, and on arithmetic applied to those numbers. Opinions are labeled as such. If any agency mentioned believes a specific claim is inaccurate, we will correct it — write to hello@slatepress.co.
       </div>
-    </div>
-  </footer>
 
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "807ccde79f084ea59cb5deab2c363a53"}'></script>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="site-footer">
+    <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
+    <div>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://x.com" target="_blank" rel="noopener">X.com</a> ·
+      <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
+    </div>
+    <div><a href="mailto:hello@slatepress.co">hello@slatepress.co →</a></div>
+  </div>
+</footer>
+
+<script>
+/* theme */
+(() => {
+  const root = document.documentElement;
+  const saved = localStorage.getItem('sp-theme') || 'light';
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('sp-theme', next);
+    });
+  });
+})();
+
+/* nav toggle */
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle||!links) return;
+  function setOpen(open){
+    toggle.setAttribute('aria-expanded', open?'true':'false');
+    links.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
+
+/* reading progress bar */
+(() => {
+  const bar = document.getElementById('readProg');
+  if (!bar) return;
+  document.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+    bar.style.setProperty('--rp', pct+'%');
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>

@@ -1,287 +1,264 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Slatepress Blog — teardowns, frameworks, and honest notes on fundraising.</title>
-  <meta name="description" content="Essays and teardowns from Slatepress — a boutique seed-deck studio. Competitor analyses, seed-deck frameworks, and honest notes on the craft of fundraising." />
-  <meta property="og:title" content="The Slatepress Blog" />
-  <meta property="og:description" content="Teardowns, frameworks, and honest notes on seed fundraising." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://slatepress.co/blog/" />
-  <meta property="og:image" content="https://slatepress.co/assets/keelhaul-cover.png" />
-  <link rel="canonical" href="https://slatepress.co/blog/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23C2720D'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Slatepress Blog — Teardowns, frameworks, and honest notes on fundraising.</title>
+<meta name="description" content="Essays and teardowns from Slatepress — a boutique seed-deck studio."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe7d6;--cream-2:#e6dcc6;--paper:#f5efdf;
+    --ink:#15171a;--ink-soft:#3a3d42;--muted:#6b6a63;
+    --rule:#cdc3ab;--ochre:#c2661a;--ochre-soft:#d98937;
+  }
+  [data-theme="dark"]{
+    --cream:#111010;--cream-2:#1a1918;--paper:#161412;
+    --ink:#efe7d6;--ink-soft:#c8bfad;--muted:#7a7570;
+    --rule:#2e2b27;--ochre:#d98937;--ochre-soft:#c2661a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:20px}
+  body{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-variation-settings:"opsz" 18;-webkit-font-smoothing:antialiased;background:var(--cream);color:var(--ink);overflow-x:hidden}
+  ::selection{background:var(--ochre);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;font-size:11px;font-weight:500}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 56px}
 
-  <style>
-    :root {
-      --ink:       #14181F;
-      --ink-soft:  #2A2F39;
-      --cream:     #F5F1E8;
-      --cream-deep:#EBE5D4;
-      --amber:     #C2720D;
-      --amber-lt:  #E8A84D;
-      --muted:     #6E6B66;
-      --hairline:  #C9C2B1;
-      --white:     #FFFFFF;
-      --f-serif:   Georgia, "Times New Roman", serif;
-      --f-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      --max:       1240px;
-      --max-prose: 720px;
-      --gutter:    clamp(20px, 5vw, 72px);
-    }
+  /* NAV */
+  .nav{padding:22px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule)}
+  .nav-left{display:flex;align-items:center;gap:0}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-weight:500;letter-spacing:.02em;font-size:16px}
+  .brand-mark{width:28px;height:28px}
+  .brand-mark svg{width:100%;height:100%;display:block}
+  .brand small{color:var(--muted);font-weight:400}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--muted);transition:color .3s}
+  .nav-link:hover,.nav-link.on{color:var(--ink)}
+  .nav-link.on{color:var(--ochre)}
+  .nav-link::before{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ink);transition:right .4s cubic-bezier(.7,0,.2,1)}
+  .nav-link:hover::before{right:0}
+  .nav-link.on::before{right:0;background:var(--ochre)}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;background:var(--ink);color:var(--cream);border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:background .3s}
+  .nav-cta:hover{background:var(--ochre)}
 
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: var(--f-sans);
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--ink-soft);
-      background: var(--cream);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  /* mk-grid (animated logo mark) */
+  .mk-grid rect{fill:var(--ink);opacity:.18;transform-origin:center;animation:gridBloom 3s ease-in-out infinite}
+  .mk-grid rect:nth-child(1){animation-delay:0s}.mk-grid rect:nth-child(2){animation-delay:.1s}.mk-grid rect:nth-child(3){animation-delay:.2s}
+  .mk-grid rect:nth-child(4){animation-delay:.35s}.mk-grid rect:nth-child(5){animation-delay:.15s;fill:var(--ochre);opacity:1}
+  .mk-grid rect:nth-child(6){animation-delay:.25s}.mk-grid rect:nth-child(7){animation-delay:.4s}.mk-grid rect:nth-child(8){animation-delay:.3s}.mk-grid rect:nth-child(9){animation-delay:.45s}
+  @keyframes gridBloom{0%,100%{opacity:.12;transform:scale(.85)}50%{opacity:.9;transform:scale(1)}}
+  .mk-grid .featured{animation:gridFeature 3s ease-in-out infinite !important}
+  @keyframes gridFeature{0%,100%{opacity:.6;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
 
-    a { color: inherit; }
-    img { max-width: 100%; display: block; }
+  /* theme toggle */
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:border-color .3s,background .3s,color .3s,transform .3s;flex:none}
+  .theme-toggle:hover{border-color:var(--ink);background:var(--ink);color:var(--cream);transform:rotate(20deg)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .icon-sun{display:none}
+  .theme-toggle .icon-moon{display:block}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:none}
 
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
+  /* HERO */
+  .blog-hero{padding:100px 0 80px;border-bottom:1px solid var(--rule)}
+  .blog-hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:32px;display:flex;align-items:center;gap:12px}
+  .blog-hero .eyebrow::before{content:"";width:8px;height:8px;background:var(--ochre);flex:none;animation:kickerpulse 2.4s ease-in-out infinite}
+  @keyframes kickerpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+  .blog-hero h1{font-size:clamp(56px,8vw,128px);line-height:.95;letter-spacing:-.03em;font-weight:400;font-variation-settings:"opsz" 144;max-width:16ch}
+  .blog-hero h1 em{font-style:italic;color:var(--ochre)}
+  .blog-hero .sub{margin-top:36px;font-size:21px;line-height:1.55;color:var(--ink-soft);max-width:580px;font-style:italic}
 
-    /* ---------- top bar ---------- */
-    .topbar { padding: 28px 0 0; }
-    .topbar-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .topbar-row a { text-decoration: none; color: var(--muted); }
-    .topbar-row a:hover { color: var(--amber); }
-    .topbar-row .dot {
-      display: inline-block;
-      width: 10px; height: 10px;
-      background: var(--amber);
-      margin-right: 10px;
-      transform: translateY(1px);
-    }
-    .topbar-row .brand { color: var(--ink); text-decoration: none; }
-    .topbar-row .nav { display: flex; gap: 28px; align-items: center; }
-    .topbar-row .nav a.current { color: var(--amber); }
+  /* chr reveal */
+  .type-in .chr{display:inline-block;opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .95s cubic-bezier(.2,.8,.2,1)}
+  .type-in .word{display:inline-block;white-space:nowrap}
+  .type-in.in .chr{opacity:1;transform:translateY(0)}
+  .type-in.reveal{transform:none}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}
 
-    /* ---------- hero ---------- */
-    .blog-hero {
-      padding: clamp(60px, 10vh, 120px) 0 clamp(40px, 6vh, 72px);
-      border-bottom: 1px solid var(--hairline);
-    }
-    .blog-hero .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--amber);
-      margin-bottom: 28px;
-    }
-    .blog-hero h1 {
-      font-family: var(--f-serif);
-      font-weight: 400;
-      font-size: clamp(40px, 6.5vw, 76px);
-      line-height: 1.04;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-      margin: 0 0 28px;
-      max-width: 14ch;
-    }
-    .blog-hero .sub {
-      font-family: var(--f-serif);
-      font-style: italic;
-      font-size: clamp(18px, 2.2vw, 24px);
-      line-height: 1.45;
-      color: var(--ink-soft);
-      max-width: 52ch;
-      margin: 0;
-    }
+  /* POST LIST */
+  .posts{padding:80px 0 140px}
+  .post-list{display:flex;flex-direction:column;gap:0}
+  .post-card{display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:baseline;padding:52px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit;transition:transform .4s cubic-bezier(.2,.8,.2,1);position:relative}
+  .post-card:first-child{border-top:1px solid var(--rule)}
+  .post-card::before{content:"";position:absolute;left:-56px;top:50%;width:40px;height:1px;background:var(--ochre);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.7,0,.2,1)}
+  .post-card:hover{transform:translateX(8px)}
+  .post-card:hover::before{transform:scaleX(1)}
+  .post-card:hover h2{color:var(--ochre)}
+  .post-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:6px;line-height:1.6}
+  .post-card h2{font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-.015em;font-weight:400;color:var(--ink);margin:0 0 18px;max-width:28ch;transition:color .3s}
+  .post-card p{font-size:17px;line-height:1.6;color:var(--ink-soft);max-width:56ch;margin:0}
+  .post-tag{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);margin-top:20px}
+  .post-tag::before{content:"";width:6px;height:6px;background:var(--ochre);border-radius:50%;flex:none}
+  .post-read{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);margin-top:20px;transition:gap .3s}
+  .post-card:hover .post-read{gap:14px}
+  .blog-footnote{margin-top:56px;font-style:italic;color:var(--muted);font-size:17px;line-height:1.65;max-width:600px}
+  .blog-footnote a{color:var(--ochre);border-bottom:1px solid var(--ochre)}
 
-    /* ---------- post list ---------- */
-    .posts {
-      padding: clamp(60px, 10vh, 100px) 0;
-    }
-    .post-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-    .post-card {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 56px;
-      align-items: baseline;
-      padding: 48px 0;
-      border-bottom: 1px solid var(--hairline);
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.25s ease;
-    }
-    .post-card:first-child { border-top: 1px solid var(--hairline); }
-    .post-card:hover { transform: translateX(6px); }
-    .post-card:hover h2 { color: var(--amber); }
-    .post-card .meta {
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--muted);
-      padding-top: 8px;
-    }
-    .post-card h2 {
-      font-family: var(--f-serif);
-      font-weight: 400;
-      font-size: clamp(26px, 3.2vw, 38px);
-      line-height: 1.15;
-      color: var(--ink);
-      margin: 0 0 16px;
-      letter-spacing: -0.005em;
-      max-width: 24ch;
-      transition: color 0.2s ease;
-    }
-    .post-card p {
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--ink-soft);
-      margin: 0;
-      max-width: 52ch;
-    }
-    .post-card .tag {
-      display: inline-block;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--amber);
-      margin-top: 18px;
-    }
+  /* FOOTER */
+  .site-footer{margin-top:0;padding:44px 0 56px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .site-footer b{color:var(--ink)}
+  .site-footer a:hover{color:var(--ochre)}
 
-    /* ---------- empty-state placeholder for future ---------- */
-    .blog-footer-note {
-      font-family: var(--f-serif);
-      font-style: italic;
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 48ch;
-      margin: 48px 0 0;
-    }
+  /* mobile nav toggle */
+  .nav-toggle{display:none;width:40px;height:40px;border:1px solid var(--rule);border-radius:999px;background:transparent;cursor:pointer;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:1001}
+  .nav-toggle span{display:block;width:16px;height:1.5px;background:var(--ink);transition:transform .3s,opacity .3s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
-    /* ---------- footer ---------- */
-    footer {
-      background: var(--ink);
-      color: var(--hairline);
-      padding: 48px 0 56px;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    footer .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    footer .dot {
-      display: inline-block;
-      width: 10px; height: 10px;
-      background: var(--amber);
-      margin-right: 10px;
-      transform: translateY(1px);
-    }
-    footer a { color: var(--hairline); text-decoration: none; }
-    footer a:hover { color: var(--amber-lt); }
-
-    @media (max-width: 780px) {
-      .topbar-row .nav { gap: 16px; font-size: 10px; }
-      .post-card { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
-      .post-card .meta { padding-top: 0; }
-    }
-  </style>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wd6byt4c1l");
-  </script>
+  @media(max-width:860px){
+    .wrap,.nav{padding-left:24px;padding-right:24px}
+    .nav-toggle{display:flex}
+    .nav-links{position:fixed;inset:0;background:var(--cream);flex-direction:column;gap:22px;justify-content:center;align-items:flex-start;padding:80px 32px 40px;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:1000;display:flex !important}
+    .nav-links.open{transform:translateX(0)}
+    .nav-links .nav-link{font-family:'Fraunces',serif;font-size:36px;letter-spacing:-.01em;text-transform:none}
+    .nav-links .nav-cta{margin-top:24px}
+    body.nav-open{overflow:hidden}
+    .blog-hero{padding:60px 0 48px}
+    .blog-hero h1{font-size:clamp(44px,12vw,72px)}
+    .post-card{grid-template-columns:1fr;gap:14px;padding:36px 0}
+    .post-card::before{display:none}
+    .post-card:hover{transform:none}
+    .post-meta{padding-top:0}
+    .site-footer{flex-direction:column;gap:12px;align-items:flex-start;padding:28px 0 48px}
+  }
+</style>
 </head>
 <body>
 
-  <!-- top bar -->
-  <header class="topbar">
-    <div class="wrap">
-      <div class="topbar-row">
-        <a class="brand" href="/"><span class="dot"></span>SLATEPRESS</a>
-        <nav class="nav">
-          <a href="/#method">Method</a>
-          <a href="/#work">Work</a>
-          <a href="/#pricing">Pricing</a>
-          <a href="/blog/" class="current">Blog</a>
-          <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>
-        </nav>
+<header class="nav">
+  <div class="nav-left">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 28 28" class="mk-grid">
+          <rect x="4" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="11.25" width="5.5" height="5.5" rx=".6" class="featured"/>
+          <rect x="18.5" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="18.5" width="5.5" height="5.5" rx=".6"/>
+        </svg>
+      </span>
+      <span>SLATEPRESS <small>&nbsp;— MMXXVI</small></span>
+    </a>
+  </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navLinks">
+    <a href="../index.html#method" class="nav-link">Method</a>
+    <a href="../index.html#work" class="nav-link">Work</a>
+    <a href="../index.html#pricing" class="nav-link">Pricing</a>
+    <a href="index.html" class="nav-link on">Blog</a>
+    <a href="https://slatepress.co/blog/" class="nav-link" target="_blank" rel="noopener">Live site</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../index.html#cta" class="nav-cta">Start a project <span>→</span></a>
+  </nav>
+</header>
+
+<section class="blog-hero wrap">
+  <div class="eyebrow">The Slatepress Blog</div>
+  <h1 class="type-in">Notes from the<br><em>deck shop.</em></h1>
+  <p class="sub reveal d1">Teardowns, frameworks, and honest reads on seed fundraising — written for founders who treat the deck as part of the pitch, not a formality.</p>
+</section>
+
+<section class="posts wrap">
+  <div class="post-list">
+
+    <a class="post-card reveal" href="how-to-vet-a-pitch-deck-agency/index.html">
+      <div class="post-meta">April 19, 2026<br>9 min read</div>
+      <div>
+        <h2>How to vet a pitch deck design agency: three tests, three teardowns.</h2>
+        <p>Most of the agencies ranking on page one of Google for "pitch deck design service" look identical from the outside. Three quick tests separate the real ones from the template mills — and we run them on three of the top results.</p>
+        <span class="post-read">Read the teardown →</span>
+        <br><span class="post-tag">Competitor teardown</span>
       </div>
+    </a>
+
+  </div>
+
+  <p class="blog-footnote reveal d2">More essays, teardowns, and seed-deck case studies posting regularly. If there's a topic you'd like us to take apart, write us at <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>.</p>
+</section>
+
+<footer class="wrap">
+  <div class="site-footer">
+    <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
+    <div>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://x.com" target="_blank" rel="noopener">X.com</a> ·
+      <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
     </div>
-  </header>
+    <div><a href="mailto:hello@slatepress.co">hello@slatepress.co →</a></div>
+  </div>
+</footer>
 
-  <!-- hero -->
-  <section class="blog-hero">
-    <div class="wrap">
-      <div class="eyebrow">The Slatepress Blog</div>
-      <h1>Notes from the deck shop.</h1>
-      <p class="sub">Teardowns, frameworks, and honest reads on seed fundraising — written for founders who treat the deck as part of the pitch, not a formality.</p>
-    </div>
-  </section>
+<script>
+/* theme */
+(() => {
+  const root = document.documentElement;
+  const saved = localStorage.getItem('sp-theme') || 'light';
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('sp-theme', next);
+    });
+  });
+})();
 
-  <!-- post list -->
-  <section class="posts">
-    <div class="wrap">
-      <div class="post-list">
+/* nav toggle */
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle||!links) return;
+  function setOpen(open){
+    toggle.setAttribute('aria-expanded', open?'true':'false');
+    links.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
 
-        <a class="post-card" href="/blog/how-to-vet-a-pitch-deck-agency/">
-          <div class="meta">April 19, 2026 · 9 min read</div>
-          <div>
-            <h2>How to vet a pitch deck design agency: three tests, three teardowns.</h2>
-            <p>Most of the agencies ranking on page one of Google for "pitch deck design service" look identical from the outside. Three quick tests separate the real ones from the template mills — and we run them on three of the top results.</p>
-            <span class="tag">Competitor teardown</span>
-          </div>
-        </a>
+/* type-in reveal */
+(() => {
+  const targets = document.querySelectorAll('.type-in');
+  targets.forEach(el => {
+    if (el.dataset.split) return;
+    el.dataset.split = '1';
+    const wrap = text => text.split(/(\s+)/).map(chunk => /^\s+$/.test(chunk) ? chunk : `<span class="word">${[...chunk].map(c=>`<span class="chr">${c==='' ?'&nbsp;':c}</span>`).join('')}</span>`).join('');
+    const newNodes = [];
+    el.childNodes.forEach(node => {
+      if (node.nodeType===3){ const sp=document.createElement('span'); sp.innerHTML=wrap(node.textContent); newNodes.push(sp); }
+      else if (node.nodeType===1){ node.innerHTML=wrap(node.textContent); newNodes.push(node); }
+    });
+    el.innerHTML=''; newNodes.forEach(n=>el.appendChild(n));
+    const chars = el.querySelectorAll('.chr');
+    chars.forEach((c,i) => { c.style.transitionDelay=(0.04+i*.045)+'s'; });
+  });
 
-      </div>
-      <p class="blog-footer-note">More essays, teardowns, and seed-deck case studies posting regularly. If there's a topic you'd like us to take apart, write us at <a href="mailto:hello@slatepress.co" style="color: var(--amber); text-decoration: none;">hello@slatepress.co</a>.</p>
-    </div>
-  </section>
-
-  <!-- footer -->
-  <footer>
-    <div class="wrap">
-      <div class="row">
-        <div><span class="dot"></span>SLATEPRESS · MMXXVI</div>
-        <div><a href="mailto:hello@slatepress.co">hello@slatepress.co</a></div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "807ccde79f084ea59cb5deab2c363a53"}'></script>
+  const els = document.querySelectorAll('.reveal:not(.in), .type-in:not(.in)');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  els.forEach(el => io.observe(el));
+  // Hero triggers on load
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll('.blog-hero .type-in').forEach(el=>el.classList.add('in'));
+  }));
+})();
+</script>
 </body>
 </html>
