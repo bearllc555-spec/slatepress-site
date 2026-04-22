@@ -1947,20 +1947,45 @@ function scramble(el, target, dur=600){
 
 
 /* =========================================================
-   LAUNCH FILM — click-to-play placeholder
+   LAUNCH FILM — click to load + play the real video
    ========================================================= */
 (() => {
   const p = document.getElementById('filmPoster');
   if (!p) return;
+  const v = document.getElementById('filmVideo');
+  if (!v) return;
+  const decorations = [
+    document.getElementById('filmGrain'),
+    document.getElementById('filmRing1'),
+    document.getElementById('filmRing2'),
+    document.getElementById('filmPlay'),
+    document.getElementById('filmMeta'),
+  ].filter(Boolean);
+  let started = false;
+
   p.addEventListener('click', () => {
+    if (started) return;
+    started = true;
     p.animate(
       [{transform:'scale(1)'},{transform:'scale(.985)'},{transform:'scale(1)'}],
       {duration:320, easing:'cubic-bezier(.2,.8,.2,1)'}
     );
-    // placeholder: replace with <video> src when ready
-    const btn = p.querySelector('.film-play');
-    if (btn) btn.style.background = 'var(--ochre)';
-    setTimeout(() => { if (btn) btn.style.background = ''; }, 800);
+    const src = p.dataset.src;
+    if (!src) return;
+    v.src = src;
+    v.controls = true;
+    v.style.zIndex = '2';
+    v.style.opacity = '1';
+    decorations.forEach(el => {
+      el.style.transition = 'opacity .3s ease';
+      el.style.opacity = '0';
+      el.style.pointerEvents = 'none';
+    });
+    const pr = v.play();
+    if (pr && typeof pr.catch === 'function') {
+      // Autoplay-with-sound can be blocked; the native controls still work.
+      pr.catch(() => {});
+    }
   });
 })();
 
