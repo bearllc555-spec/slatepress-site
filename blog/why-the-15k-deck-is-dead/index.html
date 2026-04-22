@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Why the $15K deck is already dead — Slatepress</title>
+<meta name="description" content="The pricing that deck agencies have relied on for a decade is structurally indefensible in 2026. What changed, what survives, and what a founder should actually pay for."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe7d6;--cream-2:#e6dcc6;--paper:#f5efdf;
+    --ink:#15171a;--ink-soft:#3a3d42;--muted:#6b6a63;
+    --rule:#cdc3ab;--ochre:#c2661a;--ochre-soft:#d98937;
+  }
+  [data-theme="dark"]{
+    --cream:#111010;--cream-2:#1a1918;--paper:#161412;
+    --ink:#efe7d6;--ink-soft:#c8bfad;--muted:#7a7570;
+    --rule:#2e2b27;--ochre:#d98937;--ochre-soft:#c2661a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-variation-settings:"opsz" 18;-webkit-font-smoothing:antialiased;background:var(--cream);color:var(--ink);overflow-x:hidden}
+  ::selection{background:var(--ochre);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 56px}
+  .prose{max-width:720px;margin:0 auto}
+
+  /* NAV */
+  .nav{padding:22px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule)}
+  .nav-left{display:flex;align-items:center}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-weight:500;letter-spacing:.02em;font-size:16px}
+  .brand-mark{width:28px;height:28px}
+  .brand-mark svg{width:100%;height:100%;display:block}
+  .brand small{color:var(--muted);font-weight:400}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--muted);transition:color .3s}
+  .nav-link:hover,.nav-link.on{color:var(--ink)}
+  .nav-link.on{color:var(--ochre)}
+  .nav-link::before{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ochre);transition:right .4s cubic-bezier(.7,0,.2,1)}
+  .nav-link.on::before{right:0}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;background:var(--ink);color:var(--cream);border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:background .3s}
+  .nav-cta:hover{background:var(--ochre)}
+  .mk-grid rect{fill:var(--ink);opacity:.18;transform-origin:center;animation:gridBloom 3s ease-in-out infinite}
+  .mk-grid rect:nth-child(1){animation-delay:0s}.mk-grid rect:nth-child(2){animation-delay:.1s}.mk-grid rect:nth-child(3){animation-delay:.2s}
+  .mk-grid rect:nth-child(4){animation-delay:.35s}.mk-grid rect:nth-child(5){animation-delay:.15s;fill:var(--ochre);opacity:1}
+  .mk-grid rect:nth-child(6){animation-delay:.25s}.mk-grid rect:nth-child(7){animation-delay:.4s}.mk-grid rect:nth-child(8){animation-delay:.3s}.mk-grid rect:nth-child(9){animation-delay:.45s}
+  @keyframes gridBloom{0%,100%{opacity:.12;transform:scale(.85)}50%{opacity:.9;transform:scale(1)}}
+  .mk-grid .featured{animation:gridFeature 3s ease-in-out infinite !important}
+  @keyframes gridFeature{0%,100%{opacity:.6;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:border-color .3s,background .3s,color .3s,transform .3s;flex:none}
+  .theme-toggle:hover{border-color:var(--ink);background:var(--ink);color:var(--cream);transform:rotate(20deg)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .icon-sun{display:none}
+  .theme-toggle .icon-moon{display:block}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:none}
+
+  /* ARTICLE HEAD */
+  .article-head{padding:80px 0 64px;border-bottom:1px solid var(--rule)}
+  .article-head .back{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);display:inline-flex;align-items:center;gap:8px;margin-bottom:40px;transition:gap .3s}
+  .article-head .back:hover{gap:14px}
+  .article-head .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:28px}
+  .article-head h1{font-size:clamp(40px,5.4vw,72px);line-height:1.06;letter-spacing:-.02em;font-weight:400;font-variation-settings:"opsz" 72;max-width:22ch;margin-bottom:28px}
+  .article-head .dek{font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink-soft);font-style:italic;max-width:58ch;margin-bottom:28px}
+  .article-head .byline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .article-head .byline b{color:var(--ochre);font-weight:500}
+
+  /* ARTICLE BODY */
+  .article{padding:72px 0 100px}
+  .article h2{font-size:clamp(28px,3vw,40px);line-height:1.12;letter-spacing:-.015em;font-weight:400;color:var(--ink);margin:64px 0 22px;padding-top:64px;border-top:1px solid var(--rule)}
+  .article h2:first-child{margin-top:0;padding-top:0;border-top:none}
+  .article h3{font-size:clamp(22px,2.4vw,28px);line-height:1.2;font-weight:400;color:var(--ink);margin:44px 0 16px}
+  .article p{font-size:18px;line-height:1.72;color:var(--ink-soft);margin:0 0 24px}
+  .article p.lede{font-size:21px;line-height:1.55;color:var(--ink);font-style:italic;margin-bottom:32px}
+  .article ul,.article ol{font-size:18px;line-height:1.7;color:var(--ink-soft);margin:0 0 24px;padding-left:22px}
+  .article li{margin-bottom:12px}
+  .article strong{color:var(--ink);font-weight:500}
+  .article em{font-style:italic}
+  .article a{color:var(--ochre);border-bottom:1px solid transparent;transition:border-color .2s}
+  .article a:hover{border-bottom-color:var(--ochre)}
+  .article hr{border:none;border-top:1px solid var(--rule);margin:56px auto;width:80px}
+
+  /* blockquote */
+  .article blockquote{margin:32px 0;padding:6px 0 6px 28px;border-left:3px solid var(--ochre);font-style:italic;font-size:20px;line-height:1.5;color:var(--ink)}
+
+  /* callout */
+  .callout{background:var(--cream-2);border-left:3px solid var(--ochre);padding:28px 32px;margin:32px 0}
+  [data-theme="dark"] .callout{background:var(--cream-2)}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:14px}
+  .callout p{font-size:17px;margin:0 0 10px;color:var(--ink-soft)}
+  .callout p:last-child{margin:0}
+
+  /* post CTA — inverted callout block, colors locked so they don't flip with theme */
+  .post-cta{background:#15171a;color:#efe7d6;padding:48px 44px;margin:64px 0 0;border-radius:4px}
+  .post-cta h3{font-size:28px;font-weight:400;color:#efe7d6;margin:0 0 16px}
+  .post-cta p{font-size:16px;color:rgba(239,231,214,.78);margin:0 0 18px;max-width:52ch}
+  .post-cta a{color:#d98937;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .post-cta a:hover{color:#efe7d6;border-bottom-color:#efe7d6}
+
+  /* progress bar */
+  .read-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:950;background:transparent;pointer-events:none}
+  .read-progress::after{content:"";display:block;height:100%;background:var(--ochre);width:var(--rp,0%);transition:width .1s}
+
+  /* FOOTER */
+  .site-footer{padding:44px 0 56px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .site-footer b{color:var(--ink)}
+  .site-footer a:hover{color:var(--ochre)}
+
+  /* mobile */
+  .nav-toggle{display:none;width:40px;height:40px;border:1px solid var(--rule);border-radius:999px;background:transparent;cursor:pointer;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:1001}
+  .nav-toggle span{display:block;width:16px;height:1.5px;background:var(--ink);transition:transform .3s,opacity .3s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  @media(max-width:860px){
+    .wrap,.nav{padding-left:24px;padding-right:24px}
+    .nav-toggle{display:flex}
+    .nav-links{position:fixed;inset:0;background:var(--cream);flex-direction:column;gap:22px;justify-content:center;align-items:flex-start;padding:80px 32px 40px;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:1000;display:flex !important}
+    .nav-links.open{transform:translateX(0)}
+    .nav-links .nav-link{font-family:'Fraunces',serif;font-size:36px;letter-spacing:-.01em;text-transform:none}
+    .nav-links .nav-cta{margin-top:24px}
+    body.nav-open{overflow:hidden}
+    .article-head{padding:48px 0 40px}
+    .post-cta{padding:32px 24px}
+    .site-footer{flex-direction:column;gap:12px;align-items:flex-start;padding:28px 0 48px}
+    .prose{padding:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="read-progress" id="readProg" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="../../index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 28 28" class="mk-grid">
+          <rect x="4" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="11.25" width="5.5" height="5.5" rx=".6" class="featured"/>
+          <rect x="18.5" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="18.5" width="5.5" height="5.5" rx=".6"/>
+        </svg>
+      </span>
+      <span>SLATEPRESS <small>&nbsp;— MMXXVI</small></span>
+    </a>
+  </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navLinks">
+    <a href="../../index.html#method" class="nav-link">Method</a>
+    <a href="../../index.html#work" class="nav-link">Work</a>
+    <a href="../../index.html#pricing" class="nav-link">Pricing</a>
+    <a href="../../index.html#voices" class="nav-link">Voices</a>
+    <a href="../../index.html#faq" class="nav-link">FAQ</a>
+    <a href="../index.html" class="nav-link on">Blog</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../../index.html#cta" class="nav-cta">Start a project <span>→</span></a>
+  </nav>
+</header>
+
+<section class="article-head">
+  <div class="wrap">
+    <div class="prose">
+      <a class="back" href="../index.html">← The Slatepress Blog</a>
+      <div class="eyebrow">Thesis</div>
+      <h1>Why the $15,000 pitch deck is already dead.</h1>
+      <p class="dek">The pricing that deck agencies have relied on for a decade stopped making sense in the last eighteen months. The right response is not "decks are cheaper now." It's a rewrite of what a founder should actually pay for.</p>
+      <div class="byline">SLATEPRESS · <b>April 22, 2026</b> · 6 min read</div>
+    </div>
+  </div>
+</section>
+
+<section class="article">
+  <div class="wrap">
+    <div class="prose">
+
+      <p class="lede">The business of charging fifteen thousand dollars for a single pitch deck depended on an assumption that quietly stopped being true in the last eighteen months. It is worth explaining what the assumption was, because "decks are cheaper now" is the wrong lesson — and the right one shapes what a founder should actually pay for in 2026.</p>
+
+      <p>The assumption was that a deck was a craft-hours business.</p>
+
+      <p>A boutique agency has been billing a seed deck at roughly $12,000–$18,000 for most of the last decade. The line items underneath were always some version of this: ten hours of discovery, fifteen hours of narrative writing, twenty hours of design, ten hours of revisions. Call it fifty hours, round down to forty, and at the $300–400 hourly rate a senior designer commands in New York or San Francisco, the math lands in the quoted range. Every agency in the category priced this way, implicitly or explicitly, because the output genuinely required forty hours of human time and there was no way around that.</p>
+
+      <p>In the last eighteen months, the forty hours collapsed.</p>
+
+      <p>I'm not going to litigate exactly which tool did it — there are several, and the landscape shifts every quarter. The point is that a non-designer, working with current AI design tools, can produce a polished fourteen-slide investor deck in under fifteen minutes of direct work. The floor is somewhere around eight minutes with practice. A forty-hour week of agency labor, compressed into the time it takes to order lunch. That is not an incremental change. It's a re-founding of the category.</p>
+
+      <h2>What changed and what didn't</h2>
+
+      <p>The production cost of visually-polished slides went to zero. That's the change.</p>
+
+      <p>What didn't change: almost everything else.</p>
+
+      <p>A founder's brand still has a point of view that needs to be heard, respected, and defended by someone whose full-time job is making that happen. Investors still read decks in a patterned way — first screen, last screen, the ask, one or two body slides — and the choice of what goes in each of those positions still determines whether the deck works. Decisions about what to leave off a slide are still harder than decisions about what to put on it. Knowing which of three AI-generated directions ships, and which two die on the cutting-room floor, is the whole game.</p>
+
+      <p>The craft shrunk. The taste stayed the same size.</p>
+
+      <h2>The new pricing problem</h2>
+
+      <p>The old agency price was defensible because the hours were real. The new agency price cannot be defended by hours, because the hours no longer match the cost structure of a business that can produce a deck in fifteen minutes. Founders see this too — not because they've been inside the production pipeline, but because the market always figures out its own economics eventually. A founder who spends an hour with an AI design tool and produces something that's 70% of what an agency would ship is less willing to pay $15,000 for the remaining 30%.</p>
+
+      <p>There are two bad responses to this, and one good one.</p>
+
+      <p><strong>The first bad response</strong> is to pretend nothing changed and keep pricing at $15,000 per deck. This works for a year, maybe two, until more founders encounter the tools. Then it is a slow bleed, because the market discovers the gap on its own timeline and you don't get a vote.</p>
+
+      <p><strong>The second bad response</strong> is to cut prices to match the new production cost. "We'll charge $1,500 for a deck because it only takes an hour now." This makes the hours-equals-value frame worse, not better — it reinforces the idea that a deck's value is a function of production time. It never was. A $1,500 deck that closes a $3M round is the best purchase a founder makes that year. A $15,000 deck that doesn't is the worst.</p>
+
+      <p><strong>The good response</strong> is to reprice on the axis that actually matters, which is whether the deck raises money. The inputs that drive that outcome are not production hours. They are:</p>
+
+      <ul>
+        <li><strong>Taste</strong> — picking the right direction out of several possible ones. Knowing that the third variant, not the first, is the one that will land with the investor you're actually targeting.</li>
+        <li><strong>Framing</strong> — knowing which number goes on which slide. Knowing that slide three is the one that will kill your next meeting, and what belongs there instead.</li>
+        <li><strong>Velocity</strong> — re-cutting the deck between a Monday investor call and a Tuesday follow-up. Not a week later. Inside the window while the conversation is still hot.</li>
+        <li><strong>Relationships</strong> — knowing which investors at which firms are reading what shape of deck this quarter. Warm-intro hygiene. Post-read follow-through.</li>
+      </ul>
+
+      <p>None of those four are solved by AI tools. They are the durable service.</p>
+
+      <div class="callout">
+        <span class="label">Sharp edge</span>
+        <p>If an agency cannot articulate, on the discovery call, which of these four things they deliver and how — and instead retreats to "pixel-perfect design" or "award-winning narrative" or a list of cumulative funding stats — they are still pricing the old way. That's a tell.</p>
+      </div>
+
+      <h2>What a founder should actually pay for</h2>
+
+      <p>A founder raising a seed round in 2026 should stop comparison-shopping agencies on the old axes. Logo wall, cumulative funding stat, "design aesthetic" in isolation — none of these meaningfully predict whether the agency can help close your round.</p>
+
+      <p>What will predict it:</p>
+
+      <p>Can they produce three directions, not one, on the kickoff call — and walk you through why each serves a different investor thesis? That's taste.</p>
+
+      <p>Can they tell you, without being prompted, that your current slide three is the one that will kill the meeting, and tell you what to move into that position? That's framing.</p>
+
+      <p>Can they turn a re-cut around between a Monday investor call and a Tuesday follow-up? That's velocity.</p>
+
+      <p>Do they have relationships with the investors you're actually targeting, such that when your deck lands in those inboxes it is not a cold asset? That's the relationship layer — the hardest one to fake and the most underweighted in every agency comparison that exists online.</p>
+
+      <p>An agency that can do all four is worth what they charge, whatever they charge. An agency that cannot do any is not worth anything, regardless of price. Most agencies sit somewhere in between, and the honest answer is that most of them have not yet rebuilt their pricing to reflect which of the four they actually deliver.</p>
+
+      <h2>The one thing a founder should not pay for</h2>
+
+      <p>Production hours. Specifically, any agency that quotes you on design time — "forty hours at $400 an hour" — is quoting you on an input that has been commoditized. Pay on outcomes, or on taste, or on velocity, or on access. Don't pay for the making. The making is not scarce.</p>
+
+      <p>The rest of the category will eventually catch up to this. The agencies that reprice first will be fine. The ones that don't will spend the next two years explaining why their line items still add up to fifteen thousand.</p>
+
+      <div class="post-cta">
+        <h3>About Slatepress.</h3>
+        <p>We are a boutique pitch-deck studio rebuilding around exactly this. Taste, framing, velocity, relationships — priced on outcomes, not hours. You can see our methodology and pricing on the <a href="../../index.html">home page</a>. If you're raising, write us — <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="site-footer">
+    <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
+    <div>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://x.com" target="_blank" rel="noopener">X.com</a> ·
+      <a href="https://substack.com" target="_blank" rel="noopener">Substack</a>
+    </div>
+    <div><a href="mailto:hello@slatepress.co">hello@slatepress.co →</a></div>
+  </div>
+</footer>
+
+<script>
+/* theme */
+(() => {
+  const root = document.documentElement;
+  const saved = localStorage.getItem('sp-theme') || 'light';
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('sp-theme', next);
+    });
+  });
+})();
+
+/* nav toggle */
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle||!links) return;
+  function setOpen(open){
+    toggle.setAttribute('aria-expanded', open?'true':'false');
+    links.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
+
+/* reading progress bar */
+(() => {
+  const bar = document.getElementById('readProg');
+  if (!bar) return;
+  document.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+    bar.style.setProperty('--rp', pct+'%');
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
