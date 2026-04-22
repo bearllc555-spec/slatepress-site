@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Slatepress Blog — teardowns, frameworks, and honest notes on fundraising.</title>
+  <meta name="description" content="Essays and teardowns from Slatepress — a boutique seed-deck studio. Competitor analyses, seed-deck frameworks, and honest notes on the craft of fundraising." />
+  <meta property="og:title" content="The Slatepress Blog" />
+  <meta property="og:description" content="Teardowns, frameworks, and honest notes on seed fundraising." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://slatepress.co/blog/" />
+  <meta property="og:image" content="https://slatepress.co/assets/keelhaul-cover.png" />
+  <link rel="canonical" href="https://slatepress.co/blog/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23C2720D'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink:       #14181F;
+      --ink-soft:  #2A2F39;
+      --cream:     #F5F1E8;
+      --cream-deep:#EBE5D4;
+      --amber:     #C2720D;
+      --amber-lt:  #E8A84D;
+      --muted:     #6E6B66;
+      --hairline:  #C9C2B1;
+      --white:     #FFFFFF;
+      --f-serif:   Georgia, "Times New Roman", serif;
+      --f-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --max:       1240px;
+      --max-prose: 720px;
+      --gutter:    clamp(20px, 5vw, 72px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--f-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ---------- top bar ---------- */
+    .topbar { padding: 28px 0 0; }
+    .topbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .topbar-row a { text-decoration: none; color: var(--muted); }
+    .topbar-row a:hover { color: var(--amber); }
+    .topbar-row .dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--amber);
+      margin-right: 10px;
+      transform: translateY(1px);
+    }
+    .topbar-row .brand { color: var(--ink); text-decoration: none; }
+    .topbar-row .nav { display: flex; gap: 28px; align-items: center; }
+    .topbar-row .nav a.current { color: var(--amber); }
+
+    /* ---------- hero ---------- */
+    .blog-hero {
+      padding: clamp(60px, 10vh, 120px) 0 clamp(40px, 6vh, 72px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .blog-hero .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--amber);
+      margin-bottom: 28px;
+    }
+    .blog-hero h1 {
+      font-family: var(--f-serif);
+      font-weight: 400;
+      font-size: clamp(40px, 6.5vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 28px;
+      max-width: 14ch;
+    }
+    .blog-hero .sub {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.45;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin: 0;
+    }
+
+    /* ---------- post list ---------- */
+    .posts {
+      padding: clamp(60px, 10vh, 100px) 0;
+    }
+    .post-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .post-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 56px;
+      align-items: baseline;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--hairline);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.25s ease;
+    }
+    .post-card:first-child { border-top: 1px solid var(--hairline); }
+    .post-card:hover { transform: translateX(6px); }
+    .post-card:hover h2 { color: var(--amber); }
+    .post-card .meta {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+      padding-top: 8px;
+    }
+    .post-card h2 {
+      font-family: var(--f-serif);
+      font-weight: 400;
+      font-size: clamp(26px, 3.2vw, 38px);
+      line-height: 1.15;
+      color: var(--ink);
+      margin: 0 0 16px;
+      letter-spacing: -0.005em;
+      max-width: 24ch;
+      transition: color 0.2s ease;
+    }
+    .post-card p {
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 52ch;
+    }
+    .post-card .tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--amber);
+      margin-top: 18px;
+    }
+
+    /* ---------- empty-state placeholder for future ---------- */
+    .blog-footer-note {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 48ch;
+      margin: 48px 0 0;
+    }
+
+    /* ---------- footer ---------- */
+    footer {
+      background: var(--ink);
+      color: var(--hairline);
+      padding: 48px 0 56px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    footer .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer .dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--amber);
+      margin-right: 10px;
+      transform: translateY(1px);
+    }
+    footer a { color: var(--hairline); text-decoration: none; }
+    footer a:hover { color: var(--amber-lt); }
+
+    @media (max-width: 780px) {
+      .topbar-row .nav { gap: 16px; font-size: 10px; }
+      .post-card { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+      .post-card .meta { padding-top: 0; }
+    }
+  </style>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wd6byt4c1l");
+  </script>
+</head>
+<body>
+
+  <!-- top bar -->
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-row">
+        <a class="brand" href="/"><span class="dot"></span>SLATEPRESS</a>
+        <nav class="nav">
+          <a href="/#method">Method</a>
+          <a href="/#work">Work</a>
+          <a href="/#pricing">Pricing</a>
+          <a href="/blog/" class="current">Blog</a>
+          <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <section class="blog-hero">
+    <div class="wrap">
+      <div class="eyebrow">The Slatepress Blog</div>
+      <h1>Notes from the deck shop.</h1>
+      <p class="sub">Teardowns, frameworks, and honest reads on seed fundraising — written for founders who treat the deck as part of the pitch, not a formality.</p>
+    </div>
+  </section>
+
+  <!-- post list -->
+  <section class="posts">
+    <div class="wrap">
+      <div class="post-list">
+
+        <a class="post-card" href="/blog/how-to-vet-a-pitch-deck-agency/">
+          <div class="meta">April 19, 2026 · 9 min read</div>
+          <div>
+            <h2>How to vet a pitch deck design agency: three tests, three teardowns.</h2>
+            <p>Most of the agencies ranking on page one of Google for "pitch deck design service" look identical from the outside. Three quick tests separate the real ones from the template mills — and we run them on three of the top results.</p>
+            <span class="tag">Competitor teardown</span>
+          </div>
+        </a>
+
+      </div>
+      <p class="blog-footer-note">More essays, teardowns, and seed-deck case studies posting regularly. If there's a topic you'd like us to take apart, write us at <a href="mailto:hello@slatepress.co" style="color: var(--amber); text-decoration: none;">hello@slatepress.co</a>.</p>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <div class="wrap">
+      <div class="row">
+        <div><span class="dot"></span>SLATEPRESS · MMXXVI</div>
+        <div><a href="mailto:hello@slatepress.co">hello@slatepress.co</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "807ccde79f084ea59cb5deab2c363a53"}'></script>
+</body>
+</html>
