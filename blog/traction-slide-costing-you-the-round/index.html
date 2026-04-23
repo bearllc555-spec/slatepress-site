@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Why your traction slide is costing you the round — Slatepress</title>
+<meta name="description" content="Most traction slides are built to impress, not to resolve investor questions. The re-structure that turns slide five into a yes-keep-going moment."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://slatepress.co/blog/traction-slide-costing-you-the-round/"/>
+<meta property="og:title" content="Why your traction slide is costing you the round — Slatepress"/>
+<meta property="og:description" content="Most traction slides are built to impress, not to resolve investor questions. The re-structure that turns slide five into a yes-keep-going moment."/>
+<meta property="og:image" content="https://slatepress.co/uploads/slatepress-002-poster.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Why your traction slide is costing you the round — Slatepress"/>
+<meta name="twitter:description" content="Most traction slides are built to impress, not to resolve investor questions. The re-structure that turns slide five into a yes-keep-going moment."/>
+<meta name="twitter:image" content="https://slatepress.co/uploads/slatepress-002-poster.jpg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe7d6;--cream-2:#e6dcc6;--paper:#f5efdf;
+    --ink:#15171a;--ink-soft:#3a3d42;--muted:#6b6a63;
+    --rule:#cdc3ab;--ochre:#c2661a;--ochre-soft:#d98937;
+  }
+  [data-theme="dark"]{
+    --cream:#111010;--cream-2:#1a1918;--paper:#161412;
+    --ink:#efe7d6;--ink-soft:#c8bfad;--muted:#7a7570;
+    --rule:#2e2b27;--ochre:#d98937;--ochre-soft:#c2661a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-variation-settings:"opsz" 18;-webkit-font-smoothing:antialiased;background:var(--cream);color:var(--ink);overflow-x:hidden}
+  ::selection{background:var(--ochre);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 56px}
+  .prose{max-width:720px;margin:0 auto}
+
+  /* NAV */
+  .nav{padding:22px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule)}
+  .nav-left{display:flex;align-items:center}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-weight:500;letter-spacing:.02em;font-size:16px}
+  .brand-mark{width:28px;height:28px}
+  .brand-mark svg{width:100%;height:100%;display:block}
+  .brand small{color:var(--muted);font-weight:400}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--muted);transition:color .3s}
+  .nav-link:hover,.nav-link.on{color:var(--ink)}
+  .nav-link.on{color:var(--ochre)}
+  .nav-link::before{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ochre);transition:right .4s cubic-bezier(.7,0,.2,1)}
+  .nav-link.on::before{right:0}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;background:var(--ink);color:var(--cream);border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:background .3s}
+  .nav-cta:hover{background:var(--ochre)}
+  .mk-grid rect{fill:var(--ink);opacity:.18;transform-origin:center;animation:gridBloom 3s ease-in-out infinite}
+  .mk-grid rect:nth-child(1){animation-delay:0s}.mk-grid rect:nth-child(2){animation-delay:.1s}.mk-grid rect:nth-child(3){animation-delay:.2s}
+  .mk-grid rect:nth-child(4){animation-delay:.35s}.mk-grid rect:nth-child(5){animation-delay:.15s;fill:var(--ochre);opacity:1}
+  .mk-grid rect:nth-child(6){animation-delay:.25s}.mk-grid rect:nth-child(7){animation-delay:.4s}.mk-grid rect:nth-child(8){animation-delay:.3s}.mk-grid rect:nth-child(9){animation-delay:.45s}
+  @keyframes gridBloom{0%,100%{opacity:.12;transform:scale(.85)}50%{opacity:.9;transform:scale(1)}}
+  .mk-grid .featured{animation:gridFeature 3s ease-in-out infinite !important}
+  @keyframes gridFeature{0%,100%{opacity:.6;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:border-color .3s,background .3s,color .3s,transform .3s;flex:none}
+  .theme-toggle:hover{border-color:var(--ink);background:var(--ink);color:var(--cream);transform:rotate(20deg)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .icon-sun{display:none}
+  .theme-toggle .icon-moon{display:block}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:none}
+
+  /* ARTICLE HEAD */
+  .article-head{padding:80px 0 64px;border-bottom:1px solid var(--rule)}
+  .article-head .back{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);display:inline-flex;align-items:center;gap:8px;margin-bottom:40px;transition:gap .3s}
+  .article-head .back:hover{gap:14px}
+  .article-head .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:28px}
+  .article-head h1{font-size:clamp(40px,5.4vw,72px);line-height:1.06;letter-spacing:-.02em;font-weight:400;font-variation-settings:"opsz" 72;max-width:22ch;margin-bottom:28px}
+  .article-head .dek{font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink-soft);font-style:italic;max-width:58ch;margin-bottom:28px}
+  .article-head .byline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .article-head .byline b{color:var(--ochre);font-weight:500}
+
+  /* ARTICLE BODY */
+  .article{padding:72px 0 100px}
+  .article h2{font-size:clamp(28px,3vw,40px);line-height:1.12;letter-spacing:-.015em;font-weight:400;color:var(--ink);margin:64px 0 22px;padding-top:64px;border-top:1px solid var(--rule)}
+  .article h2:first-child{margin-top:0;padding-top:0;border-top:none}
+  .article h3{font-size:clamp(22px,2.4vw,28px);line-height:1.2;font-weight:400;color:var(--ink);margin:44px 0 16px}
+  .article p{font-size:18px;line-height:1.72;color:var(--ink-soft);margin:0 0 24px}
+  .article p.lede{font-size:21px;line-height:1.55;color:var(--ink);font-style:italic;margin-bottom:32px}
+  .article ul,.article ol{font-size:18px;line-height:1.7;color:var(--ink-soft);margin:0 0 24px;padding-left:22px}
+  .article li{margin-bottom:12px}
+  .article strong{color:var(--ink);font-weight:500}
+  .article em{font-style:italic}
+  .article a{color:var(--ochre);border-bottom:1px solid transparent;transition:border-color .2s}
+  .article a:hover{border-bottom-color:var(--ochre)}
+  .article hr{border:none;border-top:1px solid var(--rule);margin:56px auto;width:80px}
+
+  /* blockquote */
+  .article blockquote{margin:32px 0;padding:6px 0 6px 28px;border-left:3px solid var(--ochre);font-style:italic;font-size:20px;line-height:1.5;color:var(--ink)}
+
+  /* callout */
+  .callout{background:var(--cream-2);border-left:3px solid var(--ochre);padding:28px 32px;margin:32px 0}
+  [data-theme="dark"] .callout{background:var(--cream-2)}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:14px}
+  .callout p{font-size:17px;margin:0 0 10px;color:var(--ink-soft)}
+  .callout p:last-child{margin:0}
+
+  /* post CTA — inverted callout block, colors locked so they don't flip with theme */
+  .post-cta{background:#15171a;color:#efe7d6;padding:48px 44px;margin:64px 0 0;border-radius:4px}
+  .post-cta h3{font-size:28px;font-weight:400;color:#efe7d6;margin:0 0 16px}
+  .post-cta p{font-size:16px;color:rgba(239,231,214,.78);margin:0 0 18px;max-width:52ch}
+  .post-cta a{color:#d98937;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .post-cta a:hover{color:#efe7d6;border-bottom-color:#efe7d6}
+
+  /* disclosure */
+  .disclosure{margin-top:56px;padding-top:28px;border-top:1px solid var(--rule);font-size:14px;line-height:1.65;color:var(--muted)}
+  .disclosure strong{color:var(--ink-soft)}
+
+  /* progress bar */
+  .read-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:950;background:transparent;pointer-events:none}
+  .read-progress::after{content:"";display:block;height:100%;background:var(--ochre);width:var(--rp,0%);transition:width .1s}
+
+  /* FOOTER */
+  .site-footer{padding:44px 0 56px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .site-footer b{color:var(--ink)}
+  .site-footer a:hover{color:var(--ochre)}
+
+  /* mobile */
+  .nav-toggle{display:none;width:40px;height:40px;border:1px solid var(--rule);border-radius:999px;background:transparent;cursor:pointer;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:1001}
+  .nav-toggle span{display:block;width:16px;height:1.5px;background:var(--ink);transition:transform .3s,opacity .3s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  @media(max-width:860px){
+    .wrap,.nav{padding-left:24px;padding-right:24px}
+    .nav-toggle{display:flex}
+    .nav-links{position:fixed;inset:0;background:var(--cream);flex-direction:column;gap:22px;justify-content:center;align-items:flex-start;padding:80px 32px 40px;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:1000;display:flex !important}
+    .nav-links.open{transform:translateX(0)}
+    .nav-links .nav-link{font-family:'Fraunces',serif;font-size:36px;letter-spacing:-.01em;text-transform:none}
+    .nav-links .nav-cta{margin-top:24px}
+    body.nav-open{overflow:hidden}
+    .article-head{padding:48px 0 40px}
+    .post-cta{padding:32px 24px}
+    .site-footer{flex-direction:column;gap:12px;align-items:flex-start;padding:28px 0 48px}
+    .prose{padding:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="read-progress" id="readProg" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="../../index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 28 28" class="mk-grid">
+          <rect x="4" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="11.25" width="5.5" height="5.5" rx=".6" class="featured"/>
+          <rect x="18.5" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="18.5" width="5.5" height="5.5" rx=".6"/>
+        </svg>
+      </span>
+      <span>SLATEPRESS <small>&nbsp;— MMXXVI</small></span>
+    </a>
+  </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navLinks">
+    <a href="../../index.html#method" class="nav-link">Method</a>
+    <a href="../../index.html#work" class="nav-link">Work</a>
+    <a href="../../index.html#pricing" class="nav-link">Pricing</a>
+    <a href="../../index.html#voices" class="nav-link">Voices</a>
+    <a href="../../index.html#faq" class="nav-link">FAQ</a>
+    <a href="../index.html" class="nav-link on">Blog</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../../index.html#cta" class="nav-cta" data-contact-modal>Start a project <span>→</span></a>
+  </nav>
+</header>
+
+<section class="article-head">
+  <div class="wrap">
+    <div class="prose">
+      <a class="back" href="../index.html">← The Slatepress Blog</a>
+      <div class="eyebrow">Thesis</div>
+      <h1>Why your traction slide is costing you the round.</h1>
+      <p class="dek">Most traction slides are built to impress. The ones that close rounds resolve a specific investor question in ten seconds — and the re-structure takes under an hour.</p>
+      <div class="byline">SLATEPRESS · <b>April 23, 2026</b> · 6 min read</div>
+    </div>
+  </div>
+</section>
+
+<section class="article">
+  <div class="wrap">
+    <div class="prose">
+
+      <p class="lede">The traction slide is the one slide in a seed deck where most founders lose the room without realizing it. Not because the numbers are bad. Because the slide is answering the wrong question.</p>
+
+      <p>A partner who has spent ninety seconds on slides one through four arrives at the traction slide with exactly one thing on their mind: <em>is this working, and is it working for the reason the founder thinks it's working?</em> That is the question. The traction slide either resolves it in ten seconds or it doesn't, and the rest of the deck is downstream of which way the resolution went.</p>
+
+      <p>Most traction slides answer a different question. They answer "are these numbers impressive," which is the question a founder asks their own slide before sending it. The two questions overlap about sixty percent of the time. The other forty percent is where the round goes sideways.</p>
+
+      <h2>What the investor is actually doing on this slide</h2>
+
+      <p>Investors don't read the traction slide the way founders write it. They do three things in a fixed order, and the slide either cooperates with that order or fights it.</p>
+
+      <p>First, they look for the number. One number. If the company is post-revenue, it is MRR or ARR. If it is pre-revenue, it is users, waitlist, design partners, or a leading indicator that the founder has chosen to proxy for demand. The investor is not yet evaluating the number. They are identifying which number the founder thinks is the one that matters.</p>
+
+      <p>Second, they look for the shape. Is this line going up, and is it going up in a way that looks like a business or a marketing spike? A clean twelve-week curve reads very differently from three flat months followed by one vertical week. Both shapes are real. Only one of them is a business.</p>
+
+      <p>Third — and this is where most slides collapse — they look for the cause. Why is the curve that shape? If the slide tells them, they keep reading. If the slide shows a number and a graph and nothing else, they build their own theory, which is usually wrong and usually worse than whatever the founder would have said.</p>
+
+      <h2>The four traction slides we see</h2>
+
+      <p>Across the decks that come through the studio during a raise, roughly four variants show up. Only one of them works.</p>
+
+      <h3>1. The dashboard dump</h3>
+      <p>Ten metrics on a single slide. MRR, MAU, CAC, LTV, churn, NPS, signups, revenue, gross margin, payback period. The founder believes this is comprehensive. The investor reads it as "the founder doesn't know which of these matters, so I have to pick." They pick the worst-looking one. The dashboard dump costs more rounds than a low number does.</p>
+
+      <h3>2. The hero chart with no caption</h3>
+      <p>One giant curve, axis labels in six-point type, no sentence explaining what the curve is or why it bends where it bends. The investor has to guess. Sometimes the guess is generous and the slide survives. More often the guess is the uncharitable one, because an investor who has read thirty decks this week defaults to pattern-match, and the pattern for an unexplained curve is "the founder is hoping I don't ask."</p>
+
+      <h3>3. The vanity stack</h3>
+      <p>"10,000 waitlist signups. 4x growth quarter over quarter. $2M in pipeline." Each number looks good in isolation. The investor's job is to check whether they compose into a business. A waitlist is not revenue. Pipeline is not closed. 4x growth from one to four is not the same as 4x growth from a hundred to four hundred. The vanity stack reads as a founder who hasn't done the composition check themselves.</p>
+
+      <h3>4. The resolved version</h3>
+      <p>One number in the hero position. One sentence that names the number, the period it covers, and the specific thing that is driving it. One small chart in the lower half of the slide that shows the shape. One sub-line underneath that anticipates the obvious investor question and answers it in advance. That's the slide that works.</p>
+
+      <div class="callout">
+        <span class="label">Sharp edge</span>
+        <p>Investors are not looking for the biggest number on your traction slide. They are looking for the smallest number you are willing to put in the hero position. The founder who leads with MRR instead of signups, or with paying customers instead of total users, is telling the investor they know what counts. That signal is worth more than any individual metric.</p>
+      </div>
+
+      <h2>The re-structure</h2>
+
+      <p>The rewrite takes forty minutes. We run this version on every deck that comes through during an active raise, and the lift in partner-meeting-to-next-step is noticeable within two weeks.</p>
+
+      <p><strong>Top half of the slide:</strong> one number, in type large enough to be read at the back of a boardroom, with a single-sentence caption directly underneath. The caption names what the number is, the time period, and the qualifier that makes it defensible. "Annualized revenue of $480K as of March 2026, from 84 paying customers on monthly subscriptions — no annual contracts in the number." The qualifier is what separates a traction slide from a highlight reel.</p>
+
+      <p><strong>Lower half:</strong> a small chart, not a hero chart. Twelve weeks, twenty-four weeks, or a month-by-month view. Label the axes. If there's a visible kink in the curve, either the founder wrote the sentence that explains it or the investor writes their own theory about it. One of those outcomes is better than the other.</p>
+
+      <p><strong>Footer of the slide:</strong> one sub-line that answers the question the investor is going to ask next, whether you give them the chance or not. "Retention at month three is 94%; cohort from January has held through March without paid re-engagement." That line is not there to brag. It's there to save the next fifteen seconds of meeting time, which the investor will use to read slide seven instead of interrogating slide five.</p>
+
+      <h2>What it looks like after</h2>
+
+      <p>A resolved traction slide does three things at once. It tells the investor which metric the founder thinks is the signal. It shows the shape of that metric over a real time window. And it pre-empts the first follow-up question with a sentence the investor would otherwise have to ask.</p>
+
+      <p>The slide ceases to be a performance and becomes a handoff. The meeting moves forward because the question the traction slide exists to resolve has been resolved, and the investor can now spend the next two minutes on the thing that actually decides the round — which is almost never the traction slide, and always the slide after it.</p>
+
+      <div class="post-cta">
+        <h3>About Slatepress.</h3>
+        <p>We rewrite traction slides during active raises as part of the Tuesday re-cut cadence — the number, the sentence, the chart, the footer line, in under an hour. If you're heading into partner meetings this week and your slide five is still the old version, write us.</p>
+        <p><a href="mailto:hello@slatepress.co" data-contact-modal>hello@slatepress.co →</a></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="site-footer">
+    <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
+    <div>
+      <a href="https://www.linkedin.com/in/anthony-de-meo-285999397/" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://x.com/Slatepress_co" target="_blank" rel="noopener">X.com</a> ·
+      <a href="https://slatepress.substack.com/" target="_blank" rel="noopener">Substack</a> ·
+      <a href="https://media.rss.com/slate-press/feed.xml" target="_blank" rel="noopener">RSS</a>
+    </div>
+    <div><a href="mailto:hello@slatepress.co" data-contact-modal>hello@slatepress.co →</a></div>
+  </div>
+</footer>
+
+<script>
+/* theme */
+(() => {
+  const root = document.documentElement;
+  const saved = localStorage.getItem('sp-theme') || 'light';
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('sp-theme', next);
+    });
+  });
+})();
+
+/* nav toggle */
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle||!links) return;
+  function setOpen(open){
+    toggle.setAttribute('aria-expanded', open?'true':'false');
+    links.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
+
+/* reading progress bar */
+(() => {
+  const bar = document.getElementById('readProg');
+  if (!bar) return;
+  document.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+    bar.style.setProperty('--rp', pct+'%');
+  }, {passive:true});
+})();
+</script>
+<script defer src="/assets/contact-modal.js?v=26"></script>
+<script defer src="/assets/blog-read.js?v=55"></script>
+</body>
+</html>
