@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>When to cut the team slide entirely — Slatepress</title>
+<meta name="description" content="Most team slides in pre-seed decks are dead weight. A short case for cutting yours — plus the three situations where the team slide is the only slide that matters."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://slatepress.co/blog/when-to-cut-the-team-slide/"/>
+<meta property="og:title" content="When to cut the team slide entirely — Slatepress"/>
+<meta property="og:description" content="Most team slides in pre-seed decks are dead weight. A short case for cutting yours — plus the three situations where the team slide is the only slide that matters."/>
+<meta property="og:image" content="https://slatepress.co/uploads/slatepress-002-poster.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="When to cut the team slide entirely — Slatepress"/>
+<meta name="twitter:description" content="Most team slides in pre-seed decks are dead weight. A short case for cutting yours — plus the three situations where the team slide is the only slide that matters."/>
+<meta name="twitter:image" content="https://slatepress.co/uploads/slatepress-002-poster.jpg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe7d6;--cream-2:#e6dcc6;--paper:#f5efdf;
+    --ink:#15171a;--ink-soft:#3a3d42;--muted:#6b6a63;
+    --rule:#cdc3ab;--ochre:#c2661a;--ochre-soft:#d98937;
+  }
+  [data-theme="dark"]{
+    --cream:#111010;--cream-2:#1a1918;--paper:#161412;
+    --ink:#efe7d6;--ink-soft:#c8bfad;--muted:#7a7570;
+    --rule:#2e2b27;--ochre:#d98937;--ochre-soft:#c2661a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;font-variation-settings:"opsz" 18;-webkit-font-smoothing:antialiased;background:var(--cream);color:var(--ink);overflow-x:hidden}
+  ::selection{background:var(--ochre);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1360px;margin:0 auto;padding:0 56px}
+  .prose{max-width:720px;margin:0 auto}
+
+  /* NAV */
+  .nav{padding:22px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule)}
+  .nav-left{display:flex;align-items:center}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-weight:500;letter-spacing:.02em;font-size:16px}
+  .brand-mark{width:28px;height:28px}
+  .brand-mark svg{width:100%;height:100%;display:block}
+  .brand small{color:var(--muted);font-weight:400}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--muted);transition:color .3s}
+  .nav-link:hover,.nav-link.on{color:var(--ink)}
+  .nav-link.on{color:var(--ochre)}
+  .nav-link::before{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ochre);transition:right .4s cubic-bezier(.7,0,.2,1)}
+  .nav-link.on::before{right:0}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;background:var(--ink);color:var(--cream);border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:background .3s}
+  .nav-cta:hover{background:var(--ochre)}
+  .mk-grid rect{fill:var(--ink);opacity:.18;transform-origin:center;animation:gridBloom 3s ease-in-out infinite}
+  .mk-grid rect:nth-child(1){animation-delay:0s}.mk-grid rect:nth-child(2){animation-delay:.1s}.mk-grid rect:nth-child(3){animation-delay:.2s}
+  .mk-grid rect:nth-child(4){animation-delay:.35s}.mk-grid rect:nth-child(5){animation-delay:.15s;fill:var(--ochre);opacity:1}
+  .mk-grid rect:nth-child(6){animation-delay:.25s}.mk-grid rect:nth-child(7){animation-delay:.4s}.mk-grid rect:nth-child(8){animation-delay:.3s}.mk-grid rect:nth-child(9){animation-delay:.45s}
+  @keyframes gridBloom{0%,100%{opacity:.12;transform:scale(.85)}50%{opacity:.9;transform:scale(1)}}
+  .mk-grid .featured{animation:gridFeature 3s ease-in-out infinite !important}
+  @keyframes gridFeature{0%,100%{opacity:.6;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:border-color .3s,background .3s,color .3s,transform .3s;flex:none}
+  .theme-toggle:hover{border-color:var(--ink);background:var(--ink);color:var(--cream);transform:rotate(20deg)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .icon-sun{display:none}
+  .theme-toggle .icon-moon{display:block}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:block}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:none}
+
+  /* ARTICLE HEAD */
+  .article-head{padding:80px 0 64px;border-bottom:1px solid var(--rule)}
+  .article-head .back{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);display:inline-flex;align-items:center;gap:8px;margin-bottom:40px;transition:gap .3s}
+  .article-head .back:hover{gap:14px}
+  .article-head .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:28px}
+  .article-head h1{font-size:clamp(40px,5.4vw,72px);line-height:1.06;letter-spacing:-.02em;font-weight:400;font-variation-settings:"opsz" 72;max-width:22ch;margin-bottom:28px}
+  .article-head .dek{font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink-soft);font-style:italic;max-width:58ch;margin-bottom:28px}
+  .article-head .byline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .article-head .byline b{color:var(--ochre);font-weight:500}
+
+  /* ARTICLE BODY */
+  .article{padding:72px 0 100px}
+  .article h2{font-size:clamp(28px,3vw,40px);line-height:1.12;letter-spacing:-.015em;font-weight:400;color:var(--ink);margin:64px 0 22px;padding-top:64px;border-top:1px solid var(--rule)}
+  .article h2:first-child{margin-top:0;padding-top:0;border-top:none}
+  .article h3{font-size:clamp(22px,2.4vw,28px);line-height:1.2;font-weight:400;color:var(--ink);margin:44px 0 16px}
+  .article p{font-size:18px;line-height:1.72;color:var(--ink-soft);margin:0 0 24px}
+  .article p.lede{font-size:21px;line-height:1.55;color:var(--ink);font-style:italic;margin-bottom:32px}
+  .article ul,.article ol{font-size:18px;line-height:1.7;color:var(--ink-soft);margin:0 0 24px;padding-left:22px}
+  .article li{margin-bottom:12px}
+  .article strong{color:var(--ink);font-weight:500}
+  .article em{font-style:italic}
+  .article a{color:var(--ochre);border-bottom:1px solid transparent;transition:border-color .2s}
+  .article a:hover{border-bottom-color:var(--ochre)}
+  .article hr{border:none;border-top:1px solid var(--rule);margin:56px auto;width:80px}
+
+  /* blockquote */
+  .article blockquote{margin:32px 0;padding:6px 0 6px 28px;border-left:3px solid var(--ochre);font-style:italic;font-size:20px;line-height:1.5;color:var(--ink)}
+
+  /* callout */
+  .callout{background:var(--cream-2);border-left:3px solid var(--ochre);padding:28px 32px;margin:32px 0}
+  [data-theme="dark"] .callout{background:var(--cream-2)}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:14px}
+  .callout p{font-size:17px;margin:0 0 10px;color:var(--ink-soft)}
+  .callout p:last-child{margin:0}
+
+  /* post CTA — inverted callout block, colors locked so they don't flip with theme */
+  .post-cta{background:#15171a;color:#efe7d6;padding:48px 44px;margin:64px 0 0;border-radius:4px}
+  .post-cta h3{font-size:28px;font-weight:400;color:#efe7d6;margin:0 0 16px}
+  .post-cta p{font-size:16px;color:rgba(239,231,214,.78);margin:0 0 18px;max-width:52ch}
+  .post-cta a{color:#d98937;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .post-cta a:hover{color:#efe7d6;border-bottom-color:#efe7d6}
+
+  /* progress bar */
+  .read-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:950;background:transparent;pointer-events:none}
+  .read-progress::after{content:"";display:block;height:100%;background:var(--ochre);width:var(--rp,0%);transition:width .1s}
+
+  /* FOOTER */
+  .site-footer{padding:44px 0 56px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .site-footer b{color:var(--ink)}
+  .site-footer a:hover{color:var(--ochre)}
+
+  /* mobile */
+  .nav-toggle{display:none;width:40px;height:40px;border:1px solid var(--rule);border-radius:999px;background:transparent;cursor:pointer;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:1001}
+  .nav-toggle span{display:block;width:16px;height:1.5px;background:var(--ink);transition:transform .3s,opacity .3s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  @media(max-width:860px){
+    .wrap,.nav{padding-left:24px;padding-right:24px}
+    .nav-toggle{display:flex}
+    .nav-links{position:fixed;inset:0;background:var(--cream);flex-direction:column;gap:22px;justify-content:center;align-items:flex-start;padding:80px 32px 40px;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:1000;display:flex !important}
+    .nav-links.open{transform:translateX(0)}
+    .nav-links .nav-link{font-family:'Fraunces',serif;font-size:36px;letter-spacing:-.01em;text-transform:none}
+    .nav-links .nav-cta{margin-top:24px}
+    body.nav-open{overflow:hidden}
+    .article-head{padding:48px 0 40px}
+    .post-cta{padding:32px 24px}
+    .site-footer{flex-direction:column;gap:12px;align-items:flex-start;padding:28px 0 48px}
+    .prose{padding:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="read-progress" id="readProg" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="../../index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 28 28" class="mk-grid">
+          <rect x="4" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="4" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="11.25" width="5.5" height="5.5" rx=".6" class="featured"/>
+          <rect x="18.5" y="11.25" width="5.5" height="5.5" rx=".6"/>
+          <rect x="4" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="11.25" y="18.5" width="5.5" height="5.5" rx=".6"/>
+          <rect x="18.5" y="18.5" width="5.5" height="5.5" rx=".6"/>
+        </svg>
+      </span>
+      <span>SLATEPRESS <small>&nbsp;— MMXXVI</small></span>
+    </a>
+  </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navLinks">
+    <a href="../../index.html#method" class="nav-link">Method</a>
+    <a href="../../index.html#work" class="nav-link">Work</a>
+    <a href="../../index.html#pricing" class="nav-link">Pricing</a>
+    <a href="../../index.html#voices" class="nav-link">Voices</a>
+    <a href="../../index.html#faq" class="nav-link">FAQ</a>
+    <a href="../index.html" class="nav-link on">Blog</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../../index.html#cta" class="nav-cta" data-contact-modal>Start a project <span>→</span></a>
+  </nav>
+</header>
+
+<section class="article-head">
+  <div class="wrap">
+    <div class="prose">
+      <a class="back" href="../index.html">← The Slatepress Blog</a>
+      <div class="eyebrow">Thesis</div>
+      <h1>When to cut the team slide entirely.</h1>
+      <p class="dek">Most team slides in pre-seed decks are dead weight. A short case for cutting yours — plus the three situations where the team slide is the only slide that matters.</p>
+      <div class="byline">SLATEPRESS · <b>April 23, 2026</b> · 6 min read</div>
+    </div>
+  </div>
+</section>
+
+<section class="article">
+  <div class="wrap">
+    <div class="prose">
+
+      <p class="lede">Most team slides in pre-seed decks are a reflex, not a decision. The slide exists because every template has one, every accelerator requires one, and every founder has convinced themselves the investor will ask. In most decks it does nothing but fill space. In a handful of specific situations, it is the only slide that will close the round.</p>
+
+      <p>At pre-seed, an investor is deciding whether to keep reading in the first ninety seconds. They are not yet asking whether this is the right team. They are asking whether this is a real business, in a real market, with a real wedge. The team slide, placed third or fourth in most decks, gets read in the wrong frame. The investor has not finished deciding if the opportunity matters, and the credentials slide past them without landing.</p>
+
+      <p>The rule of thumb we use on every incoming deck is this: if the team slide is doing the work an investor could do themselves with a thirty-second LinkedIn scan, cut it. Logos of past employers. Job titles. A line about years of industry experience. The investor already has that information. They pulled it from your domain before they opened the deck.</p>
+
+      <h2>What the team slide is actually doing right now</h2>
+
+      <p>In most seed decks the team slide is one of three things, and none of them are strong.</p>
+
+      <p>It is a comfort blanket. The founder is anxious the investor will doubt the team, so the slide is a preemptive defense: here are our credentials, please believe us. An investor at pre-seed is not yet at the doubt stage; the slide is answering a question that has not been asked.</p>
+
+      <p>It is a repetition of LinkedIn. Three headshots, three job histories, three lines of bullet text lifted almost verbatim from each founder's profile. The investor can get this faster on their phone. The slide is, functionally, a printout of something the investor already has access to.</p>
+
+      <p>Or it is a status parade. Logos from Google, Stanford, McKinsey, Stripe. Maybe a small line about ex-founder exits. The slide reads as "we are the kind of people who get funded," which is a proxy the investor has seen a thousand times and is no longer moved by. Credentials are table stakes at pre-seed, not a reason to write the check.</p>
+
+      <p>Run the test on your own deck. Close the file, open a blank one, and ask: if we did not have a team slide, what specifically would the investor fail to learn? If the honest answer is "where we used to work," the slide is not earning its place.</p>
+
+      <h2>The three situations where it is the only slide that matters</h2>
+
+      <p>There are exactly three shapes of business where the team slide is the entire bet. If you are in one of them, the slide should not be cut. It should be moved to slide two and given more room, not less.</p>
+
+      <h3>1. A technical moat that is not yet a product.</h3>
+      <p>Deep tech. A new kind of chip, a biotech mechanism, an architecture for training foundation models, a novel materials process. You are raising against an R&amp;D timeline that will not show product traction for eighteen to thirty months. The investor is explicitly buying the people — their prior research, their lab, their ability to finish something that most teams cannot finish. In this case the team slide <em>is</em> the thesis slide. Publications, patents, prior projects shipped to production. This is the deck.</p>
+
+      <h3>2. Domain return.</h3>
+      <p>A second- or third-time founder in the same category the last exit happened in. The investor is betting on recurrence, not on the new idea in isolation. The team slide is where "we have done this before" stops being a claim and becomes a specific story: the last company, the acquirer, the stage it got to, what was learned. A returning founder who buries this in a footer is throwing away their cheapest point of leverage.</p>
+
+      <h3>3. A regulated market where trust is literally the product.</h3>
+      <p>Healthtech, fintech infrastructure, defense, identity, anything where credentialed judgment is non-optional. Here the team slide is not repeating LinkedIn. It is signaling that you have the licenses, the board seats, the regulatory reps the business legally requires to exist. Cut this slide in these markets and the deck reads as naïve about how the industry actually works.</p>
+
+      <h2>The test that tells you which situation you are in</h2>
+
+      <p>Ask the last five investors who gave your deck real feedback: what was the first thing that mattered to you on this? If three of the five answered "team," you are in one of the three situations above, and your team slide should be second or third, not fifth, and should run long. If four of the five answered something other than team, whether market or traction or product or a founder's insight about the category, your team slide belongs at the end as an appendix slide, not in the core flow.</p>
+
+      <p>Most founders have never run this test. They ship the slide anyway because it is the default. The default is wrong for seven decks out of ten.</p>
+
+      <div class="callout">
+        <span class="label">Sharp edge</span>
+        <p>The team slide at pre-seed is almost always a lagging indicator of the deck's real job. If it is the first slide a founder wants to talk about in pitches, the deck is pointing the wrong direction. The investor was going to back the market thesis or they were not. Cut the slide until the pitch stops needing it. Ninety percent of the time it stays cut, and the deck gets sharper for the space it gives back.</p>
+      </div>
+
+      <h2>What replaces a cut team slide</h2>
+
+      <p>Cutting does not mean hiding. It means placing the team signal where the investor will actually read it, in the amount of space it actually earns.</p>
+
+      <p>A one-line footer on slide one does most of the work. "Founded by Jamie (ex-Stripe payments) and Priya (ex-Plaid infrastructure)" at the bottom of the cover sets the credential frame for the rest of the deck without pulling a whole slide. An appendix slide at the end carries the longer version, with headshots, bios, and board, for the partner meeting where the investor does want to drill in.</p>
+
+      <p>And, occasionally, silence. If the investor wanted the team slide they will ask for it. Most of them do not. The deck that trusts the investor to ask is the deck that sounds like it was written by a founder who knows what the deck is for.</p>
+
+      <div class="post-cta">
+        <h3>About Slatepress.</h3>
+        <p>We re-cut decks during live raises. Every Tuesday we reopen every active deck in the studio and look for the slides that are still there out of habit. The team slide is almost always the first one we move or remove.</p>
+        <p><a href="mailto:hello@slatepress.co" data-contact-modal>hello@slatepress.co →</a></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="site-footer">
+    <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
+    <div>
+      <a href="https://www.linkedin.com/in/anthony-de-meo-285999397/" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://x.com/Slatepress_co" target="_blank" rel="noopener">X.com</a> ·
+      <a href="https://slatepress.substack.com/" target="_blank" rel="noopener">Substack</a> ·
+      <a href="https://media.rss.com/slate-press/feed.xml" target="_blank" rel="noopener">RSS</a>
+    </div>
+    <div><a href="mailto:hello@slatepress.co" data-contact-modal>hello@slatepress.co →</a></div>
+  </div>
+</footer>
+
+<script>
+/* theme */
+(() => {
+  const root = document.documentElement;
+  const saved = localStorage.getItem('sp-theme') || 'light';
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('sp-theme', next);
+    });
+  });
+})();
+
+/* nav toggle */
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle||!links) return;
+  function setOpen(open){
+    toggle.setAttribute('aria-expanded', open?'true':'false');
+    links.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
+
+/* reading progress bar */
+(() => {
+  const bar = document.getElementById('readProg');
+  if (!bar) return;
+  document.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop||document.body.scrollTop) / (h.scrollHeight-h.clientHeight) * 100;
+    bar.style.setProperty('--rp', pct+'%');
+  }, {passive:true});
+})();
+</script>
+<script defer src="/assets/contact-modal.js?v=26"></script>
+<script defer src="/assets/blog-read.js?v=55"></script>
+</body>
+</html>
