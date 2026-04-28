@@ -157,6 +157,9 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 .modal-close:hover{background:rgba(0,0,0,.06)}
 .modal-close svg{width:18px;height:18px}
 .modal-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.req{color:#E03131;font-weight:800;margin-left:1px}
+.modal-tip{font-size:13.5px;color:var(--ink-soft);line-height:1.5;padding:14px 18px;background:var(--paper-2);border-left:3px solid var(--accent);border-radius:6px;margin:18px 0 6px;font-family:'Inter',sans-serif}
+.modal-tip strong{color:var(--ink);font-weight:600}
 .modal-title{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:500;letter-spacing:-.018em;line-height:1.15;color:var(--ink);margin-bottom:8px}
 .modal-title em{font-style:italic;color:var(--accent)}
 .modal-sub{font-size:14.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:22px;font-family:'Inter',sans-serif}
@@ -330,25 +333,26 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     <button class="modal-close" data-close type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     <div class="modal-eyebrow">Free design &middot; no commitment</div>
     <h3 class="modal-title" id="onboard-title">Tell us about your <em>business.</em></h3>
-    <p class="modal-sub">We'll build a free, personalized mockup of your site using your business name, services, and town. You see it before any sales conversation. About 24-48 hours.</p>
+    <p class="modal-sub">We'll build a free, personalized mockup using your business info — yours to keep, no sales conversation required. We'll email you a verification link first to confirm it's really you, then start building. About 24-48 hours total.</p>
     <div class="modal-success" id="onboard-success" hidden>
       <div class="modal-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <h3 class="modal-success-title">We're on it.</h3>
-      <p class="modal-success-text">Your free design is being built. You'll have it in your inbox within 24-48 hours. We'll reach out then to walk you through it.</p>
+      <h3 class="modal-success-title">One quick step left.</h3>
+      <p class="modal-success-text">Check your email in the next few minutes for a quick verification link. Click it to confirm your details and we'll start building your design — you'll have it in 24-48 hours.</p>
       <button type="button" class="modal-submit" data-close>Close</button>
     </div>
+    <div class="modal-tip"><strong>The more you tell us, the better your mockup.</strong> Even the optional fields help us tailor the design to your business.</div>
     <form class="modal-form" id="onboard-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <div class="ff">
-        <label for="of-biz">Business name *</label>
+        <label for="of-biz">Business name <span class="req">*</span></label>
         <input id="of-biz" name="biz" type="text" required placeholder="Joe's Plumbing">
       </div>
       <div class="ff-row">
-        <div class="ff"><label for="of-name">Your name *</label><input id="of-name" name="name" type="text" required placeholder="Joe Smith"></div>
-        <div class="ff"><label for="of-email">Email *</label><input id="of-email" name="email" type="email" required placeholder="joe@example.com"></div>
+        <div class="ff"><label for="of-name">Your name <span class="req">*</span></label><input id="of-name" name="name" type="text" required placeholder="Joe Smith"></div>
+        <div class="ff"><label for="of-email">Email <span class="req">*</span></label><input id="of-email" name="email" type="email" required placeholder="joe@example.com"></div>
       </div>
       <div class="ff-row">
-        <div class="ff"><label for="of-phone">Phone *</label><input id="of-phone" name="phone" type="tel" required placeholder="(973) 555-0123"></div>
-        <div class="ff"><label for="of-town">Town / City *</label><input id="of-town" name="town" type="text" required placeholder="Cedar Grove, NJ"></div>
+        <div class="ff"><label for="of-phone">Phone <span class="req">*</span></label><input id="of-phone" name="phone" type="tel" required placeholder="(973) 555-0123"></div>
+        <div class="ff"><label for="of-town">Town / City <span class="req">*</span></label><input id="of-town" name="town" type="text" required placeholder="Cedar Grove, NJ"></div>
       </div>
       <div class="ff"><label for="of-website">Current website (if any)</label><input id="of-website" name="website" type="url" placeholder="https://yourbusiness.com"></div>
       <div class="ff">
