@@ -43,8 +43,9 @@ img{max-width:100%;display:block}
 .brand{display:inline-flex;align-items:center;font-weight:900;font-size:21px;letter-spacing:-.02em;color:var(--ink);line-height:1;white-space:nowrap}
 .brand-prefix{display:inline-block}
 .brand-slash{display:inline-block;color:var(--blue);font-weight:900;margin:0 .04em;transform:translateY(-.02em)}
-.brand-suffix{display:inline-block;max-width:9em;opacity:1;overflow:hidden;transition:max-width .55s cubic-bezier(.55,0,.1,1),opacity .35s ease;vertical-align:bottom}
-.topnav.scrolled .brand-suffix{max-width:0;opacity:0}
+.brand-suffix{display:inline-block;overflow:hidden;vertical-align:bottom;white-space:nowrap}
+.brand-suffix .letter{display:inline-block;opacity:1;max-width:.62em;transition:opacity .25s ease,max-width .35s cubic-bezier(.55,0,.1,1);transition-delay:calc(var(--i,0) * 50ms)}
+.topnav.scrolled .brand-suffix .letter{opacity:0;max-width:0;transition-delay:calc((9 - var(--i,0)) * 50ms)}
 .topnav-cta{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;background:var(--blue);color:#fff;font-weight:600;font-size:14px;border-radius:999px;transition:background .2s,transform .2s;box-shadow:0 4px 12px var(--blue-glow)}
 .topnav-cta:hover{background:var(--blue-deep);transform:translateY(-1px)}
 .topnav-cta svg{width:13px;height:13px}
@@ -172,6 +173,12 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 .modal-submit{margin-top:10px;padding:1rem 1.4rem;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;transition:background .2s,transform .2s,border-color .2s;font-family:'Inter',sans-serif}
 .modal-submit:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
 .modal-fine{font-size:11.5px;color:var(--slate);line-height:1.45;text-align:center;margin-top:8px}
+.modal-success{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:8px 0 4px}
+.modal-success[hidden]{display:none}
+.modal-success-icon{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;margin-bottom:6px}
+.modal-success-icon svg{width:26px;height:26px}
+.modal-success-title{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:500;letter-spacing:-.018em;color:var(--ink)}
+.modal-success-text{font-size:14.5px;color:var(--ink-soft);line-height:1.55;max-width:38ch;font-family:'Inter',sans-serif}
 @media(max-width:560px){.modal-card{padding:32px 22px 26px}.ff-row{grid-template-columns:1fr}.ff-checks{grid-template-columns:1fr 1fr}}
 
 </style>
@@ -180,7 +187,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 
 <header class="topnav" id="topnav">
   <div class="topnav-inner">
-    <a href="/plumbing_002/" class="brand"><span class="brand-prefix">PLUMBING</span><span class="brand-slash">\</span><span class="brand-suffix">SLATEPRESS</span></a>
+    <a href="/plumbing_002/" class="brand"><span class="brand-prefix">PLUMBING</span><span class="brand-slash">\</span><span class="brand-suffix"><span class="letter" style="--i:0">S</span><span class="letter" style="--i:1">L</span><span class="letter" style="--i:2">A</span><span class="letter" style="--i:3">T</span><span class="letter" style="--i:4">E</span><span class="letter" style="--i:5">P</span><span class="letter" style="--i:6">R</span><span class="letter" style="--i:7">E</span><span class="letter" style="--i:8">S</span><span class="letter" style="--i:9">S</span></span></a>
     <a href="#" data-modal="onboard" class="topnav-cta">Create a free design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
   </div>
 </header>
@@ -324,7 +331,13 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     <div class="modal-eyebrow">Free design &middot; no commitment</div>
     <h3 class="modal-title" id="onboard-title">Tell us about your <em>business.</em></h3>
     <p class="modal-sub">We'll build a free, personalized mockup of your site using your business name, services, and town. You see it before any sales conversation. About 24-48 hours.</p>
-    <form class="modal-form" id="onboard-form" novalidate>
+    <div class="modal-success" id="onboard-success" hidden>
+      <div class="modal-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <h3 class="modal-success-title">We're on it.</h3>
+      <p class="modal-success-text">Your free design is being built. You'll have it in your inbox within 24-48 hours. We'll reach out then to walk you through it.</p>
+      <button type="button" class="modal-submit" data-close>Close</button>
+    </div>
+    <form class="modal-form" id="onboard-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <div class="ff">
         <label for="of-biz">Business name *</label>
         <input id="of-biz" name="biz" type="text" required placeholder="Joe's Plumbing">
@@ -372,12 +385,31 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(!form.checkValidity()){form.reportValidity();return;}
-    var d=new FormData(form);
-    var services=d.getAll('services').join(', ')||'(none selected)';
-    var lines=['New free-design request from Plumbing\\Slatepress','','Business name: '+(d.get('biz')||''),'Contact: '+(d.get('name')||''),'Email: '+(d.get('email')||''),'Phone: '+(d.get('phone')||''),'Town: '+(d.get('town')||''),'Current website: '+(d.get('website')||'(none)'),'Services: '+services,'','Notes:',(d.get('notes')||'(none)'),''];
-    var subj=encodeURIComponent('Free design request — '+(d.get('biz')||'New plumber'));
-    var body=encodeURIComponent(lines.join('\n'));
-    window.location.href='mailto:hello@slatepress.co?subject='+subj+'&body='+body;
+    var btn=form.querySelector('.modal-submit');
+    var originalText=btn.textContent;
+    btn.disabled=true;btn.textContent='Sending...';
+    var fd=new FormData(form);
+    var payload={};
+    fd.forEach(function(v,k){
+      if(payload[k]!==undefined){if(!Array.isArray(payload[k]))payload[k]=[payload[k]];payload[k].push(v);}
+      else payload[k]=v;
+    });
+    payload._subject='Free design request — '+(fd.get('biz')||'New plumber');
+    payload._source='plumbing_002';
+    fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+      .then(function(res){
+        if(!res.ok){throw new Error('submit failed: '+res.status);}
+        form.hidden=true;
+        document.getElementById('onboard-success').hidden=false;
+      })
+      .catch(function(err){
+        btn.disabled=false;btn.textContent=originalText;
+        var d=fd;var services=d.getAll('services').join(', ')||'(none selected)';
+        var lines=['New free-design request','','Business: '+(d.get('biz')||''),'Contact: '+(d.get('name')||''),'Email: '+(d.get('email')||''),'Phone: '+(d.get('phone')||''),'Town: '+(d.get('town')||''),'Website: '+(d.get('website')||'(none)'),'Services: '+services,'','Notes:',(d.get('notes')||'(none)')];
+        var subj=encodeURIComponent('Free design request — '+(d.get('biz')||'New plumber'));
+        var body=encodeURIComponent(lines.join('\n'));
+        window.location.href='mailto:hello@slatepress.co?subject='+subj+'&body='+body;
+      });
   });
 })();
 
