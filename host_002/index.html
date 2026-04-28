@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slatepress — Build your phone-ringing kit.</title>
+<meta name="description" content="Pick what you need. Pay for what you use. From $149/mo for a website that actually rings the phone, up to a full fractional growth team.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600;1,9..144,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A;
+  --ink-2:#141416;
+  --ink-3:#1F1F22;
+  --paper:#F6F4EE;
+  --paper-2:#EDE9DD;
+  --line:rgba(255,255,255,.10);
+  --line-2:rgba(255,255,255,.18);
+  --acid:#A8FF35;
+  --acid-2:#C5FF6F;
+  --acid-deep:#7BCC00;
+  --acid-glow:rgba(168,255,53,.18);
+  --slate:#9A9CA3;
+  --slate-2:#62646B;
+  --max:1320px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:#fff;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv11";overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+
+/* TOPNAV */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.85);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
+.topnav-inner{max-width:var(--max);margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;font-size:17px}
+.brand-mark{width:28px;height:28px;border-radius:7px;background:var(--acid);color:var(--ink);display:grid;place-items:center;font-weight:900;font-size:14px;letter-spacing:-.04em}
+.topnav-status{display:flex;align-items:center;gap:14px}
+.live-total{display:inline-flex;align-items:baseline;gap:.4rem;font-family:'JetBrains Mono',monospace;color:var(--acid);font-size:14px;font-weight:600;letter-spacing:.02em}
+.live-total .num{font-size:18px;font-weight:700;font-family:'Inter',sans-serif;color:#fff;letter-spacing:-.015em}
+.live-total .lbl{color:var(--slate);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+.cta-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;background:var(--acid);color:var(--ink);font-weight:700;font-size:13.5px;border-radius:999px;transition:transform .2s,background .2s}
+.cta-pill:hover{background:var(--acid-2);transform:translateY(-1px)}
+
+/* HERO (compact) */
+.hero{padding:88px 0 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(168,255,53,.05) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(ellipse at 70% 0%,#000 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--acid);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px;padding:.4rem .9rem;border:1px solid var(--line-2);border-radius:999px;background:rgba(168,255,53,.04);position:relative}
+.hero-eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 0 var(--acid);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(168,255,53,.7)}70%{box-shadow:0 0 0 12px rgba(168,255,53,0)}100%{box-shadow:0 0 0 0 rgba(168,255,53,0)}}
+.hero h1{font-size:clamp(40px,5.6vw,84px);font-weight:800;letter-spacing:-.032em;line-height:1.0;margin-bottom:18px;max-width:18ch;position:relative}
+.hero h1 em{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;color:var(--acid);letter-spacing:-.02em}
+.hero p{font-size:clamp(16px,1.2vw,19px);color:rgba(255,255,255,.74);max-width:60ch;line-height:1.55;position:relative}
+
+/* PATH */
+.path{padding:48px 0 96px;position:relative}
+.path-help{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;flex-wrap:wrap;gap:14px}
+.path-help-text{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--slate);text-transform:uppercase;letter-spacing:.07em}
+.path-help-text strong{color:var(--acid);font-weight:600}
+.reset-btn{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--line-2);padding:.42rem .9rem;border-radius:999px;transition:color .2s,border-color .2s}
+.reset-btn:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+
+.path-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch;position:relative}
+.path-line{position:absolute;top:96px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--acid) 0%,var(--acid) var(--fill,20%),var(--line-2) var(--fill,20%),var(--line-2) 100%);transition:--fill .4s ease;z-index:0;pointer-events:none}
+@property --fill{syntax:'<percentage>';inherits:false;initial-value:20%}
+.path-line{background:var(--line-2)}
+.path-line .progress{position:absolute;top:0;left:0;height:100%;background:var(--acid);width:20%;transition:width .5s ease;box-shadow:0 0 16px var(--acid-glow)}
+
+.node{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px;z-index:1}
+.node-dot{width:32px;height:32px;border-radius:50%;background:var(--ink-2);border:2px solid var(--line-2);margin-top:80px;margin-bottom:24px;display:grid;place-items:center;transition:all .35s ease;position:relative;z-index:2}
+.node.active .node-dot{background:var(--acid);border-color:var(--acid);box-shadow:0 0 0 6px rgba(168,255,53,.14),0 0 24px rgba(168,255,53,.4)}
+.node-dot::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--slate);transition:background .35s}
+.node.active .node-dot::after{background:var(--ink)}
+.node.locked .node-dot{background:var(--acid);border-color:var(--acid);box-shadow:0 0 0 6px rgba(168,255,53,.14)}
+.node.locked .node-dot::after{background:var(--ink)}
+
+.card{
+  background:var(--ink-2);
+  border:1px solid var(--line-2);
+  border-radius:16px;
+  padding:22px 22px 24px;
+  width:100%;
+  display:flex;flex-direction:column;gap:10px;
+  transition:border-color .25s,background .25s,transform .25s;
+  position:relative;
+  text-align:left;
+  min-height:280px;
+}
+.node.active .card{border-color:var(--acid);background:rgba(168,255,53,.04)}
+.node.locked .card{border-color:var(--acid);background:rgba(168,255,53,.06)}
+.node.locked .card::before{content:'INCLUDED';position:absolute;top:-9px;left:18px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.07em;background:var(--acid);color:var(--ink);padding:2px 8px;border-radius:4px}
+.card-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-bottom:2px}
+.node.active .card-tag,.node.locked .card-tag{color:var(--acid)}
+.card-name{font-size:17px;font-weight:700;letter-spacing:-.01em;color:#fff;line-height:1.2}
+.card-desc{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5}
+.card-price{display:flex;align-items:baseline;gap:4px;margin-top:auto;padding-top:8px}
+.card-price .num{font-size:24px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.card-price .per{font-size:12px;color:var(--slate)}
+.card-price .add{font-size:14px;color:var(--slate-2);margin-right:2px}
+.node.active .card-price .num{color:var(--acid)}
+
+.toggle-btn{margin-top:8px;width:100%;padding:.55rem 0;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border:1px solid var(--line-2);border-radius:8px;color:var(--slate);transition:all .2s;background:transparent}
+.toggle-btn:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.node.active .toggle-btn{color:var(--acid);border-color:var(--acid);background:rgba(168,255,53,.06)}
+.node.active .toggle-btn::before{content:'✓ '}
+
+.picker{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.picker-opt{display:flex;justify-content:space-between;align-items:center;padding:.5rem .7rem;font-size:12.5px;border:1px solid var(--line-2);border-radius:7px;color:rgba(255,255,255,.7);transition:all .2s;text-align:left;cursor:pointer}
+.picker-opt:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.picker-opt.selected{border-color:var(--acid);background:rgba(168,255,53,.08);color:var(--acid)}
+.picker-opt .price{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:11.5px}
+
+.platform-row{display:flex;gap:6px;margin-top:8px}
+.platform-chip{flex:1;padding:.45rem 0;font-size:11.5px;font-weight:600;border:1px solid var(--line-2);border-radius:7px;color:var(--slate);transition:all .2s;text-align:center;cursor:pointer;letter-spacing:.01em}
+.platform-chip:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.platform-chip.selected{border-color:var(--acid);background:rgba(168,255,53,.08);color:var(--acid)}
+
+/* HINT pills above certain nodes */
+.hint{position:absolute;top:34px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;padding:.32rem .7rem;border:1px solid var(--line-2);border-radius:999px;background:var(--ink)}
+.hint.popular{color:var(--acid);border-color:rgba(168,255,53,.3);background:rgba(168,255,53,.05)}
+
+/* TOTAL BAR */
+.total-bar{position:sticky;bottom:24px;margin-top:48px;background:var(--ink-2);border:1px solid var(--line-2);border-radius:16px;padding:20px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;backdrop-filter:blur(12px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.total-info{display:flex;flex-direction:column;gap:4px}
+.total-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--slate);text-transform:uppercase;letter-spacing:.07em}
+.total-amount{display:flex;align-items:baseline;gap:8px}
+.total-amount .num{font-size:clamp(32px,3.4vw,42px);font-weight:800;letter-spacing:-.022em;color:#fff;font-variant-numeric:tabular-nums}
+.total-amount .per{font-size:14px;color:var(--slate)}
+.total-amount .num em{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;color:var(--acid);font-size:.7em;letter-spacing:0;margin-right:6px}
+.total-meta{font-size:13px;color:var(--slate);max-width:36ch;line-height:1.5}
+.total-meta strong{color:#fff;font-weight:600}
+.total-cta{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.6rem;background:var(--acid);color:var(--ink);font-weight:700;font-size:15px;border-radius:999px;transition:transform .2s,background .2s;border:1px solid var(--acid)}
+.total-cta:hover{background:var(--acid-2);transform:translateY(-1px)}
+.total-cta svg{width:14px;height:14px}
+
+/* TRUST STRIP */
+.trust{padding:64px 0 24px;border-top:1px solid var(--line)}
+.trust-row{display:flex;justify-content:space-around;flex-wrap:wrap;gap:32px;align-items:center}
+.trust-item{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;min-width:170px}
+.trust-num{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--acid);letter-spacing:.04em}
+.trust-label{font-size:13.5px;color:var(--slate);line-height:1.4}
+
+/* FOOTER */
+footer{padding:40px 0 32px;font-size:13px;color:var(--slate);border-top:1px solid var(--line);margin-top:64px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-inner a{color:rgba(255,255,255,.72)}
+.foot-inner a:hover{color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .path-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+  .path-grid .node:nth-child(n){margin:0}
+  .path-line{display:none}
+  .node-dot{margin-top:0}
+  .hint{display:none}
+}
+@media(max-width:680px){
+  .path-grid{grid-template-columns:1fr}
+  .topnav-status .live-total{display:none}
+  .total-bar{flex-direction:column;align-items:stretch;text-align:center}
+  .total-amount{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a href="/" class="brand"><span class="brand-mark">S</span><span>Slatepress</span></a>
+    <div class="topnav-status">
+      <span class="live-total"><span class="lbl">Your build</span> <span class="num" id="nav-total">$149</span><span>/mo</span></span>
+      <a href="#total" class="cta-pill">Book a call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow"><span class="pulse"></span>Now onboarding plumbers · Metro NYC</div>
+    <h1>Build your <em>phone-ringing</em> kit.</h1>
+    <p>Start with a website that actually rings. Add what makes their phone ring more — reviews, AI lead-gen, paid ads, social. Pay only for what you use. Cancel any module anytime.</p>
+  </div>
+</section>
+
+<section class="path">
+  <div class="wrap">
+    <div class="path-help">
+      <div class="path-help-text">Tap modules to add them &mdash; <strong>your total updates live</strong></div>
+      <button class="reset-btn" id="reset-btn">Reset to base</button>
+    </div>
+
+    <div class="path-grid" id="path-grid">
+
+      <!-- Node 1: Foundation (locked) -->
+      <div class="node locked" data-node="foundation">
+        <div class="node-dot"></div>
+        <div class="card">
+          <div class="card-tag">Step 1 · Foundation</div>
+          <div class="card-name">Website + Workspace</div>
+          <div class="card-desc">Domain, AI-personalized site, Cloudflare hosting, Google Workspace (3 seats). The phone-rings starting point.</div>
+          <div class="card-price"><span class="num">$149</span><span class="per">/mo</span></div>
+          <div class="card-desc" style="font-size:11.5px;color:var(--slate);margin-top:-2px">+ $1,700 setup &middot; one-time build &amp; launch</div>
+        </div>
+      </div>
+
+      <!-- Node 2: Reputation -->
+      <div class="node" data-node="reputation">
+        <span class="hint popular">Most popular add-on</span>
+        <div class="node-dot"></div>
+        <div class="card">
+          <div class="card-tag">Step 2 · Reputation</div>
+          <div class="card-name">Reviews + monitoring</div>
+          <div class="card-desc">Auto review requests after every job. Reply management across Google, Yelp, Facebook. Monthly reputation report.</div>
+          <div class="card-price"><span class="add">+</span><span class="num">$99</span><span class="per">/mo</span></div>
+          <button class="toggle-btn" data-toggle="reputation">Add to build</button>
+        </div>
+      </div>
+
+      <!-- Node 3: Outbound AI -->
+      <div class="node" data-node="outbound">
+        <div class="node-dot"></div>
+        <div class="card">
+          <div class="card-tag">Step 3 · Outbound AI</div>
+          <div class="card-name">AI calls + SMS</div>
+          <div class="card-desc">AI follows up with hot, warm, cold leads. Books appointments straight into your Google Calendar. You take it from there.</div>
+          <div class="card-price"><span class="add">+</span><span class="num">$399</span><span class="per">/mo</span></div>
+          <button class="toggle-btn" data-toggle="outbound">Add to build</button>
+        </div>
+      </div>
+
+      <!-- Node 4: Paid Ads -->
+      <div class="node" data-node="ads">
+        <div class="node-dot"></div>
+        <div class="card">
+          <div class="card-tag">Step 4 · Paid Ads</div>
+          <div class="card-name">Google + Meta</div>
+          <div class="card-desc">Search ads, Local Service Ads, retargeting. Management fee only &mdash; ad spend is separate.</div>
+          <div class="card-price" id="ads-price"><span class="add">+</span><span class="num">$0</span><span class="per">/mo</span></div>
+          <div class="picker" data-picker="ads">
+            <button class="picker-opt selected" data-value="0" data-label="None">None <span class="price">—</span></button>
+            <button class="picker-opt" data-value="999" data-label="Starter">Starter (Google) <span class="price">$999</span></button>
+            <button class="picker-opt" data-value="1999" data-label="Growth">Growth (+ Meta) <span class="price">$1,999</span></button>
+            <button class="picker-opt" data-value="3499" data-label="Scale">Scale (multi) <span class="price">$3,499+</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Node 5: Social -->
+      <div class="node" data-node="social">
+        <div class="node-dot"></div>
+        <div class="card">
+          <div class="card-tag">Step 5 · Social</div>
+          <div class="card-name">Posts + community</div>
+          <div class="card-desc">Branded posts, before/after photos, customer reviews. Engagement monitoring + reply. $249/mo per platform.</div>
+          <div class="card-price" id="social-price"><span class="add">+</span><span class="num">$0</span><span class="per">/mo</span></div>
+          <div class="platform-row" data-picker="social">
+            <button class="platform-chip" data-platform="instagram">Instagram</button>
+            <button class="platform-chip" data-platform="facebook">Facebook</button>
+            <button class="platform-chip" data-platform="youtube">YouTube</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TOTAL BAR -->
+    <div class="total-bar" id="total">
+      <div class="total-info">
+        <div class="total-label">Your build · <span id="modules-count">just the foundation</span></div>
+        <div class="total-amount"><span class="num"><em>$</em><span id="total-num">149</span></span><span class="per">/ month</span></div>
+        <div class="total-meta" id="total-meta">+ $1,700 one-time setup &middot; territory locked to 1 plumber per ZIP</div>
+      </div>
+      <a href="#" class="total-cta" id="continue-cta">Continue with this build <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-row">
+      <div class="trust-item">
+        <div class="trust-num">RUNS ON GOOGLE</div>
+        <div class="trust-label">Drive, Calendar, Gmail. Where your business already lives.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">1 PER ZIP</div>
+        <div class="trust-label">Territory exclusivity. Your closest competitor doesn't get one too.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">90-DAY ROI</div>
+        <div class="trust-label">Or your next month is on us. We measure, you keep the calls.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">CANCEL ANYTIME</div>
+        <div class="trust-label">Each module is month-to-month. No 12-month lock-ins.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>&copy; 2026 Slatepress &middot; Built for the family-run shop.</div>
+    <div style="display:flex;gap:1.4rem">
+      <a href="/blog/">Field notes</a>
+      <a href="mailto:hello@slatepress.co">hello@slatepress.co</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var state = {
+    foundation: 149,
+    reputation: 0,
+    outbound: 0,
+    ads: 0,
+    adsLabel: 'None',
+    social: { instagram:false, facebook:false, youtube:false }
+  };
+  var SOCIAL_PRICE = 249;
+
+  function $(sel,root){return (root||document).querySelector(sel);}
+  function $$(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
+
+  function totalSocial(){
+    var n = 0;
+    Object.keys(state.social).forEach(function(k){ if(state.social[k]) n++; });
+    return n * SOCIAL_PRICE;
+  }
+  function moduleCount(){
+    var n = 0;
+    if (state.reputation) n++;
+    if (state.outbound) n++;
+    if (state.ads) n++;
+    Object.keys(state.social).forEach(function(k){ if(state.social[k]) n++; });
+    return n;
+  }
+  function calcTotal(){
+    return state.foundation + state.reputation + state.outbound + state.ads + totalSocial();
+  }
+  function fmt(n){
+    return n.toLocaleString('en-US');
+  }
+
+  function render(){
+    var total = calcTotal();
+    $('#total-num').textContent = fmt(total);
+    $('#nav-total').textContent = '$' + fmt(total);
+
+    // ads price label
+    var adsP = $('#ads-price');
+    if (state.ads > 0) {
+      adsP.innerHTML = '<span class="add">+</span><span class="num">$' + fmt(state.ads) + '</span><span class="per">/mo</span>';
+    } else {
+      adsP.innerHTML = '<span class="add">+</span><span class="num">$0</span><span class="per">/mo</span>';
+    }
+
+    // social price label
+    var socP = $('#social-price');
+    var socT = totalSocial();
+    if (socT > 0) {
+      socP.innerHTML = '<span class="add">+</span><span class="num">$' + fmt(socT) + '</span><span class="per">/mo</span>';
+    } else {
+      socP.innerHTML = '<span class="add">+</span><span class="num">$0</span><span class="per">/mo</span>';
+    }
+
+    // node active states
+    $('.node[data-node="reputation"]').classList.toggle('active', state.reputation > 0);
+    $('.node[data-node="outbound"]').classList.toggle('active', state.outbound > 0);
+    $('.node[data-node="ads"]').classList.toggle('active', state.ads > 0);
+    $('.node[data-node="social"]').classList.toggle('active', socT > 0);
+
+    // toggle button labels
+    var repBtn = $('.toggle-btn[data-toggle="reputation"]');
+    repBtn.textContent = state.reputation > 0 ? 'Added' : 'Add to build';
+    var outBtn = $('.toggle-btn[data-toggle="outbound"]');
+    outBtn.textContent = state.outbound > 0 ? 'Added' : 'Add to build';
+
+    // module count text
+    var n = moduleCount();
+    var label = n === 0 ? 'just the foundation' :
+                n === 1 ? '1 add-on module' :
+                n + ' add-on modules';
+    $('#modules-count').textContent = label;
+
+    // continue cta href
+    var subj = encodeURIComponent('Discovery call — ' + (n === 0 ? 'Foundation only' : 'Foundation + ' + n + ' modules'));
+    var bodyParts = ['Build summary:', '', '— Foundation: $149/mo (+ $1,700 setup)'];
+    if (state.reputation) bodyParts.push('— Reputation Engine: $99/mo');
+    if (state.outbound) bodyParts.push('— Outbound AI: $399/mo');
+    if (state.ads) bodyParts.push('— Paid Ads (' + state.adsLabel + '): $' + fmt(state.ads) + '/mo');
+    Object.keys(state.social).forEach(function(k){
+      if (state.social[k]) bodyParts.push('— Social (' + k.charAt(0).toUpperCase()+k.slice(1) + '): $249/mo');
+    });
+    bodyParts.push('', 'Total: $' + fmt(total) + '/mo');
+    var body = encodeURIComponent(bodyParts.join('\n'));
+    $('#continue-cta').href = 'mailto:hello@slatepress.co?subject=' + subj + '&body=' + body;
+  }
+
+  // Toggle binds
+  $$('.toggle-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var key = btn.getAttribute('data-toggle');
+      if (key === 'reputation') state.reputation = state.reputation > 0 ? 0 : 99;
+      if (key === 'outbound')   state.outbound   = state.outbound > 0 ? 0 : 399;
+      render();
+    });
+  });
+
+  // Ads picker
+  $$('.picker[data-picker="ads"] .picker-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      $$('.picker[data-picker="ads"] .picker-opt').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      state.ads = parseInt(btn.getAttribute('data-value'),10);
+      state.adsLabel = btn.getAttribute('data-label');
+      render();
+    });
+  });
+
+  // Social picker (multi-select)
+  $$('.platform-chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var p = btn.getAttribute('data-platform');
+      state.social[p] = !state.social[p];
+      btn.classList.toggle('selected', state.social[p]);
+      render();
+    });
+  });
+
+  // Reset
+  $('#reset-btn').addEventListener('click', function(){
+    state.reputation = 0;
+    state.outbound = 0;
+    state.ads = 0;
+    state.adsLabel = 'None';
+    state.social = { instagram:false, facebook:false, youtube:false };
+    $$('.platform-chip').forEach(function(b){ b.classList.remove('selected'); });
+    $$('.picker[data-picker="ads"] .picker-opt').forEach(function(b,i){ b.classList.toggle('selected', i===0); });
+    render();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
