@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plumbing\Slatepress — We make plumbing companies' phones ring.</title>
+<meta name="description" content="AI-built websites and the marketing engine to keep your phone ringing — for plumbing companies that would rather run jobs than learn ads.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#efe7d6;--cream-2:#e6dcc6;--paper:#f5efdf;--ink:#15171a;--ink-2:#1d1f22;--ink-soft:#3a3d42;--slate:#6b6a63;--rule:#cdc3ab;--rule-soft:#d8cfb8;--coral:#FF5C2A;--coral-deep:#E8451A;--max:1240px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font-family:'Fraunces','Charter','Iowan Old Style',Georgia,serif;font-optical-sizing:auto;font-size:18px;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+.topnav{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid transparent;transition:border-color .3s ease,background-color .3s ease}
+.topnav.scrolled{border-bottom-color:var(--rule);background:rgba(239,231,214,.92);backdrop-filter:saturate(160%) blur(10px)}
+.topnav-inner{max-width:var(--max);margin:0 auto;padding:22px 32px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:inline-flex;align-items:center;font-family:'Inter',sans-serif;font-weight:900;font-size:22px;letter-spacing:-.02em;color:var(--ink);line-height:1;white-space:nowrap}
+.brand-prefix{display:inline-block}
+.brand-slash{display:inline-block;color:var(--coral);font-weight:900;margin:0 .04em;transform:translateY(-.02em)}
+.brand-suffix{display:inline-block;max-width:9em;opacity:1;overflow:hidden;transition:max-width .55s cubic-bezier(.55,0,.1,1),opacity .35s ease;vertical-align:bottom}
+.topnav.scrolled .brand-suffix{max-width:0;opacity:0}
+.topnav-cta{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.25rem;background:var(--ink);color:var(--cream);font-family:'Inter',sans-serif;font-weight:600;font-size:14px;border-radius:6px;transition:background .2s ease,transform .2s ease}
+.topnav-cta:hover{background:var(--coral);transform:translateY(-1px)}
+.topnav-cta svg{width:13px;height:13px}
+.hero{padding:140px 0 110px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:48px;align-items:start}
+.hero-eyebrow{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);border-left:2px solid var(--coral);padding-left:14px;line-height:1.4}
+.hero h1{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(36px,4.4vw,62px);line-height:1.06;letter-spacing:-.02em;color:var(--ink);font-optical-sizing:auto;font-variation-settings:"opsz" 96}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--coral);letter-spacing:-.012em}
+.hero-sub{font-size:18px;color:var(--ink-soft);max-width:38ch;line-height:1.55;margin-top:34px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:42px;font-family:'Inter',sans-serif}
+.btn-primary{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.5rem;background:var(--ink);color:var(--cream);font-weight:600;font-size:14.5px;border-radius:6px;border:1px solid var(--ink);transition:background .2s,transform .2s}
+.btn-primary:hover{background:var(--coral);border-color:var(--coral);transform:translateY(-1px)}
+.btn-primary svg{width:13px;height:13px}
+.btn-ghost{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.5rem;color:var(--ink);font-weight:600;font-size:14.5px;border-radius:6px;border:1px solid var(--rule);background:transparent;transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(0,0,0,.03)}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:24px}.hero{padding:100px 0 80px}}
+.showcase{padding:0 0 96px}
+.showcase-card{background:var(--ink);color:var(--cream);border-radius:14px;padding:56px 56px 0;overflow:hidden;position:relative}
+.showcase-eyebrow{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);margin-bottom:18px}
+.showcase-h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(28px,3.2vw,42px);line-height:1.1;letter-spacing:-.018em;color:var(--cream);max-width:24ch;margin-bottom:12px}
+.showcase-h2 em{font-style:italic;font-weight:500;color:var(--coral)}
+.showcase-sub{font-size:16.5px;color:rgba(239,231,214,.72);max-width:54ch;line-height:1.55;margin-bottom:48px}
+.browser-frame{background:#0e1014;border-radius:10px 10px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;margin-top:24px;box-shadow:0 -10px 40px rgba(0,0,0,.35)}
+.browser-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:rgba(239,231,214,.4)}
+.browser-dots{display:flex;gap:6px}
+.browser-dots span{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.14)}
+.browser-url{flex:1;text-align:center;padding:5px 12px;background:rgba(255,255,255,.04);border-radius:5px;letter-spacing:.01em}
+.browser-frame iframe{width:100%;height:560px;border:none;display:block;background:#fff}
+@media(max-width:760px){.showcase-card{padding:36px 24px 0}.browser-frame iframe{height:420px}}
+.steps{padding:96px 0;border-top:1px solid var(--rule)}
+.steps-head{margin-bottom:64px;max-width:680px}
+.steps-eyebrow,.pricing-eyebrow{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border-left:2px solid var(--coral);padding-left:14px;margin-bottom:28px}
+.steps h2,.pricing h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(30px,3.4vw,46px);line-height:1.08;letter-spacing:-.02em}
+.steps h2 em,.pricing h2 em{font-style:italic;font-weight:500;color:var(--coral)}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:1px solid var(--rule);padding-top:48px}
+.step{display:flex;flex-direction:column;gap:14px}
+.step-num{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;font-size:48px;line-height:1;color:var(--coral);letter-spacing:-.02em}
+.step-name{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:21px;line-height:1.18;letter-spacing:-.012em;color:var(--ink)}
+.step-desc{font-size:15.5px;color:var(--ink-soft);line-height:1.55}
+@media(max-width:880px){.steps-grid{grid-template-columns:1fr 1fr;gap:36px 24px}}
+@media(max-width:520px){.steps-grid{grid-template-columns:1fr}}
+.pricing{padding:96px 0;border-top:1px solid var(--rule)}
+.pricing-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start}
+.pricing-detail p{font-size:17px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
+.price-block{display:flex;flex-direction:column;gap:10px;padding:36px 36px;background:var(--paper);border:1px solid var(--rule);border-radius:10px;margin-top:32px}
+.price-row{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+.price-label{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--slate)}
+.price-amount{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:32px;letter-spacing:-.02em;color:var(--ink)}
+.price-amount em{font-style:italic;color:var(--coral)}
+.price-rule{height:1px;background:var(--rule-soft);margin:8px 0}
+.price-fine{font-size:13.5px;color:var(--slate);line-height:1.5;margin-top:14px}
+@media(max-width:880px){.pricing-grid{grid-template-columns:1fr;gap:32px}}
+.closer{padding:120px 0;text-align:center;border-top:1px solid var(--rule)}
+.closer-quote{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(28px,3.2vw,42px);line-height:1.18;letter-spacing:-.012em;color:var(--ink);max-width:22ch;margin:0 auto 48px}
+.closer-quote em{font-style:italic;color:var(--coral)}
+.closer-cta{display:inline-flex;align-items:center;gap:.55rem;font-family:'Inter',sans-serif}
+footer{border-top:1px solid var(--rule);padding:32px 0;font-family:'Inter',sans-serif;font-size:13px;color:var(--slate)}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-attr{display:inline-flex;align-items:center;gap:.5rem}
+.foot-attr .slash{color:var(--coral);font-weight:700}
+.foot-inner a:hover{color:var(--ink)}
+.fx{opacity:0;transform:translateY(14px);transition:opacity .8s ease-out,transform .8s ease-out}
+.fx.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.fx{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a href="/plumbing/" class="brand"><span class="brand-prefix">PLUMBING</span><span class="brand-slash">\</span><span class="brand-suffix">SLATEPRESS</span></a>
+    <a href="#contact" class="topnav-cta">Get a free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="fx"><div class="hero-eyebrow">A growth team for<br>plumbing companies.</div></div>
+      <div class="fx">
+        <h1>We make plumbing companies' <em>phones ring.</em></h1>
+        <p class="hero-sub">AI-built websites and the marketing engine to keep them ringing &mdash; for plumbing owners who'd rather run jobs than learn ads, write blog posts, or fight with Google.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">See your free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="#how" class="btn-ghost">How it works</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase">
+  <div class="wrap">
+    <div class="showcase-card fx">
+      <div class="showcase-eyebrow">Recent build &middot; Cedar Grove, NJ</div>
+      <h2 class="showcase-h2">This is what we built for De Vito Plumbing &mdash; <em>three weeks ago.</em></h2>
+      <p class="showcase-sub">A live, mobile-responsive site with their truck, their reviews, their service area. Live phone, schedule online, Google Maps, the whole thing. Ready to go in a week from your demo call.</p>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">demos.slatepress.co/de-vito-plumbing</div>
+          <div style="width:54px"></div>
+        </div>
+        <iframe src="https://demos.slatepress.co/de-vito-plumbing_020/?nav=v2" loading="lazy" title="De Vito Plumbing live demo"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="steps-head fx">
+      <div class="steps-eyebrow">How it works</div>
+      <h2>Four steps. About two weeks. <em>Then it just runs.</em></h2>
+    </div>
+    <div class="steps-grid fx">
+      <div class="step"><div class="step-num">01</div><div class="step-name">Free demo, built for you.</div><div class="step-desc">We use your business name, your truck, your reviews. You see exactly what your site would look like before any conversation.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-name">Thirty-minute call.</div><div class="step-desc">We walk you through the demo, answer questions, and confirm whether your ZIP is still open. We only work with one plumber per ZIP.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-name">We build and launch.</div><div class="step-desc">Domain, hosting, SSL, Google Workspace, tracked phone number. Live in a week. You don't touch anything you don't want to touch.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-name">Then it just runs.</div><div class="step-desc">Phone rings, calls go to your team, monthly performance email shows what's working. Add more services later if you want &mdash; or don't.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="wrap">
+    <div class="pricing-grid">
+      <div class="pricing-head fx">
+        <div class="pricing-eyebrow">Pricing</div>
+        <h2>One number to start. <em>One number to keep going.</em></h2>
+      </div>
+      <div class="pricing-detail fx">
+        <p>The build is a one-time investment. The monthly is what keeps the site fast, secure, and tied to a tracked phone number that proves it's working.</p>
+        <p>We don't haggle and we don't have hidden upsells. Same price for the plumber in Cedar Grove and the plumber in Glen Rock. Same price every month, until you tell us to stop.</p>
+        <div class="price-block">
+          <div class="price-row"><span class="price-label">Build &amp; Launch</span><span class="price-amount">$1,700 <em>once</em></span></div>
+          <div class="price-rule"></div>
+          <div class="price-row"><span class="price-label">Hosting &amp; Running</span><span class="price-amount">$149<em>/mo</em></span></div>
+          <div class="price-fine">Includes domain, hosting, SSL, Google Workspace (3 seats), tracked phone number, monthly performance report. Cancel any time. Territory locked to one plumber per ZIP code.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer" id="contact">
+  <div class="wrap">
+    <div class="fx">
+      <p class="closer-quote">Want to see your <em>own demo</em> before we talk?</p>
+      <a href="mailto:hello@slatepress.co?subject=Free%20demo%20%E2%80%94%20Plumbing%5CSlatepress" class="btn-primary closer-cta">Get my free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-attr">An offering of <span class="slash">\</span>Slatepress &middot; <a href="https://slatepress.co/">slatepress.co</a></div>
+    <div style="display:flex;gap:1.4rem"><a href="mailto:hello@slatepress.co">hello@slatepress.co</a><a href="https://slatepress.co/blog/">Field notes</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('topnav');
+  function onScroll(){if(window.scrollY>80)nav.classList.add('scrolled');else nav.classList.remove('scrolled');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.fx').forEach(el=>el.classList.add('in'));return;}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.fx').forEach(function(el){io.observe(el);});
+  setTimeout(function(){document.querySelectorAll('.fx').forEach(function(el){el.classList.add('in');});},2400);
+})();
+</script>
+
+</body>
+</html>
