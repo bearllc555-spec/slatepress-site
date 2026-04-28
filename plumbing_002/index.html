@@ -183,6 +183,19 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 .modal-success-icon svg{width:26px;height:26px}
 .modal-success-title{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:500;letter-spacing:-.018em;color:var(--ink)}
 .modal-success-text{font-size:14.5px;color:var(--ink-soft);line-height:1.55;max-width:38ch;font-family:'Inter',sans-serif}
+.modal-affiliate{display:flex;flex-direction:column;align-items:flex-start;font-family:'Inter',sans-serif}
+.modal-affiliate[hidden]{display:none !important}
+.modal-affiliate .modal-title{margin-bottom:8px}
+.modal-affiliate .modal-sub{margin-bottom:22px;font-size:14.5px}
+.modal-affiliate .modal-sub em{font-style:italic;color:var(--accent);font-family:'Fraunces',Georgia,serif;font-weight:500}
+.affiliate-links{display:flex;flex-direction:column;gap:10px;width:100%;margin-bottom:20px}
+.affiliate-card{display:block;padding:16px 18px;border:1px solid var(--rule);border-radius:10px;text-decoration:none;color:var(--ink);background:#fff;transition:border-color .2s,transform .2s,box-shadow .2s}
+.affiliate-card:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 8px 20px rgba(37,99,235,.08)}
+.affiliate-name{font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-bottom:4px}
+.affiliate-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.45;margin-bottom:8px}
+.affiliate-arrow{font-size:13px;font-weight:600;color:var(--accent)}
+.modal-affiliate-fine{font-size:12.5px;color:var(--ink-soft);text-align:left;line-height:1.5;margin-bottom:8px;padding:12px 14px;background:var(--paper-2);border-radius:7px;width:100%}
+.modal-affiliate-fine strong{color:var(--accent);font-weight:700}
 .modal-code{display:flex;flex-direction:column;align-items:flex-start;font-family:'Inter',sans-serif}
 .modal-code[hidden]{display:none}
 .modal-code .modal-eyebrow{margin-bottom:10px}
@@ -445,6 +458,26 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
       <p class="modal-success-text">Your number is verified. Your free design is being built right now — you'll have it in your inbox within 24-48 hours. We'll reach out then to walk you through it.</p>
       <button type="button" class="modal-submit" data-close>Close</button>
     </div>
+    <div class="modal-affiliate" id="onboard-affiliate" hidden>
+      <div class="modal-eyebrow">Right tool for your stage</div>
+      <h3 class="modal-title">Start with a <em>self-serve builder.</em></h3>
+      <p class="modal-sub">Based on the budget you mentioned, we'd point you at a self-serve site builder first. They get you online for under $30/mo while your business builds cash flow. When you're ready for the team that makes the phone <em>ring</em>, come back to us. We'll be here.</p>
+      <div class="affiliate-links">
+        <a href="https://www.wix.com/" target="_blank" rel="noopener sponsored" class="affiliate-card">
+          <div class="affiliate-name">Wix</div>
+          <div class="affiliate-desc">Easiest to get started. From $17/mo. Plumber-specific templates.</div>
+          <div class="affiliate-arrow">Try Wix &rarr;</div>
+        </a>
+        <a href="https://www.squarespace.com/" target="_blank" rel="noopener sponsored" class="affiliate-card">
+          <div class="affiliate-name">Squarespace</div>
+          <div class="affiliate-desc">Slightly more polished. From $16/mo. Solid for premium-feeling small businesses.</div>
+          <div class="affiliate-arrow">Try Squarespace &rarr;</div>
+        </a>
+      </div>
+      <p class="modal-fine modal-affiliate-fine"><strong>The Hen House:</strong> we're also building our own self-serve tier (coming soon). We'll email you when it's ready &mdash; plus check in every 60-90 days to see how you're doing.</p>
+      <p class="modal-fine">We may earn a small commission if you sign up via these links. Doesn't affect your price. Funds our own ad spend so we can keep helping plumbers.</p>
+    </div>
+    
   </div>
 </div>
 
@@ -457,7 +490,8 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
   var closers=modal.querySelectorAll('[data-close]');
   var form=document.getElementById('onboard-form');
   var formState=document.getElementById('onboard-form-state');
-  function open(e){if(e)e.preventDefault();modal.removeAttribute('hidden');document.body.style.overflow='hidden';formState.hidden=false;codeState.hidden=true;successState.hidden=true;codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});setTimeout(function(){var f=modal.querySelector('form input:not([type=checkbox])');if(f)f.focus();},60);}
+  var affiliateState=document.getElementById('onboard-affiliate');
+  function open(e){if(e)e.preventDefault();modal.removeAttribute('hidden');document.body.style.overflow='hidden';formState.hidden=false;codeState.hidden=true;successState.hidden=true;affiliateState.hidden=true;codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});setTimeout(function(){var f=modal.querySelector('form input:not([type=checkbox])');if(f)f.focus();},60);}
   function close(){modal.setAttribute('hidden','');document.body.style.overflow='';}
   triggers.forEach(function(t){t.addEventListener('click',open);});
   closers.forEach(function(c){c.addEventListener('click',close);});
@@ -495,12 +529,20 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 
     // TODO: real Twilio Verify call here
     // fetch('/api/verify/start',{method:'POST',body:JSON.stringify({phone:leadPayload.get('phone')})})
+    // Branch on website budget — low budget routes to affiliate state instead of SMS verify
+    var websiteBudget=leadPayload.get('website_budget')||'';
+    var lowBudget=(websiteBudget==='Under $500'||websiteBudget==='$500-$1,000');
+
     setTimeout(function(){
       btn.disabled=false;btn.textContent=originalText;
       formState.hidden=true;
-      codeState.hidden=false;
-      codePhoneEl.textContent=leadPayload.get('phone')||'your number';
-      setTimeout(function(){codeBoxes[0].focus();},100);
+      if(lowBudget){
+        affiliateState.hidden=false;
+      } else {
+        codeState.hidden=false;
+        codePhoneEl.textContent=leadPayload.get('phone')||'your number';
+        setTimeout(function(){codeBoxes[0].focus();},100);
+      }
     },1400);
   });
 
