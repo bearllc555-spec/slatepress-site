@@ -163,7 +163,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 .modal-title{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:500;letter-spacing:-.018em;line-height:1.15;color:var(--ink);margin-bottom:8px}
 .modal-title em{font-style:italic;color:var(--accent)}
 .modal-sub{font-size:14.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:22px;font-family:'Inter',sans-serif}
-.modal-form{display:flex;flex-direction:column;gap:14px}
+.modal-form-state{display:block}.modal-form-state[hidden],.modal-form[hidden],.modal-code[hidden],.modal-success[hidden]{display:none !important}.modal-form{display:flex;flex-direction:column;gap:14px}
 .ff{display:flex;flex-direction:column;gap:6px}
 .ff-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .ff label{font-size:12.5px;font-weight:600;color:var(--ink-soft);letter-spacing:.01em}
@@ -344,30 +344,10 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
   <div class="modal-backdrop" data-close></div>
   <div class="modal-card" role="document">
     <button class="modal-close" data-close type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="modal-form-state" id="onboard-form-state">
     <div class="modal-eyebrow">Free design &middot; no commitment</div>
     <h3 class="modal-title" id="onboard-title">Tell us about your <em>business.</em></h3>
     <p class="modal-sub">We'll build a free, personalized mockup using your business info — yours to keep, no sales conversation required. We'll text you a quick code to verify your number, then start building. About 24-48 hours total.</p>
-    <div class="modal-code" id="onboard-code" hidden>
-      <div class="modal-eyebrow">Step 2 of 2</div>
-      <h3 class="modal-title">Check your <em>texts.</em></h3>
-      <p class="modal-sub">We just sent a 6-digit code to <strong id="code-phone">your number</strong>. Type it below to verify.</p>
-      <div class="code-input" id="code-input">
-        <input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" data-code-box="0" aria-label="Digit 1">
-        <input type="text" inputmode="numeric" maxlength="1" data-code-box="1" aria-label="Digit 2">
-        <input type="text" inputmode="numeric" maxlength="1" data-code-box="2" aria-label="Digit 3">
-        <input type="text" inputmode="numeric" maxlength="1" data-code-box="3" aria-label="Digit 4">
-        <input type="text" inputmode="numeric" maxlength="1" data-code-box="4" aria-label="Digit 5">
-        <input type="text" inputmode="numeric" maxlength="1" data-code-box="5" aria-label="Digit 6">
-      </div>
-      <button type="button" class="modal-submit" id="code-verify">Verify and continue</button>
-      <p class="modal-fine"><a href="#" id="code-resend" style="color:var(--accent);font-weight:600;text-decoration:underline">Didn't get it? Resend</a> &middot; <a href="#" id="code-back" style="color:var(--slate)">Edit number</a></p>
-    </div>
-    <div class="modal-success" id="onboard-success" hidden>
-      <div class="modal-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <h3 class="modal-success-title">We're on it.</h3>
-      <p class="modal-success-text">Your number is verified. Your free design is being built right now — you'll have it in your inbox within 24-48 hours. We'll reach out then to walk you through it.</p>
-      <button type="button" class="modal-submit" data-close>Close</button>
-    </div>
     <div class="modal-tip"><strong>The more you tell us, the better your mockup.</strong> Even the optional fields help us tailor the design to your business.</div>
     <form class="modal-form" id="onboard-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <div class="ff">
@@ -398,6 +378,28 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
       <button type="submit" class="modal-submit">Create my free design</button>
       <p class="modal-fine">By submitting, you agree to receive your free design at the email above. We don't share your info.</p>
     </form>
+    </div>
+    <div class="modal-code" id="onboard-code" hidden>
+      <div class="modal-eyebrow">Step 2 of 2</div>
+      <h3 class="modal-title">Check your <em>texts.</em></h3>
+      <p class="modal-sub">We just sent a 6-digit code to <strong id="code-phone">your number</strong>. Type it below to verify.</p>
+      <div class="code-input" id="code-input">
+        <input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" data-code-box="0" aria-label="Digit 1">
+        <input type="text" inputmode="numeric" maxlength="1" data-code-box="1" aria-label="Digit 2">
+        <input type="text" inputmode="numeric" maxlength="1" data-code-box="2" aria-label="Digit 3">
+        <input type="text" inputmode="numeric" maxlength="1" data-code-box="3" aria-label="Digit 4">
+        <input type="text" inputmode="numeric" maxlength="1" data-code-box="4" aria-label="Digit 5">
+        <input type="text" inputmode="numeric" maxlength="1" data-code-box="5" aria-label="Digit 6">
+      </div>
+      <button type="button" class="modal-submit" id="code-verify">Verify and continue</button>
+      <p class="modal-fine"><a href="#" id="code-resend" style="color:var(--accent);font-weight:600;text-decoration:underline">Didn't get it? Resend</a> &middot; <a href="#" id="code-back" style="color:var(--slate)">Edit number</a></p>
+    </div>
+    <div class="modal-success" id="onboard-success" hidden>
+      <div class="modal-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <h3 class="modal-success-title">We're on it.</h3>
+      <p class="modal-success-text">Your number is verified. Your free design is being built right now — you'll have it in your inbox within 24-48 hours. We'll reach out then to walk you through it.</p>
+      <button type="button" class="modal-submit" data-close>Close</button>
+    </div>
   </div>
 </div>
 
@@ -409,7 +411,8 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
   var triggers=document.querySelectorAll('[data-modal="onboard"]');
   var closers=modal.querySelectorAll('[data-close]');
   var form=document.getElementById('onboard-form');
-  function open(e){if(e)e.preventDefault();modal.removeAttribute('hidden');document.body.style.overflow='hidden';form.hidden=false;codeState.hidden=true;successState.hidden=true;codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});setTimeout(function(){var f=modal.querySelector('form input:not([type=checkbox])');if(f)f.focus();},60);}
+  var formState=document.getElementById('onboard-form-state');
+  function open(e){if(e)e.preventDefault();modal.removeAttribute('hidden');document.body.style.overflow='hidden';formState.hidden=false;codeState.hidden=true;successState.hidden=true;codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});setTimeout(function(){var f=modal.querySelector('form input:not([type=checkbox])');if(f)f.focus();},60);}
   function close(){modal.setAttribute('hidden','');document.body.style.overflow='';}
   triggers.forEach(function(t){t.addEventListener('click',open);});
   closers.forEach(function(c){c.addEventListener('click',close);});
@@ -449,7 +452,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     // fetch('/api/verify/start',{method:'POST',body:JSON.stringify({phone:leadPayload.get('phone')})})
     setTimeout(function(){
       btn.disabled=false;btn.textContent=originalText;
-      form.hidden=true;
+      formState.hidden=true;
       codeState.hidden=false;
       codePhoneEl.textContent=leadPayload.get('phone')||'your number';
       setTimeout(function(){codeBoxes[0].focus();},100);
@@ -494,7 +497,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
   });
 
   resendLink.addEventListener('click',function(e){e.preventDefault();resendLink.textContent='Sent. Check your texts...';setTimeout(function(){resendLink.textContent='Didn\'t get it? Resend';},2400);});
-  backLink.addEventListener('click',function(e){e.preventDefault();codeState.hidden=true;form.hidden=false;codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});});
+  backLink.addEventListener('click',function(e){e.preventDefault();codeState.hidden=true;formState.hidden=false;codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});});
 })();
 
 </script>
