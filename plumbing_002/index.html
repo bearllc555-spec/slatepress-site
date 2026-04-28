@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plumbing\Slatepress — Better website. More phone calls. None of the work.</title>
+<meta name="description" content="AI-built websites and the marketing engine to keep your phone ringing — for plumbing companies that would rather run jobs than learn ads.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAFBFF;
+  --paper-2:#EEF3FF;
+  --paper-3:#E1EAFF;
+  --white:#FFFFFF;
+  --ink:#0A0A0A;
+  --ink-soft:#3A3D42;
+  --slate:#6B6A73;
+  --rule:#DCE3F5;
+  --rule-soft:#E8EDFA;
+  --blue:#2563EB;
+  --blue-deep:#1D4ED8;
+  --blue-bright:#3B82F6;
+  --blue-soft:#EFF3FF;
+  --blue-glow:rgba(37,99,235,.16);
+  --max:1240px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv11"}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+
+/* TOPNAV */
+.topnav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid transparent;transition:border-color .3s ease,background-color .3s ease}
+.topnav.scrolled{border-bottom-color:var(--rule);background:rgba(250,251,255,.92);backdrop-filter:saturate(160%) blur(10px)}
+.topnav-inner{max-width:var(--max);margin:0 auto;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:inline-flex;align-items:center;font-weight:900;font-size:21px;letter-spacing:-.02em;color:var(--ink);line-height:1;white-space:nowrap}
+.brand-prefix{display:inline-block}
+.brand-slash{display:inline-block;color:var(--blue);font-weight:900;margin:0 .04em;transform:translateY(-.02em)}
+.brand-suffix{display:inline-block;max-width:9em;opacity:1;overflow:hidden;transition:max-width .55s cubic-bezier(.55,0,.1,1),opacity .35s ease;vertical-align:bottom}
+.topnav.scrolled .brand-suffix{max-width:0;opacity:0}
+.topnav-cta{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;background:var(--blue);color:#fff;font-weight:600;font-size:14px;border-radius:999px;transition:background .2s,transform .2s;box-shadow:0 4px 12px var(--blue-glow)}
+.topnav-cta:hover{background:var(--blue-deep);transform:translateY(-1px)}
+.topnav-cta svg{width:13px;height:13px}
+
+/* HERO */
+.hero{padding:96px 0 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center top,var(--paper-2) 0%,transparent 60%);pointer-events:none;z-index:0}
+.hero-inner{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.55rem;background:var(--ink);color:#fff;padding:.45rem .35rem .45rem 1rem;border-radius:999px;font-size:13px;font-weight:500;margin-bottom:36px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.hero-eyebrow .new{display:inline-flex;align-items:center;gap:.35rem;background:var(--blue);color:#fff;padding:.18rem .55rem;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.hero-eyebrow .new .dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 #fff;animation:nodot 2.4s ease-out infinite}
+@keyframes nodot{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 6px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.hero-eyebrow-arrow{display:inline-flex;align-items:center;padding:.18rem .55rem;border-radius:999px;background:rgba(255,255,255,.1);font-size:13px}
+.hero-eyebrow-arrow svg{width:13px;height:13px;margin-left:.25rem}
+
+.hero h1{font-size:clamp(40px,6.4vw,96px);font-weight:800;letter-spacing:-.035em;line-height:1.0;color:var(--ink);max-width:18ch;margin:0 auto}
+.hero h1 .line{display:block}
+.hero h1 .line.accent{color:var(--blue)}
+.hero-sub{font-size:clamp(15px,1.2vw,18px);color:var(--ink-soft);max-width:54ch;line-height:1.6;margin:32px auto 0}
+
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:36px}
+.hero-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.05rem;background:var(--blue-soft);color:var(--blue-deep);border:1px solid var(--paper-3);border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.hero-pill::before{content:'';width:14px;height:14px;border-radius:50%;background:var(--blue);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'><polyline points='20 6 9 17 4 12'/></svg>");background-size:60%;background-position:center;background-repeat:no-repeat;flex-shrink:0}
+
+.hero-cta{margin-top:44px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.btn-primary{display:inline-flex;align-items:center;gap:.55rem;padding:1rem 1.7rem;background:var(--blue);color:#fff;font-weight:700;font-size:15px;border-radius:999px;border:1px solid var(--blue);transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 8px 24px var(--blue-glow)}
+.btn-primary:hover{background:var(--blue-deep);border-color:var(--blue-deep);transform:translateY(-2px);box-shadow:0 14px 32px var(--blue-glow)}
+.btn-primary svg{width:14px;height:14px}
+.btn-ghost{display:inline-flex;align-items:center;gap:.55rem;padding:1rem 1.7rem;color:var(--ink);font-weight:700;font-size:15px;border-radius:999px;border:1px solid var(--rule);background:transparent;transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:var(--ink);background:var(--white)}
+
+/* SHOWCASE */
+.showcase{padding:32px 0 96px}
+.showcase-card{background:var(--white);border:1px solid var(--rule);border-radius:18px;padding:48px 48px 0;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(37,99,235,.06)}
+.showcase-eyebrow{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.showcase-h2{font-size:clamp(26px,3.2vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.08;color:var(--ink);max-width:24ch;margin-bottom:10px}
+.showcase-h2 em{font-style:normal;color:var(--blue)}
+.showcase-sub{font-size:16px;color:var(--ink-soft);max-width:54ch;line-height:1.55;margin-bottom:40px}
+.browser-frame{background:#0e1014;border-radius:10px 10px 0 0;border:1px solid rgba(0,0,0,.08);border-bottom:none;margin-top:16px;box-shadow:0 -10px 40px rgba(0,0,0,.18)}
+.browser-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:rgba(255,255,255,.4)}
+.browser-dots{display:flex;gap:6px}
+.browser-dots span{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.14)}
+.browser-url{flex:1;text-align:center;padding:5px 12px;background:rgba(255,255,255,.04);border-radius:5px}
+.browser-frame iframe{width:100%;height:560px;border:none;display:block;background:#fff}
+@media(max-width:760px){.showcase-card{padding:32px 22px 0}.browser-frame iframe{height:420px}}
+
+/* STEPS */
+.steps{padding:96px 0;background:var(--paper-2);position:relative}
+.steps-head{margin-bottom:64px;max-width:680px;margin-left:auto;margin-right:auto;text-align:center}
+.section-eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:18px;padding:.32rem .8rem;background:var(--blue-soft);border-radius:999px}
+.steps h2,.pricing h2{font-size:clamp(28px,3.6vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.06;color:var(--ink)}
+.steps h2 em,.pricing h2 em{font-style:normal;color:var(--blue)}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.step{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:12px;transition:transform .25s,box-shadow .25s}
+.step:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(37,99,235,.08)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-weight:800;font-size:15px;letter-spacing:.02em}
+.step-name{font-size:18px;font-weight:700;letter-spacing:-.012em;color:var(--ink);line-height:1.2}
+.step-desc{font-size:14px;color:var(--ink-soft);line-height:1.55}
+@media(max-width:880px){.steps-grid{grid-template-columns:1fr 1fr;gap:18px}}
+@media(max-width:520px){.steps-grid{grid-template-columns:1fr}}
+
+/* PRICING */
+.pricing{padding:96px 0;text-align:center}
+.pricing-head{max-width:680px;margin:0 auto 48px}
+.price-block{display:flex;flex-direction:column;gap:0;max-width:680px;margin:0 auto;background:var(--white);border:1px solid var(--rule);border-radius:18px;padding:36px 48px;box-shadow:0 24px 60px rgba(37,99,235,.06)}
+.price-row{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 0}
+.price-row+.price-row{border-top:1px solid var(--rule-soft)}
+.price-label{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--slate)}
+.price-amount{font-size:36px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.price-amount em{font-style:normal;color:var(--blue);font-size:.55em;font-weight:600;margin-left:4px}
+.price-fine{font-size:13.5px;color:var(--slate);line-height:1.55;margin-top:18px;padding-top:18px;border-top:1px solid var(--rule-soft);text-align:left}
+
+/* CLOSER */
+.closer{padding:96px 0 120px;text-align:center;background:var(--ink);color:#fff}
+.closer h2{font-size:clamp(34px,4.8vw,68px);font-weight:800;letter-spacing:-.025em;line-height:1.04;max-width:18ch;margin:0 auto 28px;color:#fff}
+.closer h2 em{font-style:normal;color:var(--blue-bright)}
+.closer p{font-size:17px;color:rgba(255,255,255,.7);max-width:54ch;margin:0 auto 36px;line-height:1.6}
+.closer .btn-primary{box-shadow:0 12px 32px rgba(59,130,246,.38)}
+
+/* FOOTER */
+footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);border-top:1px solid rgba(255,255,255,.08)}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-attr{display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.6)}
+.foot-attr .slash{color:var(--blue-bright);font-weight:700}
+.foot-inner a{color:rgba(255,255,255,.7)}
+.foot-inner a:hover{color:#fff}
+
+/* LETTER-BY-LETTER MOTION */
+.fx-letters .letter,.fx-letters .letter-word{display:inline-block}
+.fx-letters .letter-word{white-space:nowrap}
+.fx-letters .letter{opacity:0;transform:translateY(.45em);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 14ms)}
+.fx-letters.in .letter{opacity:1;transform:none}
+
+/* ROW MOTION */
+.fx-row{opacity:0;transform:translateY(14px);transition:opacity .7s ease-out,transform .7s ease-out}
+.fx-row.in{opacity:1;transform:none}
+.fx-row[data-delay="100"]{transition-delay:.1s}
+.fx-row[data-delay="200"]{transition-delay:.2s}
+.fx-row[data-delay="300"]{transition-delay:.3s}
+.fx-row[data-delay="400"]{transition-delay:.4s}
+
+@media(prefers-reduced-motion:reduce){.fx-letters .letter,.fx-row{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a href="/plumbing_002/" class="brand"><span class="brand-prefix">PLUMBING</span><span class="brand-slash">\</span><span class="brand-suffix">SLATEPRESS</span></a>
+    <a href="#contact" class="topnav-cta">Get a free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="fx-row">
+      <div class="hero-eyebrow">
+        <span class="new"><span class="dot"></span>NEW</span>
+        <span>Now onboarding plumbers in Metro NYC</span>
+        <span class="hero-eyebrow-arrow">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </div>
+    </div>
+    <h1 class="fx-letters">
+      <span class="line">Better website.</span>
+      <span class="line accent">More phone calls.</span>
+      <span class="line">None of the work.</span>
+    </h1>
+    <div class="hero-pills fx-row" data-delay="200">
+      <span class="hero-pill">Built in 7 days</span>
+      <span class="hero-pill">One plumber per ZIP</span>
+      <span class="hero-pill">Cancel anytime</span>
+    </div>
+    <div class="hero-cta fx-row" data-delay="300">
+      <a href="#contact" class="btn-primary">See your free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#how" class="btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="showcase">
+  <div class="wrap">
+    <div class="showcase-card fx-row">
+      <div class="showcase-eyebrow">Recent build &middot; Cedar Grove, NJ</div>
+      <h2 class="showcase-h2">This is what we built for De Vito Plumbing &mdash; <em>three weeks ago.</em></h2>
+      <p class="showcase-sub">A live, mobile-responsive site with their truck, their reviews, their service area. Live phone, schedule online, Google Maps, the whole thing. Ready in a week from your demo call.</p>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">demos.slatepress.co/de-vito-plumbing</div>
+          <div style="width:54px"></div>
+        </div>
+        <iframe src="https://demos.slatepress.co/de-vito-plumbing_020/?nav=v2" loading="lazy" title="De Vito Plumbing live demo"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="steps-head fx-row">
+      <span class="section-eyebrow">How it works</span>
+      <h2>Four steps. Two weeks. <em>Then it just runs.</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step fx-row" data-delay="100"><div class="step-num">01</div><div class="step-name">Free demo, built for you.</div><div class="step-desc">We use your business name, your truck, your reviews. You see exactly what your site would look like before any conversation.</div></div>
+      <div class="step fx-row" data-delay="200"><div class="step-num">02</div><div class="step-name">Thirty-minute call.</div><div class="step-desc">We walk you through the demo, answer questions, confirm whether your ZIP is still open. One plumber per ZIP.</div></div>
+      <div class="step fx-row" data-delay="300"><div class="step-num">03</div><div class="step-name">We build and launch.</div><div class="step-desc">Domain, hosting, SSL, Google Workspace, tracked phone number. Live in a week. You don't touch anything you don't want to touch.</div></div>
+      <div class="step fx-row" data-delay="400"><div class="step-num">04</div><div class="step-name">Then it just runs.</div><div class="step-desc">Phone rings, calls go to your team, monthly performance email shows what's working. Add more services later if you want &mdash; or don't.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="wrap">
+    <div class="pricing-head fx-row">
+      <span class="section-eyebrow">Pricing</span>
+      <h2>One number to start. <em>One number to keep going.</em></h2>
+    </div>
+    <div class="price-block fx-row" data-delay="200">
+      <div class="price-row"><span class="price-label">Build &amp; Launch</span><span class="price-amount">$1,700 <em>once</em></span></div>
+      <div class="price-row"><span class="price-label">Hosting &amp; Running</span><span class="price-amount">$149 <em>/mo</em></span></div>
+      <div class="price-fine">Includes domain, hosting, SSL, Google Workspace (3 seats), tracked phone number, monthly performance report. Cancel any time. Territory locked to one plumber per ZIP code.</div>
+    </div>
+  </div>
+</section>
+
+<section class="closer" id="contact">
+  <div class="wrap">
+    <h2 class="fx-letters"><span class="line">Want to see your</span> <span class="line accent">own demo?</span></h2>
+    <p class="fx-row" data-delay="200">Free, personalized to your business, built before any sales conversation. No commitment. We'll just show you what your site could look like — and you decide.</p>
+    <div class="fx-row" data-delay="300">
+      <a href="mailto:hello@slatepress.co?subject=Free%20demo%20%E2%80%94%20Plumbing%5CSlatepress" class="btn-primary">Get my free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-attr">An offering of <span class="slash">\</span>Slatepress &middot; <a href="https://slatepress.co/">slatepress.co</a></div>
+    <div style="display:flex;gap:1.4rem"><a href="mailto:hello@slatepress.co">hello@slatepress.co</a><a href="https://slatepress.co/blog/">Field notes</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // logo scroll-collapse
+  var nav=document.getElementById('topnav');
+  function onScroll(){if(window.scrollY>80)nav.classList.add('scrolled');else nav.classList.remove('scrolled');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // letter splitter
+  function splitLetters(root){
+    var nodes=Array.prototype.slice.call(root.childNodes);
+    var i=0;
+    nodes.forEach(function(node){
+      if(node.nodeType===3){
+        var text=node.textContent;
+        var parts=text.split(/(\s+)/);
+        var frag=document.createDocumentFragment();
+        parts.forEach(function(seg){
+          if(seg===''||/^\s+$/.test(seg)){if(seg!=='')frag.appendChild(document.createTextNode(seg));return;}
+          var w=document.createElement('span');w.className='letter-word';
+          for(var k=0;k<seg.length;k++){
+            var s=document.createElement('span');s.className='letter';s.style.setProperty('--i',i++);s.textContent=seg[k];w.appendChild(s);
+          }
+          frag.appendChild(w);
+        });
+        node.parentNode.replaceChild(frag,node);
+      } else if(node.nodeType===1){
+        splitLetters(node);
+      }
+    });
+  }
+  document.querySelectorAll('.fx-letters').forEach(function(el){splitLetters(el);});
+
+  // reveal on scroll
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.fx-letters,.fx-row').forEach(el=>el.classList.add('in'));return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.15,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.fx-letters,.fx-row').forEach(function(el){io.observe(el);});
+  setTimeout(function(){document.querySelectorAll('.fx-letters,.fx-row').forEach(function(el){el.classList.add('in');});},2800);
+})();
+</script>
+
+</body>
+</html>
