@@ -11,6 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
+  --accent:#2563EB;
+  --accent-glow:rgba(37,99,235,.14);
   --paper:#FAFBFF;
   --paper-2:#EEF3FF;
   --paper-3:#E1EAFF;
@@ -145,6 +147,33 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 .fx-row[data-delay="400"]{transition-delay:.4s}
 
 @media(prefers-reduced-motion:reduce){.fx-letters .letter,.fx-row{transition:none;opacity:1;transform:none}}
+/* ============ ONBOARD MODAL ============ */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;overflow-y:auto}
+.modal[hidden]{display:none}
+.modal-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.5);backdrop-filter:blur(4px)}
+.modal-card{position:relative;background:var(--paper);max-width:580px;width:100%;border-radius:14px;padding:44px 42px 38px;border:1px solid var(--rule);box-shadow:0 30px 80px rgba(0,0,0,.25);font-family:'Inter',sans-serif}
+.modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;display:grid;place-items:center;color:var(--ink-soft);border-radius:8px;background:transparent;border:none;cursor:pointer}
+.modal-close:hover{background:rgba(0,0,0,.06)}
+.modal-close svg{width:18px;height:18px}
+.modal-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.modal-title{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:500;letter-spacing:-.018em;line-height:1.15;color:var(--ink);margin-bottom:8px}
+.modal-title em{font-style:italic;color:var(--accent)}
+.modal-sub{font-size:14.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:22px;font-family:'Inter',sans-serif}
+.modal-form{display:flex;flex-direction:column;gap:14px}
+.ff{display:flex;flex-direction:column;gap:6px}
+.ff-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ff label{font-size:12.5px;font-weight:600;color:var(--ink-soft);letter-spacing:.01em}
+.ff input,.ff textarea{padding:.7rem .85rem;border:1px solid var(--rule);border-radius:7px;font-size:14.5px;font-family:'Inter',sans-serif;background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s;width:100%}
+.ff input:focus,.ff textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.ff-checks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:4px}
+.ff-checks label{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .65rem;border:1px solid var(--rule);border-radius:7px;font-size:13px;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s;font-weight:500}
+.ff-checks label:hover{border-color:var(--ink)}
+.ff-checks input[type="checkbox"]{accent-color:var(--accent);width:13px;height:13px;flex-shrink:0}
+.modal-submit{margin-top:10px;padding:1rem 1.4rem;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;transition:background .2s,transform .2s,border-color .2s;font-family:'Inter',sans-serif}
+.modal-submit:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.modal-fine{font-size:11.5px;color:var(--slate);line-height:1.45;text-align:center;margin-top:8px}
+@media(max-width:560px){.modal-card{padding:32px 22px 26px}.ff-row{grid-template-columns:1fr}.ff-checks{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
@@ -152,7 +181,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 <header class="topnav" id="topnav">
   <div class="topnav-inner">
     <a href="/plumbing_002/" class="brand"><span class="brand-prefix">PLUMBING</span><span class="brand-slash">\</span><span class="brand-suffix">SLATEPRESS</span></a>
-    <a href="#contact" class="topnav-cta">Get a free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="#contact" class="topnav-cta">Create a free design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
   </div>
 </header>
 
@@ -176,7 +205,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
       <span class="hero-pill">Cancel anytime</span>
     </div>
     <div class="hero-cta fx-row" data-delay="300">
-      <a href="#contact" class="btn-primary">See your free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#contact" class="btn-primary">Create a free design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       <a href="#how" class="btn-ghost">How it works</a>
     </div>
   </div>
@@ -234,7 +263,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     <h2 class="fx-letters"><span class="line">Want to see your</span> <span class="line accent">own demo?</span></h2>
     <p class="fx-row" data-delay="200">Free, personalized to your business, built before any sales conversation. No commitment. We'll just show you what your site could look like — and you decide.</p>
     <div class="fx-row" data-delay="300">
-      <a href="mailto:hello@slatepress.co?subject=Free%20demo%20%E2%80%94%20Plumbing%5CSlatepress" class="btn-primary">Get my free demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#" data-modal="onboard" class="btn-primary">Create my free design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -288,5 +317,70 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 })();
 </script>
 
+<div class="modal" id="onboard-modal" role="dialog" aria-modal="true" aria-labelledby="onboard-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="document">
+    <button class="modal-close" data-close type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="modal-eyebrow">Free design &middot; no commitment</div>
+    <h3 class="modal-title" id="onboard-title">Tell us about your <em>business.</em></h3>
+    <p class="modal-sub">We'll build a free, personalized mockup of your site using your business name, services, and town. You see it before any sales conversation. About 24-48 hours.</p>
+    <form class="modal-form" id="onboard-form" novalidate>
+      <div class="ff">
+        <label for="of-biz">Business name *</label>
+        <input id="of-biz" name="biz" type="text" required placeholder="Joe's Plumbing">
+      </div>
+      <div class="ff-row">
+        <div class="ff"><label for="of-name">Your name *</label><input id="of-name" name="name" type="text" required placeholder="Joe Smith"></div>
+        <div class="ff"><label for="of-email">Email *</label><input id="of-email" name="email" type="email" required placeholder="joe@example.com"></div>
+      </div>
+      <div class="ff-row">
+        <div class="ff"><label for="of-phone">Phone *</label><input id="of-phone" name="phone" type="tel" required placeholder="(973) 555-0123"></div>
+        <div class="ff"><label for="of-town">Town / City *</label><input id="of-town" name="town" type="text" required placeholder="Cedar Grove, NJ"></div>
+      </div>
+      <div class="ff"><label for="of-website">Current website (if any)</label><input id="of-website" name="website" type="url" placeholder="https://yourbusiness.com"></div>
+      <div class="ff">
+        <label>What services do you offer?</label>
+        <div class="ff-checks">
+          <label><input type="checkbox" name="services" value="Emergency"> Emergency</label>
+          <label><input type="checkbox" name="services" value="Water heater"> Water heater</label>
+          <label><input type="checkbox" name="services" value="Drain cleaning"> Drain cleaning</label>
+          <label><input type="checkbox" name="services" value="Boiler service"> Boiler service</label>
+          <label><input type="checkbox" name="services" value="Sewer"> Sewer</label>
+          <label><input type="checkbox" name="services" value="Pipe repair"> Pipe repair</label>
+        </div>
+      </div>
+      <div class="ff"><label for="of-notes">Anything else? (optional)</label><textarea id="of-notes" name="notes" rows="3" placeholder="Years in business, truck make/model, anything we should know..."></textarea></div>
+      <button type="submit" class="modal-submit">Create my free design</button>
+      <p class="modal-fine">By submitting, you agree to receive your free design at the email above. We don't share your info.</p>
+    </form>
+  </div>
+</div>
+
+
+
+<script>
+(function(){
+  var modal=document.getElementById('onboard-modal');if(!modal)return;
+  var triggers=document.querySelectorAll('[data-modal="onboard"]');
+  var closers=modal.querySelectorAll('[data-close]');
+  var form=document.getElementById('onboard-form');
+  function open(e){if(e)e.preventDefault();modal.removeAttribute('hidden');document.body.style.overflow='hidden';setTimeout(function(){var f=modal.querySelector('input');if(f)f.focus();},60);}
+  function close(){modal.setAttribute('hidden','');document.body.style.overflow='';}
+  triggers.forEach(function(t){t.addEventListener('click',open);});
+  closers.forEach(function(c){c.addEventListener('click',close);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hasAttribute('hidden'))close();});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var d=new FormData(form);
+    var services=d.getAll('services').join(', ')||'(none selected)';
+    var lines=['New free-design request from Plumbing\\Slatepress','','Business name: '+(d.get('biz')||''),'Contact: '+(d.get('name')||''),'Email: '+(d.get('email')||''),'Phone: '+(d.get('phone')||''),'Town: '+(d.get('town')||''),'Current website: '+(d.get('website')||'(none)'),'Services: '+services,'','Notes:',(d.get('notes')||'(none)'),''];
+    var subj=encodeURIComponent('Free design request — '+(d.get('biz')||'New plumber'));
+    var body=encodeURIComponent(lines.join('\n'));
+    window.location.href='mailto:hello@slatepress.co?subject='+subj+'&body='+body;
+  });
+})();
+
+</script>
 </body>
 </html>
