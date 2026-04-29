@@ -529,7 +529,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     captureLead(leadPayload);
 
     // TODO: real Twilio Verify call here
-    // fetch('/api/verify/start',{method:'POST',body:JSON.stringify({phone:leadPayload.get('phone')})})
+    // fetch('https://slatepress-site.pages.dev/api/verify/start',{method:'POST',body:JSON.stringify({phone:leadPayload.get('phone')})})
     // Branch on website budget — low budget routes to affiliate state instead of SMS verify
     var websiteBudget=leadPayload.get('website_budget')||'';
     var lowBudget=(websiteBudget==='Under $500'||websiteBudget==='$500-$1,000');
@@ -576,7 +576,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     verifyBtn.disabled=true;verifyBtn.textContent='Verifying...';
 
     // TODO: real Twilio Verify check here
-    // fetch('/api/verify/check',{method:'POST',body:JSON.stringify({phone:leadPayload.get('phone'),code:code})})
+    // fetch('https://slatepress-site.pages.dev/api/verify/check',{method:'POST',body:JSON.stringify({phone:leadPayload.get('phone'),code:code})})
     setTimeout(function(){
       verifyBtn.disabled=false;verifyBtn.textContent='Verify and continue';
       codeState.hidden=true;
@@ -591,8 +591,8 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 </script>
 <script>
 /* Twilio Verify wiring — overrides the simulated SMS flow on plumbing_002.
-   Re-binds the form submit and verify button to call /api/verify/start and
-   /api/verify/check. Loaded after the inline IIFE above — its handlers run
+   Re-binds the form submit and verify button to call https://slatepress-site.pages.dev/api/verify/start and
+   https://slatepress-site.pages.dev/api/verify/check. Loaded after the inline IIFE above — its handlers run
    in addition to (and pre-empt) the simulated ones via stopImmediatePropagation. */
 (function(){
   var form=document.getElementById('onboard-form');
@@ -639,7 +639,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     }
 
     var phone=leadPayload.get('phone')||'';
-    fetch('/api/verify/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
+    fetch('https://slatepress-site.pages.dev/api/verify/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
       .then(function(res){return res.json().then(function(d){return {ok:res.ok,data:d};},function(){return {ok:res.ok,data:{}};});})
       .then(function(r){
         btn.disabled=false;btn.textContent=originalText;
@@ -662,7 +662,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     if(code.length<6){codeInput.classList.add('error');setTimeout(function(){codeInput.classList.remove('error');},400);return;}
     verifyBtn.disabled=true;verifyBtn.textContent='Verifying...';
     var phone=(leadPayload&&leadPayload.get('phone'))||'';
-    fetch('/api/verify/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,code:code})})
+    fetch('https://slatepress-site.pages.dev/api/verify/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,code:code})})
       .then(function(res){return res.json().then(function(d){return {ok:res.ok,data:d};},function(){return {ok:res.ok,data:{}};});})
       .then(function(r){
         verifyBtn.disabled=false;verifyBtn.textContent='Verify and continue';
@@ -688,7 +688,7 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
     if(!phone)return;
     var orig="Didn't get it? Resend";
     resendLink.textContent='Sending...';
-    fetch('/api/verify/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
+    fetch('https://slatepress-site.pages.dev/api/verify/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
       .then(function(res){
         resendLink.textContent=res.ok?'Sent. Check your texts...':"Couldn't resend. Try again.";
         setTimeout(function(){resendLink.textContent=orig;},2400);
