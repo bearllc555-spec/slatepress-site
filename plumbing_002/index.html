@@ -589,5 +589,117 @@ footer{padding:32px 0;font-size:13px;color:var(--slate);background:var(--ink);bo
 })();
 
 </script>
+<script>
+/* Twilio Verify wiring — overrides the simulated SMS flow on plumbing_002.
+   Re-binds the form submit and verify button to call /api/verify/start and
+   /api/verify/check. Loaded after the inline IIFE above — its handlers run
+   in addition to (and pre-empt) the simulated ones via stopImmediatePropagation. */
+(function(){
+  var form=document.getElementById('onboard-form');
+  var formState=document.getElementById('onboard-form-state');
+  var codeState=document.getElementById('onboard-code');
+  var successState=document.getElementById('onboard-success');
+  var affiliateState=document.getElementById('onboard-affiliate');
+  var codePhoneEl=document.getElementById('code-phone');
+  var verifyBtn=document.getElementById('code-verify');
+  var codeInput=document.getElementById('code-input');
+  var resendLink=document.getElementById('code-resend');
+  if(!form||!verifyBtn||!resendLink)return;
+  var codeBoxes=codeState.querySelectorAll('[data-code-box]');
+  var leadPayload=null;
+
+  function captureLead(fd,verified){
+    var payload={};
+    fd.forEach(function(v,k){if(payload[k]!==undefined){if(!Array.isArray(payload[k]))payload[k]=[payload[k]];payload[k].push(v);}else payload[k]=v;});
+    payload._subject=(verified?'Free design request (VERIFIED) — ':'Free design request — ')+(fd.get('biz')||'New plumber');
+    payload._source='plumbing_002';
+    payload._verified=!!verified;
+    return fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+  }
+
+  function onSubmit(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var btn=form.querySelector('.modal-submit');
+    var originalText=btn.textContent;
+    btn.disabled=true;btn.textContent='Sending code...';
+    leadPayload=new FormData(form);
+    captureLead(leadPayload,false);
+
+    var websiteBudget=leadPayload.get('website_budget')||'';
+    var lowBudget=(websiteBudget==='Under $500'||websiteBudget==='$500-$1,000');
+    if(lowBudget){
+      setTimeout(function(){
+        btn.disabled=false;btn.textContent=originalText;
+        formState.hidden=true;
+        affiliateState.hidden=false;
+      },600);
+      return;
+    }
+
+    var phone=leadPayload.get('phone')||'';
+    fetch('/api/verify/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
+      .then(function(res){return res.json().then(function(d){return {ok:res.ok,data:d};},function(){return {ok:res.ok,data:{}};});})
+      .then(function(r){
+        btn.disabled=false;btn.textContent=originalText;
+        if(r.ok){
+          formState.hidden=true;codeState.hidden=false;
+          codePhoneEl.textContent=phone||'your number';
+          codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});
+          setTimeout(function(){codeBoxes[0].focus();},100);
+        } else {
+          alert((r.data&&r.data.message)||"Couldn't send the verification text. Try again.");
+        }
+      })
+      .catch(function(){btn.disabled=false;btn.textContent=originalText;alert('Network error. Try again.');});
+  }
+  form.addEventListener('submit',onSubmit,true);
+
+  function onVerify(e){
+    if(e){e.stopImmediatePropagation();}
+    var code='';codeBoxes.forEach(function(b){code+=b.value;});
+    if(code.length<6){codeInput.classList.add('error');setTimeout(function(){codeInput.classList.remove('error');},400);return;}
+    verifyBtn.disabled=true;verifyBtn.textContent='Verifying...';
+    var phone=(leadPayload&&leadPayload.get('phone'))||'';
+    fetch('/api/verify/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,code:code})})
+      .then(function(res){return res.json().then(function(d){return {ok:res.ok,data:d};},function(){return {ok:res.ok,data:{}};});})
+      .then(function(r){
+        verifyBtn.disabled=false;verifyBtn.textContent='Verify and continue';
+        if(r.ok&&r.data&&r.data.approved){
+          if(leadPayload)captureLead(leadPayload,true);
+          codeState.hidden=true;
+          successState.hidden=false;
+        } else {
+          codeInput.classList.add('error');
+          setTimeout(function(){codeInput.classList.remove('error');},400);
+          codeBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});
+          codeBoxes[0].focus();
+        }
+      })
+      .catch(function(){verifyBtn.disabled=false;verifyBtn.textContent='Verify and continue';alert('Network error. Try again.');});
+  }
+  verifyBtn.addEventListener('click',onVerify,true);
+
+  function onResend(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var phone=(leadPayload&&leadPayload.get('phone'))||'';
+    if(!phone)return;
+    var orig="Didn't get it? Resend";
+    resendLink.textContent='Sending...';
+    fetch('/api/verify/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone})})
+      .then(function(res){
+        resendLink.textContent=res.ok?'Sent. Check your texts...':"Couldn't resend. Try again.";
+        setTimeout(function(){resendLink.textContent=orig;},2400);
+      })
+      .catch(function(){
+        resendLink.textContent='Network error.';
+        setTimeout(function(){resendLink.textContent=orig;},2400);
+      });
+  }
+  resendLink.addEventListener('click',onResend,true);
+})();
+</script>
 </body>
 </html>
