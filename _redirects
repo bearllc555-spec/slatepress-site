@@ -1,2 +1,6 @@
 /_rdtest /dash/ 302
 /dash/* /dash/ 200
+
+# 2026-04-30: plumbing_002 retired — canonical lander now lives on plumbingslatepress.com
+/plumbing_002 https://plumbingslatepress.com/ 301
+/plumbing_002/* https://plumbingslatepress.com/ 301
