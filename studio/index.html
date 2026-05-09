@@ -459,6 +459,8 @@
   .cta-mail::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:var(--ochre-soft);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.7,0,.2,1)}
   .cta-mail:hover::after{transform:scaleX(1);transform-origin:left}
   .footer{margin-top:160px;padding-top:28px;border-top:1px solid rgba(245,239,223,.14);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,239,223,.55)}
+  .foot{margin-top:160px;border-top:1px solid #E8E8E8;padding:32px;color:#5C5C66;font-size:13px;text-align:center;background:#FFFFFF;font-family:Inter,-apple-system,system-ui,sans-serif;letter-spacing:0;text-transform:none}
+  .foot-tag{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#5C5C66;margin-top:6px}
   .footer b{color:var(--cream);font-weight:500}
   .footer a:hover{color:var(--ochre-soft)}
 
@@ -1595,16 +1597,10 @@
     <a href="mailto:hello@slatepress.co" data-contact-modal class="cta-mail reveal d2" data-cursor="write">hello@slatepress.co</a>
     <p class="cta-sub reveal d3 type-in fast">Tell us what you're raising, when you're pitching, and what about the current deck isn't landing. We'll reply with a read on whether we're a fit — usually same day.</p>
 
-    <div class="footer">
-      <div><b>SLATEPRESS</b> · MMXXVI · New York / Remote</div>
-      <div>
-        <a href="https://www.linkedin.com/in/anthony-de-meo-285999397/" target="_blank" rel="noopener">LinkedIn</a> ·
-        <a href="https://x.com/Slatepress_co" target="_blank" rel="noopener">X.com</a> ·
-        <a href="https://slatepress.substack.com/" target="_blank" rel="noopener">Substack</a> ·
-        <a href="https://media.rss.com/slate-press/feed.xml" target="_blank" rel="noopener">RSS</a>
-      </div>
-      <div><a href="mailto:hello@slatepress.co" data-contact-modal data-cursor="write">hello@slatepress.co →</a></div>
-    </div>
+    <footer class="foot">
+      <div><span style="color:#2563EB;font-weight:800;letter-spacing:-.05em">/</span>slatepress.co &copy; 2026</div>
+      <div class="foot-tag">Bear LLC digital property</div>
+    </footer>
   </div>
 </section>
 
