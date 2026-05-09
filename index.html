@@ -133,7 +133,13 @@ h1{font-size:clamp(40px,6.4vw,76px);font-weight:700;letter-spacing:-.035em;line-
 .price-display{display:flex;align-items:baseline;gap:6px;margin-bottom:8px}
 .price-amount{font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-.04em;line-height:1}
 .price-suffix{font-size:16px;color:var(--ink-soft);font-weight:500}
-.price-setup{font-size:13.5px;color:var(--ink-soft);margin-bottom:28px}
+.price-setup{font-size:13.5px;color:var(--ink-soft);margin-bottom:8px}
+.price-anchor-vs{font-size:12.5px;color:var(--slate);margin-bottom:24px;line-height:1.5}
+.price-anchor-vs .vs-label{font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-size:10.5px;display:block;margin-bottom:3px}
+.price-anchor-vs .vs-amount{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:var(--slate);opacity:.85}
+.price-card.pro .price-anchor-vs{color:rgba(255,255,255,.55)}
+.price-card.pro .price-anchor-vs .vs-label{color:rgba(255,255,255,.65)}
+.price-card.pro .price-anchor-vs .vs-amount{text-decoration-color:rgba(255,255,255,.55)}
 .price-features{list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:11px;flex:1}
 .price-feature{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:var(--ink);line-height:1.5}
 .price-feature svg{width:16px;height:16px;color:var(--blue);flex-shrink:0;margin-top:2px}
@@ -315,6 +321,10 @@ h1{font-size:clamp(40px,6.4vw,76px);font-weight:700;letter-spacing:-.035em;line-
         <span class="price-suffix">/mo</span>
       </div>
       <div class="price-setup"><strong>$3,500 setup</strong> &middot; Founder pricing for first 50</div>
+      <div class="price-anchor-vs">
+        <span class="vs-label">vs typical agency</span>
+        <span class="vs-amount">$5K&ndash;$15K setup + $1.5K&ndash;$5K/mo</span>
+      </div>
       <ul class="price-features">
         <li class="price-feature">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -352,6 +362,10 @@ h1{font-size:clamp(40px,6.4vw,76px);font-weight:700;letter-spacing:-.035em;line-
         <span class="price-suffix">/mo</span>
       </div>
       <div class="price-setup"><strong>$8,999 setup</strong> &middot; Ad budget pass-through</div>
+      <div class="price-anchor-vs">
+        <span class="vs-label">vs typical agency</span>
+        <span class="vs-amount">$20K&ndash;$30K setup + $10K&ndash;$20K/mo</span>
+      </div>
       <ul class="price-features">
         <li class="price-feature">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
