@@ -4,3 +4,11 @@
 # 2026-04-30: plumbing_002 retired — canonical lander now lives on plumbingslatepress.com
 /plumbing_002 https://plumbingslatepress.com/ 301
 /plumbing_002/* https://plumbingslatepress.com/ 301
+
+# 2026-05-08: pitch-deck-studio site moved from root to /studio/.
+# Old anchor links now redirect into the studio surface so external references still work.
+/method /studio/#method 301
+/work /studio/#work 301
+/pricing /studio/#pricing 301
+/voices /studio/#voices 301
+/faq /studio/#faq 301
