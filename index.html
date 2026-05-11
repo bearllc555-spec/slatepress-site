@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Slatepress — Digital Marketing Distribution Partner for local service businesses</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-<link rel="apple-touch-icon" href="/favicon.svg"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
 <meta name="description" content="One vendor. Eight steps. Booked appointments. The website is the beachhead — the product is the phone ringing. Foundation $269/mo, Pro $998/mo. Hand-picked clients only.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://slatepress.co/">
@@ -14,8 +13,8 @@
 <meta property="og:title" content="Slatepress — Digital Marketing Distribution Partner">
 <meta property="og:description" content="Fractional growth team for local service businesses. We make our clients money.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FFFFFF;
@@ -211,7 +210,64 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
   .final-cta{padding:64px 20px}
 }
 </style>
-</head>
+<style id="press-section-targeting-styles">[data-press-section] {
+  cursor: pointer;
+  transition: background-color 0.12s ease, outline-color 0.12s ease, box-shadow 0.12s ease;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+}
+[data-press-section]:hover {
+  background-color: rgba(16, 185, 129, 0.06) !important;
+  outline-color: rgba(16, 185, 129, 0.55);
+}
+[data-press-section].press-selected {
+  background-color: rgba(16, 185, 129, 0.10) !important;
+  outline-color: rgba(16, 185, 129, 0.85);
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.15);
+}
+[data-press-section].press-parent-faded {
+  background-color: rgba(16, 185, 129, 0.04) !important;
+  outline-color: rgba(16, 185, 129, 0.45);
+}
+[data-press-section].press-selected [data-press-subsection],
+[data-press-section].press-parent-faded [data-press-subsection] {
+  cursor: pointer;
+  transition: background-color 0.12s ease, outline-color 0.12s ease;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+}
+[data-press-section].press-selected [data-press-subsection]:hover,
+[data-press-section].press-parent-faded [data-press-subsection]:hover {
+  outline-color: rgba(245, 158, 11, 0.5);
+}
+[data-press-subsection].press-sub-selected {
+  outline: 2px solid rgba(245, 158, 11, 1.0) !important;
+  outline-offset: -2px;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18), 0 0 14px rgba(245, 158, 11, 0.30);
+}
+[data-press-text-edit] { cursor: text; }
+[data-press-text-edit]:hover { cursor: text; }
+[data-press-text-edit].press-editing {
+  outline: 2px solid rgba(245, 158, 11, 1.0) !important;
+  outline-offset: -2px;
+  cursor: text;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18), 0 0 14px rgba(245, 158, 11, 0.30);
+}
+[data-press-text-edit][contenteditable]:focus {
+  outline: 2px solid rgba(245, 158, 11, 1.0) !important;
+  caret-color: rgb(15, 23, 42);
+}
+@keyframes press-pulse-affected {
+  0%   { outline-color: rgba(245, 158, 11, 0); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  20%  { outline-color: rgba(245, 158, 11, 0.95); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.20); }
+  100% { outline-color: rgba(245, 158, 11, 0); box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+}
+.press-pulse-affected {
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  border-radius: 4px;
+  animation: press-pulse-affected 1.2s ease-out;
+}</style></head>
 <body>
 
 <header class="topnav" id="topnav">
@@ -222,7 +278,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
       <a href="#pricing" class="topnav-link">Pricing</a>
       <a href="#verticals" class="topnav-link">Verticals</a>
       <a href="#faq" class="topnav-link">Questions</a>
-      <a href="https://calendly.com/bearllc555/30min" class="btn btn-primary" target="_blank" rel="noopener">Book a call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="https://calendly.com/bearllc555/30min" class="btn btn-primary" target="_blank" rel="noopener">Book a call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></a>
     </div>
     <button class="topnav-burger" id="topnavBurger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
@@ -232,29 +288,29 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
 
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
   </button>
   <nav class="mobile-menu-nav">
     <a href="#how" class="mobile-menu-link">How it works</a>
     <a href="#pricing" class="mobile-menu-link">Pricing</a>
     <a href="#verticals" class="mobile-menu-link">Verticals</a>
     <a href="#faq" class="mobile-menu-link">Questions</a>
-    <a href="https://calendly.com/bearllc555/30min" class="mobile-menu-cta" target="_blank" rel="noopener">Book a call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="https://calendly.com/bearllc555/30min" class="mobile-menu-cta" target="_blank" rel="noopener">Book a call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg></a>
   </nav>
 </div>
 
-<section class="hero">
+<section class="hero" data-press-section="0" data-press-type="hero" data-press-label="the headline area at the top">
   <div class="eyebrow"><span class="dot"></span>Digital Marketing Distribution Partner</div>
-  <h1>is your calendar fully booked?</h1>
-  <p class="lead">ready to grow with a digital partner?</p>
+  <h1 data-press-subsection="headline" data-press-sub-index="0" data-press-sub-label="the main headline" data-press-text-edit="headline" data-press-text-edit-path="sections[0].props.headline" data-press-text-edit-label="the main headline">is your calendar fully booked?</h1>
+  <p class="lead" data-press-subsection="subheadline" data-press-sub-index="0" data-press-sub-label="the subheadline" data-press-text-edit="subheadline" data-press-text-edit-path="sections[0].props.subheadline" data-press-text-edit-label="the subheadline" data-press-text-edit-multiline="true">ready to grow with a digital partner??</p>
   <div class="hero-ctas">
     <a href="https://calendly.com/bearllc555/30min" class="cta-primary" target="_blank" rel="noopener">
       Book a discovery call
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
     </a>
     <a href="#how" class="cta-secondary">
       or see how it works
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
     </a>
   </div>
 </section>
@@ -262,24 +318,24 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
 <section class="section" id="how">
   <div class="section-eyebrow">Three product lines, one bundle</div>
   <h2 class="section-title">the marketing function your business doesn't have.</h2>
-  <p class="section-sub">You run the trade. We run everything between &ldquo;I need a plumber&rdquo; and &ldquo;on my way.&rdquo; Three product lines, one stack, one cell phone to call when something needs to change.</p>
+  <p class="section-sub">You run the trade. We run everything between “I need a plumber” and “on my way.” Three product lines, one stack, one cell phone to call when something needs to change.</p>
 
   <div class="pillars">
     <div class="pillar">
-      <span class="pillar-tag">01 &middot; Acquisition</span>
+      <span class="pillar-tag">01 · Acquisition</span>
       <h3>eight-step offer</h3>
       <p>The growth-team operating system: site, research, strategy, creatives, campaign, analyze, lead-gen, booked appointments. Every step happens; nothing falls through the cracks.</p>
       <ul>
         <li>Site that ranks + converts</li>
         <li>Google + Meta ads, your spend, our hands</li>
         <li>Tracked phone numbers, monthly reports</li>
-        <li>Booked appointments &mdash; the only metric that matters</li>
+        <li>Booked appointments — the only metric that matters</li>
       </ul>
     </div>
     <div class="pillar">
-      <span class="pillar-tag">02 &middot; Front office</span>
+      <span class="pillar-tag">02 · Front office</span>
       <h3>AI front office</h3>
-      <p>Two of you. Voice-cloned AI answers the phone in your voice, texts back missed calls, replies to web chat, drafts emails. You intervene any time. Most owners don&rsquo;t need to.</p>
+      <p>Two of you. Voice-cloned AI answers the phone in your voice, texts back missed calls, replies to web chat, drafts emails. You intervene any time. Most owners don’t need to.</p>
       <ul>
         <li>Voice-clone phone answering, ~100 concurrent</li>
         <li>SMS text-back on every missed call</li>
@@ -288,9 +344,9 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
       </ul>
     </div>
     <div class="pillar">
-      <span class="pillar-tag">03 &middot; Content engine</span>
+      <span class="pillar-tag">03 · Content engine</span>
       <h3>content engine</h3>
-      <p>Daily blog post, ten social derivatives, auto-posted to Facebook + Instagram + LinkedIn. Same engine that makes Slatepress&rsquo;s own content; we use it on ourselves first.</p>
+      <p>Daily blog post, ten social derivatives, auto-posted to Facebook + Instagram + LinkedIn. Same engine that makes Slatepress’s own content; we use it on ourselves first.</p>
       <ul>
         <li>1 blog post / day on your site</li>
         <li>10 social derivatives per post</li>
@@ -304,7 +360,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
 <section class="section" id="pricing">
   <div class="section-eyebrow">Two tiers, no contracts</div>
   <h2 class="section-title">start where it makes sense. graduate when ready.</h2>
-  <p class="section-sub">Foundation gets you a real marketing function for less than the cheapest agency&rsquo;s monthly minimum. Pro is the full Slatepress stack &mdash; everything above, integrated, on autopilot.</p>
+  <p class="section-sub">Foundation gets you a real marketing function for less than the cheapest agency’s monthly minimum. Pro is the full Slatepress stack — everything above, integrated, on autopilot.</p>
 
   <div class="pricing-grid">
 
@@ -316,89 +372,89 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
         <span class="price-amount">$269</span>
         <span class="price-suffix">/mo</span>
       </div>
-      <div class="price-setup"><strong>$7,999 setup</strong> &middot;<br><strong>$4,999 setup</strong> &middot; Founder pricing for first 50</div>
+      <div class="price-setup"><strong>$7,999 setup</strong> ·<br><strong>$4,999 setup</strong> · Founder pricing for first 50</div>
       <div class="price-anchor-vs">
         <span class="vs-label">vs typical agency</span>
-        <span class="vs-amount">$10K&ndash;$15K setup + $1.5K&ndash;$5K/mo</span>
+        <span class="vs-amount">$10K–$15K setup + $1.5K–$5K/mo</span>
       </div>
       <ul class="price-features">
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Custom website + hosting + SSL <div class="price-feature-text">Yours forever, you own everything</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Google Workspace, 3 seats <div class="price-feature-text">info@yourbusiness.com day one</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Tracked phone number <div class="price-feature-text">Every call timestamped + recorded</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <div>Monthly performance report <div class="price-feature-text">Calls, conversions, what&rsquo;s working</div></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div>Monthly performance report <div class="price-feature-text">Calls, conversions, what’s working</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>5-year domain registration <div class="price-feature-text">Domain locked in your name for 5 years. We renew, you own.</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Territory exclusivity hold <div class="price-feature-text">One business per ZIP. Locked.</div></div>
         </li>
       </ul>
       <a href="https://calendly.com/bearllc555/30min" class="price-card-cta" target="_blank" rel="noopener">
         Book a discovery call
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
       </a>
     </div>
 
     <div class="price-card pro">
-      <span class="price-tier-tag">Pro &middot; Full stack</span>
+      <span class="price-tier-tag">Pro · Full stack</span>
       <div class="price-tier-name">pro</div>
       <div class="price-sub">Everything in Foundation, plus AI Front Office + Content Engine. The full Slatepress stack on autopilot.</div>
       <div class="price-display">
         <span class="price-amount">$998</span>
         <span class="price-suffix">/mo</span>
       </div>
-      <div class="price-setup"><strong>$15,999 setup</strong> &middot; Ad budget pass-through</div>
+      <div class="price-setup"><strong>$15,999 setup</strong> · Ad budget pass-through</div>
       <div class="price-anchor-vs">
         <span class="vs-label">vs typical agency</span>
-        <span class="vs-amount">$20K&ndash;$30K setup + $10K&ndash;$20K/mo</span>
+        <span class="vs-amount">$20K–$30K setup + $10K–$20K/mo</span>
       </div>
       <ul class="price-features">
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Everything in Foundation</div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>AI Front Office <div class="price-feature-text">Voice + SMS + chat + email</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Content Engine <div class="price-feature-text">Daily blog + 10 social derivatives</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Google + Meta ads management <div class="price-feature-text">Your budget, our hands, weekly tuning</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>10-year domain registration <div class="price-feature-text">Domain locked in your name for 10 years. We renew, you own.</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
           <div>Territory exclusivity <div class="price-feature-text">One business per ZIP. Locked.</div></div>
         </li>
         <li class="price-feature">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <div>Direct founder access <div class="price-feature-text">Anthony&rsquo;s cell. No support tier.</div></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div>Direct founder access <div class="price-feature-text">Anthony’s cell. No support tier.</div></div>
         </li>
       </ul>
       <a href="https://calendly.com/bearllc555/30min" class="price-card-cta" target="_blank" rel="noopener">
         Book a discovery call
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
       </a>
     </div>
 
@@ -465,14 +521,14 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
     <span class="icp-tag">Cleaning services</span>
     <span class="icp-tag">Other home-service trades</span>
   </div>
-  <div class="icp-not"><strong>Not a fit:</strong> e-commerce stores, SaaS companies, restaurants, medical practices, or any business where the website is the product. We&rsquo;re built for the trades.</div>
+  <div class="icp-not"><strong>Not a fit:</strong> e-commerce stores, SaaS companies, restaurants, medical practices, or any business where the website is the product. We’re built for the trades.</div>
 </section>
 
 <section class="receipts">
   <div class="receipts-inner">
     <div class="receipts-eyebrow">Operating principle</div>
     <h2>slatepress is client #0.</h2>
-    <p>Every module we sell to clients ships to ourselves first. The cold outreach we sell as a product is the same cold outreach we use to acquire SlatePress clients. The performance reports we generate for clients are the reports we generate for ourselves. <a href="https://webhosting197.com" target="_blank" rel="noopener">Webhosting197.com</a> is built with our stack &mdash; if it doesn&rsquo;t make us money, we don&rsquo;t sell it.</p>
+    <p>Every module we sell to clients ships to ourselves first. The cold outreach we sell as a product is the same cold outreach we use to acquire SlatePress clients. The performance reports we generate for clients are the reports we generate for ourselves. <a href="https://webhosting197.com" target="_blank" rel="noopener">Webhosting197.com</a> is built with our stack — if it doesn’t make us money, we don’t sell it.</p>
   </div>
 </section>
 
@@ -480,37 +536,37 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
   <h2>questions</h2>
 
   <details class="faq-item">
-    <summary><span>How long until I see calls coming in?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+    <summary><span>How long until I see calls coming in?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
     <p>Foundation tier ships your site in week one and begins ad management in week two. Most clients see their first booked appointments inside the first 30 days. Pro tier typically delivers measurable lead flow within the first 14 days because the Content Engine + AI Front Office go live in parallel with paid acquisition.</p>
   </details>
 
   <details class="faq-item">
-    <summary><span>How are you different from a regular marketing agency?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
-    <p>We&rsquo;re not an agency, we&rsquo;re a fractional growth team. Agencies sell hours of work; we sell booked appointments. Pricing reflects that &mdash; you pay one flat monthly number, not a $1,500&ndash;$10,000 retainer plus per-hour billing. We also bundle the toolchain you&rsquo;d otherwise stitch together from 12&ndash;14 vendors. One throat to choke when something breaks.</p>
+    <summary><span>How are you different from a regular marketing agency?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <p>We’re not an agency, we’re a fractional growth team. Agencies sell hours of work; we sell booked appointments. Pricing reflects that — you pay one flat monthly number, not a $1,500–$10,000 retainer plus per-hour billing. We also bundle the toolchain you’d otherwise stitch together from 12–14 vendors. One throat to choke when something breaks.</p>
   </details>
 
   <details class="faq-item">
-    <summary><span>What happens if I want to leave?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
-    <p>You take everything with you. Domain stays in your name. Site exports as a ZIP, one click. Google Workspace stays yours. Tracked phone numbers port out. Month-to-month, no contracts. We just don&rsquo;t want you to leave &mdash; that&rsquo;s the deal.</p>
+    <summary><span>What happens if I want to leave?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <p>You take everything with you. Domain stays in your name. Site exports as a ZIP, one click. Google Workspace stays yours. Tracked phone numbers port out. Month-to-month, no contracts. We just don’t want you to leave — that’s the deal.</p>
   </details>
 
   <details class="faq-item">
-    <summary><span>Do I need an existing website?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
-    <p>No. The setup fee covers building you a new site from scratch &mdash; copywriting, design, technical setup, hosting, SSL. If you have an existing domain you want to bring, perfect. If not, we register one for you (~$15/yr at any registrar).</p>
+    <summary><span>Do I need an existing website?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <p>No. The setup fee covers building you a new site from scratch — copywriting, design, technical setup, hosting, SSL. If you have an existing domain you want to bring, perfect. If not, we register one for you (~$15/yr at any registrar).</p>
   </details>
 
   <details class="faq-item">
-    <summary><span>What's the marketing budget I should plan for?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
-    <p>Foundation tier works at any ad budget; we&rsquo;ll match strategy to spend. For Pro tier we recommend <strong>$4,000/mo minimum</strong> in ad budget for the math to work consistently &mdash; below that the AI Front Office and Content Engine carry too much of the load. We have flexible payment options including milestone-tied tranches if cash flow is tight in month one.</p>
+    <summary><span>What's the marketing budget I should plan for?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <p>Foundation tier works at any ad budget; we’ll match strategy to spend. For Pro tier we recommend <strong>$4,000/mo minimum</strong> in ad budget for the math to work consistently — below that the AI Front Office and Content Engine carry too much of the load. We have flexible payment options including milestone-tied tranches if cash flow is tight in month one.</p>
   </details>
 
   <details class="faq-item">
-    <summary><span>Why a discovery call instead of just signing up?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
-    <p>We work with one business per ZIP. The discovery call is how we make sure (a) your territory is open, (b) the math works for your specific business, (c) we&rsquo;re actually a fit. 20 minutes. No pitch deck, no high-pressure close. If we&rsquo;re not the right partner we&rsquo;ll tell you who is.</p>
+    <summary><span>Why a discovery call instead of just signing up?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <p>We work with one business per ZIP. The discovery call is how we make sure (a) your territory is open, (b) the math works for your specific business, (c) we’re actually a fit. 20 minutes. No pitch deck, no high-pressure close. If we’re not the right partner we’ll tell you who is.</p>
   </details>
 
   <details class="faq-item">
-    <summary><span>Who's behind Slatepress?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+    <summary><span>Who's behind Slatepress?</span><svg class="faq-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
     <p>Anthony DeMeo. Operator. Sold a programmatic local-content business in 2019. Building Slatepress as the AI-native version of that playbook for local service businesses. Direct cell access for Pro-tier clients; you talk to the person who built the system.</p>
   </details>
 
@@ -518,15 +574,15 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
 
 <section class="final-cta">
   <h2>is your calendar full this month? it could be</h2>
-  <p>20-minute discovery call. We confirm your territory&rsquo;s open, run the math on your specific business, and tell you honestly whether we&rsquo;re a fit.</p>
+  <p>20-minute discovery call. We confirm your territory’s open, run the math on your specific business, and tell you honestly whether we’re a fit.</p>
   <a href="https://calendly.com/bearllc555/30min" class="cta-primary" target="_blank" rel="noopener">
     Book a discovery call
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
   </a>
 </section>
 
 <footer class="foot">
-  <div><span class="brand-mark">/</span>slatepress.co &copy; 2026</div>
+  <div><span class="brand-mark">/</span>slatepress.co © 2026</div>
   <div class="foot-tag">Bear LLC digital property</div>
 </footer>
 
@@ -567,5 +623,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
   }
 })();
 </script>
-</body>
-</html>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;c1d0216e4bcd49cc9ed28d8167963e7a&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+</body></html>
