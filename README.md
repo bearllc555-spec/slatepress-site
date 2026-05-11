@@ -30,3 +30,5 @@ The `functions/api/*` code expects one D1 binding: `DASH_DB`. Configured at the 
 ## Local dev
 
 Not set up. If needed in the future, use `wrangler pages dev .` from the repo root — wrangler compiles `functions/` and serves it alongside the static assets.
+
+<!-- kick deploy: 1778508520040 -->
