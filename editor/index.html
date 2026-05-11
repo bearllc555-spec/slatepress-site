@@ -1,0 +1,2257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Edit · Slatepress</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FBFBFC;
+    --ink: #0F172A;
+    --ink-soft: #1E293B;
+    --slate: #64748B;
+    --slate-light: #94A3B8;
+    --rule: #E5E7EB;
+    --rule-strong: #D1D5DB;
+    --primary: #2563EB;
+    --primary-soft: rgba(37, 99, 235, 0.08);
+    --primary-deep: #1D4ED8;
+    --green: #10B981;
+    --green-soft: rgba(16, 185, 129, 0.1);
+    --red: #DC2626;
+    --red-soft: rgba(220, 38, 38, 0.08);
+    --amber-soft: rgba(245, 158, 11, 0.12);
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .app { display: grid; grid-template-rows: 56px 1fr; height: 100vh; }
+
+  /* ---- topbar ---- */
+  .topbar { display: flex; align-items: center; padding: 0 1.25rem; background: white; border-bottom: 1px solid var(--rule); gap: 1rem; }
+  .brand { font-weight: 700; font-size: 0.9375rem; letter-spacing: -0.015em; }
+  .brand .slash { color: var(--slate); font-weight: 500; }
+  .topbar-divider { width: 1px; height: 22px; background: var(--rule); }
+  .topbar-site { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--ink-soft); }
+  .topbar-site .domain { color: var(--slate); font-weight: 500; }
+  .save-status { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; color: var(--slate); margin-left: auto; margin-right: 0.5rem; }
+  .save-status .dot { width: 7px; height: 7px; background: var(--green); border-radius: 999px; box-shadow: 0 0 0 3px var(--green-soft); transition: background-color 0.2s ease, box-shadow 0.2s ease; }
+  .save-status.local .dot { background: #F59E0B; box-shadow: 0 0 0 3px rgba(245,158,11,0.18); }
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.9rem; font-size: 0.875rem; font-weight: 600; border-radius: 8px; border: 1px solid transparent; text-decoration: none; cursor: pointer; font-family: inherit; transition: transform 0.12s, box-shadow 0.12s, background 0.15s; }
+  .btn-ghost { background: white; color: var(--ink); border-color: var(--rule-strong); }
+  .btn-ghost:hover { border-color: var(--slate); }
+  .btn-primary { background: var(--primary); color: white; box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 4px 12px rgba(37,99,235,0.18); }
+  .btn-primary:hover { background: var(--primary-deep); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* ---- main split ---- */
+  .main { display: grid; grid-template-columns: 380px 1fr; height: 100%; overflow: hidden; }
+
+  /* ---- chat side ---- */
+  .chat { display: flex; flex-direction: column; background: white; border-right: 1px solid var(--rule); min-height: 0; overflow: hidden; }
+  .chat-head { padding: 1.25rem; border-bottom: 1px solid var(--rule); }
+  .chat-head h2 { margin: 0 0 0.25rem 0; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.015em; }
+  .chat-head p { margin: 0; font-size: 0.8125rem; color: var(--slate); line-height: 1.5; }
+  .messages { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.85rem; min-height: 0; }
+  .messages:empty::before { content: "Tip: click any text in the preview to edit it directly. Use chat for color, layout, or \"make it look better\" type changes."; display: block; padding: 1rem; font-size: 0.8125rem; color: var(--slate-light); font-style: italic; line-height: 1.5; text-align: center; }
+
+  .msg { max-width: 92%; font-size: 0.9rem; line-height: 1.5; }
+  .msg.user { align-self: flex-end; background: var(--primary); color: white; padding: 0.6rem 0.9rem; border-radius: 12px 12px 2px 12px; }
+  .msg.assistant { align-self: flex-start; }
+  .msg.assistant .text { background: var(--bg); padding: 0.7rem 0.9rem; border-radius: 12px 12px 12px 2px; border: 1px solid var(--rule); }
+  .msg.assistant .diff { margin-top: 0.5rem; background: white; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.75rem; }
+  .diff-row { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .diff-row:last-child { border-bottom: 0; }
+  .diff-op { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.4rem; border-radius: 4px; flex-shrink: 0; }
+  .diff-op.set { background: var(--amber-soft); color: #92400E; }
+  .diff-op.insert { background: var(--green-soft); color: #065F46; }
+  .diff-op.remove { background: var(--red-soft); color: #991B1B; }
+  .diff-op.move { background: var(--primary-soft); color: var(--primary); }
+  .diff-path { color: var(--slate); flex-shrink: 0; }
+  .diff-value { color: var(--ink); margin-left: auto; font-weight: 600; word-break: break-word; max-width: 60%; text-align: right; }
+  .diff-color { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--rule-strong); vertical-align: -2px; margin-right: 0.25rem; }
+
+  .msg-meta { font-size: 0.75rem; color: var(--slate); margin-top: 0.4rem; display: flex; gap: 0.6rem; align-items: center; }
+  .confidence-bar { width: 56px; height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+  .confidence-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.3s ease; }
+  .confidence-fill.low { background: var(--red); }
+  .confidence-fill.med { background: #F59E0B; }
+
+  .msg-actions { margin-top: 0.5rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .msg-actions .btn { padding: 0.4rem 0.75rem; font-size: 0.8125rem; }
+
+  .warnings { margin-top: 0.4rem; font-size: 0.78rem; color: #92400E; background: var(--amber-soft); padding: 0.5rem 0.7rem; border-radius: 8px; line-height: 1.45; }
+  .warnings ul { margin: 0; padding-left: 1.1rem; }
+
+  .error-msg { background: var(--red-soft); border: 1px solid var(--red); color: var(--red); padding: 0.6rem 0.85rem; border-radius: 10px; font-size: 0.85rem; line-height: 1.4; }
+  .error-msg .error-text { color: var(--red); }
+  .error-msg .error-actions { display: flex; gap: 0.4rem; margin-top: 0.55rem; flex-wrap: wrap; }
+  .error-msg .error-action-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.65rem; background: white; color: var(--ink-soft); border: 1px solid rgba(220, 38, 38, 0.35); border-radius: 6px; font-size: 0.78rem; font-weight: 500; cursor: pointer; font-family: inherit; transition: background 0.12s, border-color 0.12s, color 0.12s; }
+  .error-msg .error-action-btn:hover { background: var(--bg); border-color: var(--red); color: var(--ink); }
+  .error-msg .error-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .error-msg .error-action-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  .composer { border-top: 1px solid var(--rule); padding: 0.85rem 1rem; background: white; }
+  .composer-input { width: 100%; border: 1px solid var(--rule-strong); border-radius: 10px; padding: 0.7rem 0.9rem; font-family: inherit; font-size: 0.9rem; resize: none; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+  .composer-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .composer-input:focus::placeholder { color: white; }
+  .composer-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; font-size: 0.72rem; color: var(--slate); }
+  .composer-send { padding: 0.45rem 0.95rem; font-size: 0.8125rem; }
+
+  .thinking { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--slate); font-size: 0.85rem; font-style: italic; }
+  .thinking .dot { width: 6px; height: 6px; background: var(--slate); border-radius: 50%; animation: pulse 1.4s ease-in-out infinite; }
+  .thinking .dot:nth-child(2) { animation-delay: 0.2s; }
+  .thinking .dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes pulse { 0%, 80%, 100% { opacity: 0.3; } 40% { opacity: 1; } }
+
+  /* ---- target pill (shows "Editing: [section]" when a section is clicked in preview) ---- */
+  .target-pill { display: none; align-items: center; gap: 0.45rem; background: rgba(16, 185, 129, 0.1); color: #047857; padding: 0.35rem 0.65rem 0.35rem 0.75rem; border-radius: 999px; font-size: 0.8125rem; font-weight: 500; margin-bottom: 0.55rem; border: 1px solid rgba(16, 185, 129, 0.35); width: fit-content; max-width: 100%; }
+  .target-pill.show { display: inline-flex; }
+  .target-pill .pin { width: 8px; height: 8px; background: var(--green); border-radius: 999px; box-shadow: 0 0 0 3px rgba(16,185,129,0.18); flex-shrink: 0; }
+  .target-pill strong { color: #064E3B; font-weight: 600; }
+  .target-pill-close { background: none; border: 0; color: #047857; cursor: pointer; padding: 0 0 0 0.15rem; font-size: 1.1rem; line-height: 1; flex-shrink: 0; opacity: 0.7; }
+  .target-pill-close:hover { opacity: 1; color: #064E3B; }
+
+  /* ---- preview side ---- */
+  .preview { display: flex; flex-direction: column; background: var(--bg); overflow: hidden; }
+  .preview-head { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: white; border-bottom: 1px solid var(--rule); }
+  .preview-tabs { display: flex; gap: 0.25rem; }
+  .preview-tab { padding: 0.45rem 0.8rem; font-size: 0.8125rem; font-weight: 500; border: 1px solid var(--rule); background: white; border-radius: 8px; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
+  .preview-tab.active { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); font-weight: 600; }
+  .preview-url { flex: 1; margin: 0 0.75rem; background: var(--bg); padding: 0.45rem 0.8rem; border-radius: 8px; font-size: 0.8125rem; color: var(--slate); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; }
+  .device-toggle { display: flex; gap: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .device-toggle button { padding: 0.4rem 0.6rem; background: white; border: 0; cursor: pointer; color: var(--slate); border-right: 1px solid var(--rule); }
+  .device-toggle button:last-child { border-right: 0; }
+  .device-toggle button.active { background: var(--primary-soft); color: var(--primary); }
+
+  .preview-frame-wrap { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 1.5rem; overflow: auto; }
+  .preview-frame { width: 100%; max-width: 1100px; height: 100%; background: white; border-radius: 12px; border: 1px solid var(--rule); box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 24px 48px rgba(15,23,42,0.06); overflow: hidden; display: flex; flex-direction: column; transition: max-width 0.3s ease; }
+  .preview-frame.mobile { max-width: 380px; }
+  .preview-frame iframe { flex: 1; width: 100%; border: 0; display: block; }
+  .preview-overlay { flex-shrink: 0; height: 38px; background: white; border-bottom: 1px solid var(--rule); display: flex; align-items: center; padding: 0 0.85rem; gap: 0.4rem; }
+  .preview-dot { width: 11px; height: 11px; border-radius: 999px; }
+  .preview-dot.r { background: #FF5F57; } .preview-dot.y { background: #FEBC2E; } .preview-dot.g { background: #28C840; }
+  .preview-nav { display: inline-flex; gap: 0.2rem; margin-left: 0.6rem; }
+  .preview-nav button { width: 24px; height: 24px; padding: 0; background: white; border: 1px solid var(--rule); border-radius: 6px; color: var(--ink-soft); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; line-height: 1; transition: background 0.12s, color 0.12s, border-color 0.12s; }
+  .preview-nav button:hover { background: var(--bg); color: var(--ink); border-color: var(--rule-strong); }
+  .preview-nav button:active { background: var(--primary-soft); color: var(--primary); border-color: var(--primary); }
+  .preview-nav button svg { width: 13px; height: 13px; display: block; }
+  .preview-overlay-url { margin-left: 0.6rem; font-size: 0.75rem; color: var(--slate); font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; }
+
+  /* ---- history side panel ---- */
+  .history-tab { display: none; }
+  .history-tab.active { display: flex; flex-direction: column; flex: 1; padding: 1.5rem; overflow-y: auto; gap: 1rem; }
+  .history-row { display: flex; align-items: flex-start; gap: 0.85rem; padding: 0.85rem 1rem; background: white; border: 1px solid var(--rule); border-radius: 10px; }
+  .history-dot { flex-shrink: 0; width: 10px; height: 10px; background: var(--slate-light); border-radius: 50%; margin-top: 0.5rem; }
+  .history-row.current .history-dot { background: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+  .history-row.launch .history-dot { background: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .history-meta { flex: 1; min-width: 0; }
+  .history-narration { font-size: 0.9rem; color: var(--ink); font-weight: 500; line-height: 1.4; }
+  .history-time { font-size: 0.75rem; color: var(--slate); margin-top: 0.2rem; }
+  .history-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+  .history-row.current .history-actions { visibility: hidden; }
+
+  /* ---- color picker (Step 2.5a) ---- */
+  .color-picker { margin-top: 0.5rem; background: white; border: 1px solid var(--rule); border-radius: 10px; padding: 0.85rem; }
+  .cp-row { margin-bottom: 0.75rem; }
+  .cp-row:last-of-type { margin-bottom: 0; }
+  .cp-row-label { font-size: 0.7rem; font-weight: 600; color: var(--slate); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .cp-pick-row { display: flex; align-items: center; gap: 0.75rem; }
+  .cp-pick-hex { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.8rem; color: var(--ink-soft); font-weight: 600; }
+  .cp-swatch-grid { display: flex; flex-wrap: wrap; gap: 0.32rem; }
+  .cp-grid-family { display: flex; gap: 0.25rem; margin-bottom: 0.25rem; }
+  .cp-grid-family:last-child { margin-bottom: 0; }
+  .cp-swatch { padding: 0; border: 1px solid var(--rule-strong); border-radius: 5px; cursor: pointer; transition: outline 0.12s, transform 0.12s, box-shadow 0.12s; outline: 2px solid transparent; outline-offset: 1px; flex-shrink: 0; }
+  .cp-swatch:hover { outline-color: rgba(245, 158, 11, 0.55); transform: scale(1.06); }
+  .cp-swatch.selected { outline: 3px solid #F59E0B; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18), 0 0 14px rgba(245, 158, 11, 0.30); }
+  .cp-swatch-large { width: 56px; height: 56px; border-radius: 8px; }
+  .cp-swatch-med { width: 30px; height: 30px; }
+  .cp-swatch-small { width: 22px; height: 22px; border-radius: 4px; }
+  .cp-hex-input { width: 130px; border: 1px solid var(--rule-strong); border-radius: 6px; padding: 0.4rem 0.55rem; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.82rem; outline: none; transition: border-color 0.15s, box-shadow 0.15s; text-transform: uppercase; }
+  .cp-hex-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .cp-hex-input.invalid { border-color: var(--red); }
+  .cp-current { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg); padding: 0.4rem 0.65rem; border-radius: 6px; border: 1px solid var(--rule); font-size: 0.78rem; color: var(--slate); }
+  .cp-current-swatch { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--rule-strong); flex-shrink: 0; }
+  .cp-current-hex { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; color: var(--ink-soft); font-weight: 600; }
+  .cp-actions { display: flex; gap: 0.4rem; margin-top: 0.6rem; }
+  .cp-actions .btn { padding: 0.4rem 0.75rem; font-size: 0.8125rem; }
+  .cp-collapsed { font-size: 0.85rem; color: #047857; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--green-soft); border-radius: 8px; }
+  .cp-collapsed-swatch { width: 14px; height: 14px; border-radius: 4px; border: 1px solid var(--rule-strong); display: inline-block; }
+  .cp-discarded { font-size: 0.8rem; color: var(--slate); padding: 0.4rem 0.6rem; background: var(--bg); border-radius: 6px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- topbar -->
+  <div class="topbar">
+    <span class="brand"><span class="slash">/</span>press</span>
+    <span class="topbar-divider"></span>
+    <span class="topbar-site">
+      <strong>Slatepress</strong>
+      <span class="domain">slatepress.co</span>
+    </span>
+    <span class="save-status" id="saveStatus">
+      <span class="dot"></span>
+      <span id="saveStatusText">All changes saved</span>
+    </span>
+    <button class="btn btn-ghost" id="downloadBtn" title="Download a snapshot of your site.json">Download backup</button>
+    <button class="btn btn-primary" id="publishBtn">Publish · coming soon</button>
+  </div>
+
+  <!-- main -->
+  <div class="main">
+    <!-- chat side -->
+    <div class="chat">
+      <div class="chat-head">
+        <h2>Tell us what to change</h2>
+        <p>Describe the change in plain English. We'll show you exactly what will change before anything ships.</p>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="composer">
+        <div class="target-pill" id="targetPill" aria-live="polite">
+          <span class="pin" aria-hidden="true"></span>
+          <span>Editing: <strong id="targetLabel"></strong></span>
+          <button type="button" class="target-pill-close" id="targetPillClose" title="Clear selection">&times;</button>
+        </div>
+        <textarea
+          class="composer-input"
+          id="composerInput"
+          rows="2"
+          placeholder='Click any section in the preview, then describe the change. Or just type — &ldquo;make the headline green&rdquo;.'></textarea>
+        <div class="composer-foot">
+          <span> to send · Shift+ for new line</span>
+          <button class="btn btn-primary composer-send" id="composerSend">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- preview side -->
+    <div class="preview">
+      <div class="preview-head">
+        <div class="preview-tabs">
+          <button class="preview-tab active" data-tab="preview">Live preview</button>
+          <button class="preview-tab" data-tab="history">Version history</button>
+        </div>
+        <span class="preview-url">slatepress.co</span>
+        <div class="device-toggle">
+          <button class="active" data-device="desktop" title="Desktop">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </button>
+          <button data-device="mobile" title="Mobile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- preview tab -->
+      <div class="preview-frame-wrap" id="previewTab">
+        <div class="preview-frame" id="previewFrame">
+          <div class="preview-overlay">
+            <span class="preview-dot r"></span>
+            <span class="preview-dot y"></span>
+            <span class="preview-dot g"></span>
+            <span class="preview-nav">
+              <button type="button" id="navBack" title="Back" aria-label="Back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button type="button" id="navForward" title="Forward" aria-label="Forward">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+              <button type="button" id="navReload" title="Reload" aria-label="Reload">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              </button>
+            </span>
+            <span class="preview-overlay-url">slatepress.co</span>
+          </div>
+          <iframe id="previewIframe" src="/?editor=1" title="Live preview"></iframe>
+        </div>
+      </div>
+
+      <!-- history tab -->
+      <div class="history-tab" id="historyTab"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+ * Press editor — client-side controller
+ *
+ * State:
+ *   currentSite — the customer's site.json as it is right now
+ *   history     — array of { siteJson, narration, timestamp, isLaunch? }
+ *
+ * Flow:
+ *   User types request  POST /api/edit with {siteJson, request}
+ *      response shows narration + diff + Apply/Undo buttons
+ *   User clicks Apply  currentSite = response.proposedSite
+ *      push entry into history
+ *      patch the iframe preview live (where possible)
+ *   User clicks Restore on a history row  currentSite = that entry
+ *      re-render preview
+ * ============================================================ */
+
+// Bootstrap with Slatepress fixture (in real product this is loaded from
+// the customer's per-customer git repo — for V1 demo it's hard-coded).
+const INITIAL_SITE = {
+  meta: {
+    customer_slug: "jacks-plumbing",
+    template: "modern-clean",
+    hero_variant: "cta",
+    schema_version: 1,
+    created_at: "2026-05-07T14:00:00.000Z",
+    updated_at: "2026-05-07T14:00:00.000Z"
+  },
+  business: {
+    name: "Slatepress",
+    tagline: "Your local plumber, on call when you need us.",
+    industry: "Plumbing",
+    year_established: 2008,
+    contact: {
+      phone: "(973) 555-0100",
+      email: "hello@slatepress.co",
+      address: { street: "12 Main St", city: "Clifton", state: "NJ", zip: "07013" },
+      hours: { monday: "8a-6p", tuesday: "8a-6p", wednesday: "8a-6p", thursday: "8a-6p", friday: "8a-6p", saturday: "9a-2p", notes: "24/7 emergency calls" },
+      social: { facebook: "https://facebook.com/jacksplumbing", google_business: "https://g.page/jacksplumbing" }
+    },
+    service_area: ["Clifton, NJ", "Passaic, NJ", "Little Falls, NJ", "Wayne, NJ", "Paterson, NJ"]
+  },
+  brand: {
+    logo_url: "https://placehold.co/300x100/0F172A/FFFFFF/png?text=Jack%27s+Plumbing",
+    colors: { primary: "#0F172A", accent: "#F59E0B", neutral_dark: "#1E293B", neutral_light: "#F8FAFC" },
+    voice: "friendly"
+  },
+  services: [
+    { name: "Emergency Repair", description: "24/7 burst pipes, leaks, and clogs handled fast — most calls resolved within 90 minutes." },
+    { name: "Water Heater", description: "Repair and replacement for tank and tankless water heaters. Same-day service when stocked." },
+    { name: "Drain Cleaning", description: "Hydro-jetting and snaking for kitchen, bathroom, and main-line clogs." },
+    { name: "Fixture Install", description: "Faucets, toilets, garbage disposals, and full bathroom remodels." }
+  ],
+  sections: [
+    { type: "hero", props: { headline: "Plumbing problems? We're 30 minutes away.", subheadline: "Family-owned and serving Clifton, Passaic, and surrounding NJ towns since 2008.", cta_label: "Call (973) 555-0100", cta_href: "tel:+19735550100" } },
+    { type: "services_grid", props: { heading: "What we do", service_indices: [0, 1, 2, 3], layout: "grid-2" } },
+    { type: "testimonials", props: { heading: "What our neighbors say", testimonials: [ { quote: "Jack came out at 11pm on a Sunday for a burst pipe. Saved my floors. Fair price, no upcharge.", author: "Maria L.", role: "Clifton, NJ" }, { quote: "Honest, on time, and explained everything. We use him for the whole rental portfolio now.", author: "Dave R.", role: "Passaic, NJ" } ] } },
+    { type: "cta", props: { heading: "Got a plumbing problem? Don't wait.", subheading: "Most repairs handled the same day.", cta_label: "Call (973) 555-0100", cta_href: "tel:+19735550100" } }
+  ],
+  pages: { home: { sections: [0, 1, 2, 3] } }
+};
+
+let currentSite = structuredClone(INITIAL_SITE);
+let history = [
+  { siteJson: structuredClone(INITIAL_SITE), narration: " Initial site (from onboarding)", timestamp: Date.now() - 1000 * 60 * 60 * 24, isLaunch: true }
+];
+
+const $messages = document.getElementById("messages");
+const $input = document.getElementById("composerInput");
+const $send = document.getElementById("composerSend");
+const $iframe = document.getElementById("previewIframe");
+const $previewFrame = document.getElementById("previewFrame");
+const $previewTab = document.getElementById("previewTab");
+const $historyTab = document.getElementById("historyTab");
+const $publishBtn = document.getElementById("publishBtn");
+const $downloadBtn = document.getElementById("downloadBtn");
+const $saveStatusText = document.getElementById("saveStatusText");
+
+/* ---------- chat ---------- */
+
+async function sendRequest() {
+  const request = $input.value.trim();
+  if (!request) return;
+  // Step 2.5a: if a color picker is mid-preview, sending a new request means
+  // the customer moved on without confirming. Revert iframe and collapse.
+  if (activeColorPicker) discardColorPicker(activeColorPicker);
+  $input.value = "";
+  $send.disabled = true;
+  // The sub-target label takes precedence in display if both are set
+  const tagForChat = selectedSubTarget
+    ? { label: selectedSubTarget.label }
+    : selectedTarget;
+  appendUserMessage(request, tagForChat);
+  const thinking = appendThinkingMessage();
+
+  // Capture targets at send-time so the user can clear/change them without
+  // affecting the in-flight request.
+  const targetForSend = selectedTarget ? { ...selectedTarget } : null;
+  const subTargetForSend = selectedSubTarget ? { ...selectedSubTarget } : null;
+
+  try {
+    const payload = { siteJson: currentSite, request };
+    if (targetForSend) {
+      payload.targetType = targetForSend.type;
+      payload.targetIndex = targetForSend.index;
+      payload.targetLabel = targetForSend.label;
+    }
+    if (subTargetForSend) {
+      payload.subTargetKind = subTargetForSend.kind;
+      payload.subTargetIndex = subTargetForSend.subIndex;
+      payload.subTargetLabel = subTargetForSend.label;
+    }
+    const result = await postEditWithRetry(payload);
+    thinking.remove();
+    if (result.kind === "ok") {
+      appendAssistantMessage(result.payload);
+    } else if (result.kind === "rate_limited") {
+      // Rate-limit: 60s cooldown on the Retry button so the customer can't
+      // make a Cloudflare block worse by hammering. Copy is always available.
+      appendErrorMessage("System busy. Try again in a few minutes.", {
+        onRetry: (el) => retryRequest(request, payload, el),
+        textToCopy: request,
+        cooldownSeconds: 60,
+      });
+    } else if (result.kind === "api_error") {
+      // API errors usually indicate a structural problem; retry won't help, but
+      // copying the prompt lets the customer tweak and re-send without retyping.
+      appendErrorMessage(result.message || `request failed (${result.status})`, {
+        textToCopy: request,
+      });
+    } else {
+      // Network errors: retry might help, no cooldown needed
+      appendErrorMessage(result.message || "Network error. Try again.", {
+        onRetry: (el) => retryRequest(request, payload, el),
+        textToCopy: request,
+      });
+    }
+  } catch (err) {
+    thinking.remove();
+    appendErrorMessage(err.message || "Network error. Try again.", {
+      onRetry: (el) => retryRequest(request, payload, el),
+      textToCopy: request,
+    });
+  } finally {
+    $send.disabled = false;
+    $input.focus();
+  }
+}
+
+// Re-fire a previously-failed request without making the customer re-type or
+// re-select. Used by the Retry button on chat error bubbles. The existing
+// error bubble (errorEl) is updated in place rather than spawning a new
+// stacked bubble — failed retries should not pile up.
+async function retryRequest(originalText, payload, errorEl) {
+  $send.disabled = true;
+  const thinking = appendThinkingMessage();
+  try {
+    const result = await postEditWithRetry(payload);
+    thinking.remove();
+    if (result.kind === "ok") {
+      // Success: drop the old error bubble entirely, show the assistant reply.
+      if (errorEl && errorEl.parentNode) errorEl.parentNode.removeChild(errorEl);
+      appendAssistantMessage(result.payload);
+    } else if (result.kind === "rate_limited") {
+      updateErrorBubble(errorEl, "Still busy. Try again in a few minutes.", {
+        onRetry: (el) => retryRequest(originalText, payload, el),
+        textToCopy: originalText,
+        cooldownSeconds: 60,
+      });
+    } else if (result.kind === "api_error") {
+      updateErrorBubble(errorEl, result.message || `request failed (${result.status})`, {
+        textToCopy: originalText,
+      });
+    } else {
+      updateErrorBubble(errorEl, result.message || "Network error. Try again.", {
+        onRetry: (el) => retryRequest(originalText, payload, el),
+        textToCopy: originalText,
+      });
+    }
+  } catch (err) {
+    thinking.remove();
+    updateErrorBubble(errorEl, err.message || "Network error. Try again.", {
+      onRetry: (el) => retryRequest(originalText, payload, el),
+      textToCopy: originalText,
+    });
+  } finally {
+    $send.disabled = false;
+  }
+}
+
+// POST /api/edit. Categorizes the response so the chat UI can render the right
+// kind of error bubble. Distinguishes between:
+//   - ok           : real JSON returned by our Function
+//   - rate_limited : HTML body (CF/upstream blocked us); show friendly toast
+//   - api_error    : JSON error from our Function (4xx with structured body)
+//   - network_error: fetch threw or response wasn't parseable as expected
+//
+// NOTE: this used to auto-retry once after 1.2s on rate_limited. Removed in
+// Step 1.6 — Cloudflare's edge rate-limit windows EXTEND when you keep
+// hitting them, so an internal auto-retry was making blocks worse rather than
+// recovering from them. Retries are now driven exclusively by the customer
+// clicking the Retry button (which has its own 60s cooldown to throttle abuse).
+async function postEditWithRetry(payload) {
+  let r;
+  try {
+    r = await fetch("/api/edit", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {
+    return { kind: "network_error", message: e && e.message ? e.message : "Network error" };
+  }
+  const text = await r.text();
+  // Detect HTML-error-page responses (Cloudflare 502/rate-limit/firewall)
+  const looksLikeHtml = text.startsWith("<!DOCTYPE") || text.startsWith("<html") || text.startsWith("<");
+  if (looksLikeHtml) {
+    return { kind: "rate_limited", status: r.status };
+  }
+  let j;
+  try { j = JSON.parse(text); }
+  catch { return { kind: "network_error", message: "Bad response from server" }; }
+  if (!r.ok) {
+    return { kind: "api_error", status: r.status, message: j.error || j.message || `request failed (${r.status})` };
+  }
+  return { kind: "ok", payload: j };
+}
+
+function appendUserMessage(text, target) {
+  const el = document.createElement("div");
+  el.className = "msg user";
+  if (target && target.label) {
+    const tag = document.createElement("div");
+    tag.style.cssText = "font-size:0.72rem;opacity:0.85;margin-bottom:0.2rem;";
+    tag.textContent = "ð " + target.label;
+    el.appendChild(tag);
+    const body = document.createElement("div");
+    body.textContent = text;
+    el.appendChild(body);
+  } else {
+    el.textContent = text;
+  }
+  $messages.appendChild(el);
+  $messages.scrollTop = $messages.scrollHeight;
+}
+
+function appendThinkingMessage() {
+  const el = document.createElement("div");
+  el.className = "msg assistant";
+  el.innerHTML = `<div class="text"><span class="thinking">Thinking<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span></div>`;
+  $messages.appendChild(el);
+  $messages.scrollTop = $messages.scrollHeight;
+  return el;
+}
+
+// Inline SVG icons for the error action buttons
+const ICON_RETRY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>';
+const ICON_COPY  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+const ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+// appendErrorMessage(text, actions?) — actions is optional and may include:
+//   - onRetry:           callback fired when the retry button is clicked.
+//                        Receives the bubble element so a retry can update
+//                        the SAME bubble in place rather than stacking a new one.
+//   - textToCopy:        string to copy to clipboard when the copy button is clicked
+//   - cooldownSeconds:   if > 0, disable the Retry button for N seconds with a
+//                        live countdown ("Retry in 47s") so we don't let the
+//                        customer hammer a rate-limited endpoint and make the
+//                        block window worse.
+// If actions is omitted or empty, the error renders as a plain bubble.
+function appendErrorMessage(msg, actions) {
+  const el = document.createElement("div");
+  el.className = "msg assistant";
+
+  const wrap = document.createElement("div");
+  wrap.className = "error-msg";
+  el.appendChild(wrap);
+
+  buildErrorContent(wrap, el, msg, actions);
+
+  $messages.appendChild(el);
+  $messages.scrollTop = $messages.scrollHeight;
+  return el;
+}
+
+// updateErrorBubble(el, text, actions?) — REPLACE the contents of an existing
+// error bubble in place rather than appending a new one. Used by retryRequest
+// when a retry fails again so we don't accumulate a column of duplicate errors.
+function updateErrorBubble(el, msg, actions) {
+  if (!el) return appendErrorMessage(msg, actions);
+  const wrap = el.querySelector(".error-msg");
+  if (!wrap) return appendErrorMessage(msg, actions);
+  wrap.innerHTML = "";
+  el.style.opacity = "1";
+  buildErrorContent(wrap, el, msg, actions);
+  $messages.scrollTop = $messages.scrollHeight;
+  return el;
+}
+
+// Internal: render the inner content of an error bubble into `wrap`.
+// Pulled out so appendErrorMessage and updateErrorBubble share rendering.
+function buildErrorContent(wrap, bubbleEl, msg, actions) {
+  const text = document.createElement("div");
+  text.className = "error-text";
+  text.textContent = msg;
+  wrap.appendChild(text);
+
+  if (!actions || (!actions.onRetry && !actions.textToCopy)) return;
+
+  const actionRow = document.createElement("div");
+  actionRow.className = "error-actions";
+
+  if (actions.onRetry) {
+    const retryBtn = document.createElement("button");
+    retryBtn.type = "button";
+    retryBtn.className = "error-action-btn";
+    retryBtn.dataset.action = "retry";
+    retryBtn.title = "Retry the same request";
+    retryBtn.innerHTML = ICON_RETRY + "<span>Retry</span>";
+
+    // Cooldown: disable + live-countdown for actions.cooldownSeconds.
+    // Prevents the customer from amplifying a CF rate-limit by clicking Retry
+    // every second.
+    const cooldown = Number(actions.cooldownSeconds) || 0;
+    let cooldownInterval = null;
+    if (cooldown > 0) {
+      let remaining = cooldown;
+      retryBtn.disabled = true;
+      retryBtn.querySelector("span").textContent = "Retry in " + remaining + "s";
+      cooldownInterval = setInterval(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+          clearInterval(cooldownInterval);
+          cooldownInterval = null;
+          retryBtn.disabled = false;
+          retryBtn.querySelector("span").textContent = "Retry";
+        } else {
+          retryBtn.querySelector("span").textContent = "Retry in " + remaining + "s";
+        }
+      }, 1000);
+    }
+
+    retryBtn.addEventListener("click", () => {
+      if (retryBtn.disabled) return;
+      if (cooldownInterval) { clearInterval(cooldownInterval); cooldownInterval = null; }
+      retryBtn.disabled = true;
+      retryBtn.querySelector("span").textContent = "Retrying...";
+      bubbleEl.style.transition = "opacity 0.2s ease";
+      bubbleEl.style.opacity = "0.5";
+      try { actions.onRetry(bubbleEl); }
+      catch (e) { console.warn("Retry callback threw:", e); }
+    });
+    actionRow.appendChild(retryBtn);
+  }
+
+  if (actions.textToCopy) {
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "error-action-btn";
+    copyBtn.dataset.action = "copy";
+    copyBtn.title = "Copy your message to clipboard";
+    copyBtn.innerHTML = ICON_COPY + "<span>Copy your message</span>";
+    copyBtn.addEventListener("click", async () => {
+      const labelEl = copyBtn.querySelector("span");
+      try {
+        await navigator.clipboard.writeText(actions.textToCopy);
+        copyBtn.innerHTML = ICON_CHECK + "<span>Copied</span>";
+        setTimeout(() => {
+          copyBtn.innerHTML = ICON_COPY + "<span>Copy your message</span>";
+        }, 1500);
+      } catch {
+        if (labelEl) labelEl.textContent = "Copy failed";
+      }
+    });
+    actionRow.appendChild(copyBtn);
+  }
+
+  wrap.appendChild(actionRow);
+}
+
+function appendAssistantMessage(payload) {
+  const { narration, diff, confidence, warnings, proposedSite, validated, validationError } = payload;
+
+  // Step 2.5a: color-change diffs render as a swatch picker rather than the
+  // standard diff card. Detection is single-op SET on brand.colors.* with a
+  // hex value. Multi-op or non-color diffs fall through to the standard render.
+  const isColorPicker = isColorPickerDiff(diff);
+
+  const el = document.createElement("div");
+  el.className = "msg assistant";
+
+  let html = `<div class="text">${escapeHtml(narration)}</div>`;
+  if (diff && diff.length > 0 && !isColorPicker) {
+    html += `<div class="diff">${diff.map(renderDiffRow).join("")}</div>`;
+  }
+
+  // confidence + provider meta
+  const confClass = confidence >= 0.8 ? "" : confidence >= 0.6 ? "med" : "low";
+  html += `
+    <div class="msg-meta">
+      <span class="confidence-bar"><span class="confidence-fill ${confClass}" style="width:${Math.round((confidence || 0) * 100)}%"></span></span>
+      <span>${Math.round((confidence || 0) * 100)}% confident · ${escapeHtml(payload.provider || "ai")}</span>
+    </div>`;
+
+  // warnings
+  if (warnings && warnings.length > 0) {
+    html += `<div class="warnings"><ul>${warnings.map(w => `<li>${escapeHtml(w)}</li>`).join("")}</ul></div>`;
+  }
+
+  // validation error (if any)
+  if (validated === false && validationError) {
+    html += `<div class="warnings">Heads up: ${escapeHtml(validationError)}. Apply may produce unexpected results.</div>`;
+  }
+
+  // actions (skipped for color-picker case — picker has its own Apply/Discard)
+  if (diff && diff.length > 0 && !isColorPicker) {
+    html += `
+      <div class="msg-actions">
+        <button class="btn btn-primary apply-btn">Apply</button>
+        <button class="btn btn-ghost discard-btn">Discard</button>
+      </div>`;
+  }
+
+  el.innerHTML = html;
+
+  const applyBtn = el.querySelector(".apply-btn");
+  if (applyBtn) {
+    applyBtn.addEventListener("click", () => applyDiff(narration, proposedSite, applyBtn, diff));
+  }
+  const discardBtn = el.querySelector(".discard-btn");
+  if (discardBtn) {
+    discardBtn.addEventListener("click", () => {
+      el.querySelector(".msg-actions").innerHTML = '<span style="font-size:0.8rem; color:var(--slate)">Discarded.</span>';
+    });
+  }
+
+  $messages.appendChild(el);
+  $messages.scrollTop = $messages.scrollHeight;
+
+  // For color-picker diffs, append the picker UI to the message and auto-preview
+  // AI's pick in the iframe so the customer sees the suggestion immediately.
+  if (isColorPicker) {
+    openColorPicker(payload, el);
+  }
+}
+
+function renderDiffRow(op) {
+  const opClass = op.op;
+  let pathLabel, valueLabel = "";
+  switch (op.op) {
+    case "set":
+      pathLabel = `${op.path}`;
+      valueLabel = formatValue(op.value, op.path);
+      break;
+    case "insert":
+      pathLabel = `${op.path}${op.index !== undefined ? ` @ ${op.index}` : ""}`;
+      valueLabel = formatValue(op.value, op.path);
+      break;
+    case "remove":
+      pathLabel = op.path;
+      break;
+    case "move":
+      pathLabel = `${op.from}  ${op.to}`;
+      break;
+    default:
+      pathLabel = JSON.stringify(op);
+  }
+  return `<div class="diff-row">
+    <span class="diff-op ${opClass}">${op.op}</span>
+    <span class="diff-path">${escapeHtml(pathLabel)}</span>
+    ${valueLabel ? `<span class="diff-value">${valueLabel}</span>` : ""}
+  </div>`;
+}
+
+function formatValue(value, path) {
+  if (typeof value === "string" && /^#[0-9a-fA-F]{6}$/.test(value)) {
+    return `<span class="diff-color" style="background:${value}"></span>${value}`;
+  }
+  if (typeof value === "string") {
+    return escapeHtml(value.length > 60 ? value.slice(0, 57) + "..." : value);
+  }
+  if (typeof value === "number" || typeof value === "boolean") {
+    return String(value);
+  }
+  if (value && typeof value === "object" && value.type) {
+    return `${value.type}`;
+  }
+  if (Array.isArray(value)) {
+    return `[${value.length} items]`;
+  }
+  return "{...}";
+}
+
+/* ---------- apply diff ---------- */
+
+function applyDiff(narration, proposedSite, btn, diffOps) {
+  const actions = btn.parentElement;
+
+  // B12: filter out no-op SET ops where the new value already matches the
+  // current site state. These produce theatrical Apply clicks that don't
+  // visibly change anything, and they pollute history.
+  const meaningfulOps = (diffOps || []).filter((op) => {
+    if (op.op !== "set") return true; // pass-through non-SET ops
+    const current = readSitePath(currentSite, op.path);
+    return op.value !== current;
+  });
+
+  // If everything was a no-op, don't pretend we changed anything.
+  if (meaningfulOps.length === 0) {
+    actions.innerHTML = `<span style="font-size:0.8rem; color:var(--slate)">No change needed — values already match.</span>`;
+    return;
+  }
+
+  // Push to history (only meaningful changes go in)
+  history.unshift({
+    siteJson: structuredClone(proposedSite),
+    narration,
+    timestamp: Date.now()
+  });
+  currentSite = structuredClone(proposedSite);
+
+  // Apply visual changes to iframe in-place where possible
+  patchIframePreview(currentSite);
+
+  // Persist the meaningful diff ops to localStorage so refresh-replay restores them
+  pushDiffOps(meaningfulOps);
+
+  // A5: pulse-highlight every DOM element affected by these ops, and count them
+  // so the chat tells the truth about scope ("4 elements changed", not just "Applied").
+  let affectedCount = 0;
+  const doc = $iframe.contentDocument;
+  if (doc) {
+    const affected = new Set();
+    meaningfulOps.forEach((op) => {
+      findElementsAffectedByOp(doc, op).forEach((el) => affected.add(el));
+    });
+    pulseAffectedElements(affected);
+    affectedCount = affected.size;
+  }
+
+  const countSuffix = affectedCount > 1 ? ` · ${affectedCount} elements changed` : "";
+  actions.innerHTML = `<span style="font-size:0.8rem; color:var(--green)"> Applied${countSuffix}</span>`;
+
+  renderHistory();
+  flashSaveStatus(`Applied · ${narration.slice(0, 40)}${narration.length > 40 ? "..." : ""}`);
+}
+
+/* ---------- color picker (Step 2.5a) ---------- */
+// AI is unreliable at exact color matching ("hot pink" -> burgundy was the
+// motivating failure). Instead of asking the AI to nail the shade, we let it
+// pick a starting suggestion and let the customer point at the exact swatch
+// they want. Click-to-preview only — Apply commits the single history entry,
+// Discard reverts the iframe, new chat message auto-discards.
+
+let activeColorPicker = null;
+
+function isColorPickerDiff(diff) {
+  if (!Array.isArray(diff) || diff.length !== 1) return false;
+  const op = diff[0];
+  return op
+    && op.op === "set"
+    && typeof op.path === "string"
+    && op.path.startsWith("brand.colors.")
+    && typeof op.value === "string"
+    && /^#[0-9A-Fa-f]{6}$/.test(op.value);
+}
+
+function openColorPicker(payload, msgEl) {
+  // Only one picker open at a time; the new one auto-discards the prior.
+  if (activeColorPicker) discardColorPicker(activeColorPicker);
+
+  const { narration, diff } = payload;
+  const op = diff[0];
+  const path = op.path;
+  const aiHex = op.value.toUpperCase();
+  const originalRaw = readSitePath(currentSite, path);
+  const originalHex = (typeof originalRaw === "string" && /^#[0-9A-Fa-f]{6}$/.test(originalRaw))
+    ? originalRaw.toUpperCase()
+    : "#FFFFFF";
+
+  const wrap = document.createElement("div");
+  wrap.className = "color-picker";
+
+  const similar = generateSimilarShades(aiHex);
+  const fullGrid = STANDARD_PALETTE;
+
+  const swatchHTML = (hex, klass, isSelected) =>
+    `<button type="button" class="cp-swatch ${klass}${isSelected ? " selected" : ""}" data-hex="${hex}" style="background: ${hex}" aria-label="${hex}"></button>`;
+
+  wrap.innerHTML = `
+    <div class="cp-row">
+      <div class="cp-row-label">Press's pick</div>
+      <div class="cp-pick-row">
+        ${swatchHTML(aiHex, "cp-swatch-large", true)}
+        <span class="cp-pick-hex">${aiHex}</span>
+      </div>
+    </div>
+    <div class="cp-row">
+      <div class="cp-row-label">Similar shades</div>
+      <div class="cp-swatch-grid">
+        ${similar.map((h) => swatchHTML(h, "cp-swatch-med", false)).join("")}
+      </div>
+    </div>
+    <div class="cp-row">
+      <div class="cp-row-label">Or pick from</div>
+      ${fullGrid.map((family) => `
+        <div class="cp-grid-family">
+          ${family.map((h) => swatchHTML(h, "cp-swatch-small", false)).join("")}
+        </div>`).join("")}
+    </div>
+    <div class="cp-row">
+      <div class="cp-row-label">Or paste a hex</div>
+      <input type="text" class="cp-hex-input" placeholder="#XXXXXX" maxlength="7" />
+    </div>
+    <div class="cp-row">
+      <div class="cp-current">
+        <span>Currently previewing:</span>
+        <span class="cp-current-swatch" style="background: ${aiHex}"></span>
+        <span class="cp-current-hex">${aiHex}</span>
+      </div>
+    </div>
+    <div class="cp-actions">
+      <button type="button" class="btn btn-primary cp-apply-btn">Apply</button>
+      <button type="button" class="btn btn-ghost cp-discard-btn">Discard</button>
+    </div>
+  `;
+
+  msgEl.appendChild(wrap);
+
+  const state = { wrap, msgEl, path, narration, originalHex, previewHex: aiHex };
+
+  // Auto-preview AI's pick on open so the customer sees what they're starting from.
+  applyColorToIframe(path, aiHex);
+
+  // Wire swatch clicks
+  wrap.querySelectorAll(".cp-swatch").forEach((sw) => {
+    sw.addEventListener("click", (e) => {
+      e.preventDefault();
+      const hex = (sw.dataset.hex || "").toUpperCase();
+      if (/^#[0-9A-Fa-f]{6}$/.test(hex)) selectColorInPicker(state, hex);
+    });
+  });
+
+  // Wire hex input — preview as soon as the typed value is a valid 6-char hex
+  const hexInput = wrap.querySelector(".cp-hex-input");
+  hexInput.addEventListener("input", () => {
+    let v = hexInput.value.trim();
+    if (v && !v.startsWith("#")) v = "#" + v;
+    if (/^#[0-9A-Fa-f]{6}$/.test(v)) {
+      hexInput.classList.remove("invalid");
+      selectColorInPicker(state, v.toUpperCase());
+    } else if (v.length > 1) {
+      hexInput.classList.add("invalid");
+    } else {
+      hexInput.classList.remove("invalid");
+    }
+  });
+
+  wrap.querySelector(".cp-apply-btn").addEventListener("click", () => commitColorPicker(state));
+  wrap.querySelector(".cp-discard-btn").addEventListener("click", () => discardColorPicker(state));
+
+  activeColorPicker = state;
+  $messages.scrollTop = $messages.scrollHeight;
+}
+
+function selectColorInPicker(state, hex) {
+  state.previewHex = hex;
+  applyColorToIframe(state.path, hex);
+  const cs = state.wrap.querySelector(".cp-current-swatch");
+  const ch = state.wrap.querySelector(".cp-current-hex");
+  if (cs) cs.style.background = hex;
+  if (ch) ch.textContent = hex;
+  state.wrap.querySelectorAll(".cp-swatch").forEach((s) => {
+    s.classList.toggle("selected", (s.dataset.hex || "").toUpperCase() === hex);
+  });
+}
+
+// Set the relevant CSS variable on the iframe :root. Pure preview — no diff
+// stack write, no history entry. Mirror of applyOpToIframe's color branch.
+function applyColorToIframe(path, hex) {
+  const doc = $iframe.contentDocument;
+  if (!doc) return;
+  const root = doc.documentElement.style;
+  if (path === "brand.colors.primary")        root.setProperty("--primary", hex);
+  else if (path === "brand.colors.accent")    root.setProperty("--accent", hex);
+  else if (path === "brand.colors.neutral_dark") root.setProperty("--neutral-dark", hex);
+  else if (path === "brand.colors.neutral_light") root.setProperty("--neutral-light", hex);
+}
+
+// Apply: route through the existing applyDiff so history + persistence + the
+// A5 pulse + count chip behavior all stay consistent with non-picker applies.
+function commitColorPicker(state) {
+  const finalOp = { op: "set", path: state.path, value: state.previewHex };
+  const finalDiff = [finalOp];
+
+  const finalSite = structuredClone(currentSite);
+  setSitePath(finalSite, state.path, state.previewHex);
+
+  // applyDiff replaces the parent of the button with " Applied". Give it a
+  // throwaway button host so it doesn't blow away the picker container.
+  const host = document.createElement("div");
+  host.style.display = "none";
+  const tempBtn = document.createElement("button");
+  host.appendChild(tempBtn);
+  state.wrap.appendChild(host);
+
+  applyDiff(state.narration, finalSite, tempBtn, finalDiff);
+
+  // Replace the picker UI with a compact confirmation row.
+  const before = state.wrap.parentElement;
+  state.wrap.innerHTML = `<div class="cp-collapsed"> Applied <span class="cp-collapsed-swatch" style="background: ${state.previewHex}"></span> ${state.previewHex}</div>`;
+  if (activeColorPicker === state) activeColorPicker = null;
+  if (before) before.scrollTop = before.scrollHeight;
+  $messages.scrollTop = $messages.scrollHeight;
+}
+
+function discardColorPicker(state) {
+  applyColorToIframe(state.path, state.originalHex);
+  state.wrap.innerHTML = `<div class="cp-discarded">Discarded.</div>`;
+  if (activeColorPicker === state) activeColorPicker = null;
+}
+
+// Generate 5 similar swatches by walking lightness up and down around AI's pick.
+// Saturation and hue stay fixed — gives the customer "same color, lighter/darker"
+// rather than wandering into adjacent hues.
+function generateSimilarShades(hex) {
+  const hsl = hexToHsl(hex);
+  const offsets = [-22, -11, 11, 22, 33];
+  return offsets.map((delta) => {
+    const l = Math.max(8, Math.min(94, hsl.l + delta));
+    return hslToHex(hsl.h, hsl.s, l);
+  });
+}
+
+// 9 hue families x 6 lightness stops. Familiar Tailwind-style ladder.
+const STANDARD_PALETTE = [
+  ["#FFF1F2", "#FECDD3", "#FB7185", "#E11D48", "#9F1239", "#4C0519"], // rose
+  ["#FEF2F2", "#FECACA", "#F87171", "#DC2626", "#991B1B", "#450A0A"], // red
+  ["#FFF7ED", "#FED7AA", "#FB923C", "#EA580C", "#9A3412", "#431407"], // orange
+  ["#FFFBEB", "#FDE68A", "#FBBF24", "#D97706", "#92400E", "#451A03"], // amber
+  ["#F0FDF4", "#BBF7D0", "#4ADE80", "#16A34A", "#166534", "#052E16"], // green
+  ["#F0FDFA", "#99F6E4", "#2DD4BF", "#0D9488", "#115E59", "#042F2E"], // teal
+  ["#EFF6FF", "#BFDBFE", "#60A5FA", "#2563EB", "#1E3A8A", "#172554"], // blue
+  ["#FAF5FF", "#E9D5FF", "#C084FC", "#9333EA", "#6B21A8", "#3B0764"], // purple
+  ["#F8FAFC", "#E2E8F0", "#94A3B8", "#475569", "#1E293B", "#020617"], // neutral
+];
+
+function hexToHsl(hex) {
+  hex = hex.replace("#", "");
+  const r = parseInt(hex.slice(0, 2), 16) / 255;
+  const g = parseInt(hex.slice(2, 4), 16) / 255;
+  const b = parseInt(hex.slice(4, 6), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)); break;
+      case g: h = ((b - r) / d + 2); break;
+      case b: h = ((r - g) / d + 4); break;
+    }
+    h *= 60;
+  }
+  return { h, s: s * 100, l: l * 100 };
+}
+
+function hslToHex(h, s, l) {
+  s /= 100; l /= 100;
+  const c = (1 - Math.abs(2 * l - 1)) * s;
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+  const m = l - c / 2;
+  let r = 0, g = 0, b = 0;
+  if (h < 60)       { r = c; g = x; }
+  else if (h < 120) { r = x; g = c; }
+  else if (h < 180) {        g = c; b = x; }
+  else if (h < 240) {        g = x; b = c; }
+  else if (h < 300) { r = x;        b = c; }
+  else              { r = c;        b = x; }
+  const toHex = (v) => Math.round((v + m) * 255).toString(16).padStart(2, "0").toUpperCase();
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+// Read the value at a dot/bracket path inside the site JSON. Mirror of
+// setSitePath. Returns undefined if the path doesn't resolve.
+function readSitePath(obj, path) {
+  const re = /([^.[\]]+)|\[(\d+)\]/g;
+  const tokens = [];
+  let m;
+  while ((m = re.exec(path)) !== null) {
+    if (m[1]) tokens.push({ key: m[1] });
+    else if (m[2] !== undefined) tokens.push({ idx: parseInt(m[2], 10) });
+  }
+  let cur = obj;
+  for (const t of tokens) {
+    if (cur === undefined || cur === null) return undefined;
+    cur = ("key" in t) ? cur[t.key] : cur[t.idx];
+  }
+  return cur;
+}
+
+// Given a diff op, return the DOM elements inside the iframe whose visible state
+// reflects the schema field at that path. Powers the A5 pulse + count display.
+// Mirrors the selector logic in applyOpToIframe — keep these two functions in sync.
+function findElementsAffectedByOp(doc, op) {
+  if (op.op !== "set") return [];
+  const path = op.path;
+
+  if (path === "brand.colors.primary") {
+    return Array.from(doc.querySelectorAll(".btn-primary, .hero-cta, .nav-cta, .cta-btn"));
+  }
+  if (path === "brand.colors.accent") {
+    return Array.from(doc.querySelectorAll("[class*='accent']"));
+  }
+  if (path === "business.name") {
+    return Array.from(doc.querySelectorAll(".brand-logo, .footer-brand"));
+  }
+  if (path === "business.contact.phone") {
+    return Array.from(doc.querySelectorAll(".nav-cta, .hero-cta, .cta-btn, .footer-link[href^='tel:']"));
+  }
+  if (path === "business.contact.address") {
+    return Array.from(doc.querySelectorAll(".footer-address, .footer-link.footer-address"));
+  }
+  if (path === "business.tagline") {
+    return Array.from(doc.querySelectorAll(".footer-tagline"));
+  }
+
+  // sections[N].props.<field> — single element inside the tagged section
+  const sectionMatch = path.match(/^sections\[(\d+)\]\.props\.([\w_]+)$/);
+  if (sectionMatch) {
+    const idx = parseInt(sectionMatch[1], 10);
+    const prop = sectionMatch[2];
+    const section = doc.querySelector('[data-press-section="' + idx + '"]');
+    if (!section) return [];
+    if (prop === "headline")    return [section.querySelector("h1")].filter(Boolean);
+    if (prop === "subheadline") return [section.querySelector(".lead.hero-sub, .hero-sub, .lead")].filter(Boolean);
+    if (prop === "heading")     return [section.querySelector("h2")].filter(Boolean);
+    if (prop === "subheading")  return [section.querySelector(".cta-sub, .lead.cta-sub")].filter(Boolean);
+    if (prop === "cta_label")   return Array.from(section.querySelectorAll(".btn, .hero-cta, .cta-btn, .nav-cta"));
+    if (prop === "cta_href")    return Array.from(section.querySelectorAll("a.btn, a.hero-cta, a.cta-btn, a.nav-cta"));
+    return [];
+  }
+
+  // Testimonials: sections[N].props.testimonials[M].<field>
+  const testMatch = path.match(/^sections\[(\d+)\]\.props\.testimonials\[(\d+)\]\.([\w_]+)$/);
+  if (testMatch) {
+    const sidx = parseInt(testMatch[1], 10);
+    const tidx = parseInt(testMatch[2], 10);
+    const section = doc.querySelector('[data-press-section="' + sidx + '"]');
+    if (!section) return [];
+    const card = section.querySelectorAll(".testimonial-card")[tidx];
+    return card ? [card] : [];
+  }
+
+  // Top-level services[N].<field>
+  const serviceMatch = path.match(/^services\[(\d+)\]\.([\w_]+)$/);
+  if (serviceMatch) {
+    const idx = parseInt(serviceMatch[1], 10);
+    const card = doc.querySelectorAll(".service-card")[idx];
+    return card ? [card] : [];
+  }
+
+  return [];
+}
+
+// Add a brief amber pulse outline to each element so the customer SEES exactly
+// what changed. Auto-clears after the animation finishes.
+function pulseAffectedElements(set) {
+  set.forEach((el) => {
+    el.classList.remove("press-pulse-affected");
+    // Force reflow so re-adding the class restarts the animation
+    void el.offsetWidth;
+    el.classList.add("press-pulse-affected");
+    setTimeout(() => el.classList.remove("press-pulse-affected"), 1300);
+  });
+}
+
+function patchIframePreview(site) {
+  // For visual changes that don't require a full re-render, mutate the
+  // iframe DOM directly. Color and text changes work this way today;
+  // more complex changes (added section, reordered) require a full
+  // server-side re-render which V1 mocks by reloading the iframe.
+  try {
+    const doc = $iframe.contentDocument;
+    if (!doc) return;
+    // Update brand colors
+    const root = doc.documentElement.style;
+    root.setProperty("--primary", site.brand.colors.primary);
+    if (site.brand.colors.accent) root.setProperty("--accent", site.brand.colors.accent);
+    if (site.brand.colors.neutral_dark) root.setProperty("--neutral-dark", site.brand.colors.neutral_dark);
+    if (site.brand.colors.neutral_light) root.setProperty("--neutral-light", site.brand.colors.neutral_light);
+
+    // Update hero headline + subheadline if present
+    const heroSection = site.sections.find(s => s.type === "hero");
+    if (heroSection) {
+      const h1 = doc.querySelector(".hero h1");
+      if (h1 && h1.textContent !== heroSection.props.headline) {
+        h1.textContent = heroSection.props.headline;
+      }
+      const sub = doc.querySelector(".hero .lead.hero-sub");
+      if (sub && heroSection.props.subheadline && sub.textContent !== heroSection.props.subheadline) {
+        sub.textContent = heroSection.props.subheadline;
+      }
+    }
+    // Update services grid layout
+    const servicesGrid = site.sections.find(s => s.type === "services_grid");
+    if (servicesGrid?.props.layout) {
+      const grid = doc.querySelector(".services-grid");
+      if (grid) {
+        grid.classList.remove("grid-2", "grid-3", "grid-4");
+        grid.classList.add(servicesGrid.props.layout);
+      }
+    }
+  } catch (err) {
+    // Iframe may be from different origin — we can't patch it. That's OK
+    // for V1; the Apply still updates state. In production we'd trigger
+    // a full server-side re-render and reload the iframe URL.
+    console.warn("Iframe patch failed (likely cross-origin); state updated only.", err);
+  }
+}
+
+/* ---------- history ---------- */
+
+function renderHistory() {
+  const rows = history.map((entry, i) => {
+    const ago = relativeTime(entry.timestamp);
+    const klass = i === 0 ? "history-row current" : entry.isLaunch ? "history-row launch" : "history-row";
+    const launchTag = entry.isLaunch ? '<strong style="color: var(--primary)"> </strong>' : "";
+    return `
+      <div class="${klass}" data-idx="${i}">
+        <span class="history-dot"></span>
+        <div class="history-meta">
+          <div class="history-narration">${launchTag}${escapeHtml(entry.narration)}</div>
+          <div class="history-time">${ago}</div>
+        </div>
+        <div class="history-actions">
+          <button class="btn btn-ghost preview-history-btn" data-idx="${i}">Preview</button>
+          <button class="btn btn-primary restore-btn" data-idx="${i}">Restore</button>
+        </div>
+      </div>`;
+  }).join("");
+  $historyTab.innerHTML = rows;
+
+  $historyTab.querySelectorAll(".restore-btn").forEach(btn => {
+    btn.addEventListener("click", () => restoreVersion(parseInt(btn.dataset.idx)));
+  });
+  $historyTab.querySelectorAll(".preview-history-btn").forEach(btn => {
+    btn.addEventListener("click", () => previewVersion(parseInt(btn.dataset.idx)));
+  });
+}
+
+function restoreVersion(idx) {
+  const entry = history[idx];
+  if (!entry) return;
+  const restoredSite = structuredClone(entry.siteJson);
+  history.unshift({
+    siteJson: restoredSite,
+    narration: `Restored: ${entry.narration}`,
+    timestamp: Date.now()
+  });
+  currentSite = restoredSite;
+  patchIframePreview(currentSite);
+  renderHistory();
+  flashSaveStatus("Restored");
+  // Switch to the preview tab so the user sees the result
+  switchTab("preview");
+}
+
+function previewVersion(idx) {
+  // V1: just patch iframe with this version (without committing to history).
+  // In production: render to a temp preview URL and open it in a new pane.
+  const entry = history[idx];
+  if (!entry) return;
+  patchIframePreview(entry.siteJson);
+  switchTab("preview");
+  flashSaveStatus(`Previewing: ${entry.narration.slice(0, 30)}...`);
+  // Restore current state after 5 seconds so they don't lose the live view
+  setTimeout(() => {
+    patchIframePreview(currentSite);
+    updateSaveStatus(); // re-derive honest topbar state from localStorage
+  }, 5000);
+}
+
+/* ---------- tabs / device toggle ---------- */
+
+function switchTab(tab) {
+  document.querySelectorAll(".preview-tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+  $previewTab.style.display = tab === "preview" ? "" : "none";
+  $historyTab.classList.toggle("active", tab === "history");
+}
+
+document.querySelectorAll(".preview-tab").forEach(btn => {
+  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+});
+
+document.querySelectorAll(".device-toggle button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".device-toggle button").forEach(b => b.classList.toggle("active", b === btn));
+    $previewFrame.classList.toggle("mobile", btn.dataset.device === "mobile");
+  });
+});
+
+/* ---------- top-bar actions ---------- */
+
+$publishBtn.addEventListener("click", () => {
+  // Step 1: Publish wiring is deferred to Step 5 (KV-backed /api/apply +
+  // server-side render of preview from site.json). For now, be honest with
+  // the customer rather than pretending to publish.
+  flashSaveStatus("Publish wires up next. Changes are saved locally.");
+});
+
+$downloadBtn.addEventListener("click", () => {
+  // Easy Exit lite: download the current site.json
+  const blob = new Blob([JSON.stringify(currentSite, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${currentSite.meta.customer_slug}-site.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* ---------- composer ---------- */
+
+$send.addEventListener("click", sendRequest);
+$input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendRequest();
+  }
+});
+
+// Bulletproof placeholder hide on focus — clear the placeholder attribute
+// outright on focus, restore it on blur. The CSS-only approach
+// (.composer-input:focus::placeholder { color: white }) doesn't render
+// reliably in some browsers; this guarantees the gray hint vanishes the
+// instant the customer clicks into the textarea.
+$input.addEventListener("focus", () => {
+  if (!$input.dataset.savedPlaceholder) {
+    $input.dataset.savedPlaceholder = $input.placeholder || "";
+    $input.placeholder = "";
+  }
+});
+$input.addEventListener("blur", () => {
+  if ($input.dataset.savedPlaceholder !== undefined) {
+    $input.placeholder = $input.dataset.savedPlaceholder;
+    delete $input.dataset.savedPlaceholder;
+  }
+});
+
+/* ---------- helpers ---------- */
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function relativeTime(ts) {
+  const diffMs = Date.now() - ts;
+  const sec = Math.round(diffMs / 1000);
+  const min = Math.round(sec / 60);
+  const hr = Math.round(min / 60);
+  const day = Math.round(hr / 24);
+  if (sec < 30) return "just now";
+  if (min < 1) return `${sec}s ago`;
+  if (min < 60) return `${min} min ago`;
+  if (hr < 24) return `${hr} hour${hr > 1 ? "s" : ""} ago`;
+  return `${day} day${day > 1 ? "s" : ""} ago`;
+}
+
+/* ---------- save-status truth state ----------
+ *
+ * Three states map to two visual representations:
+ *   - "saved" (no local diffs):           green dot + "Saved"
+ *   - "local" (localStorage has diffs):   amber dot + "Local changes — not yet published"
+ *   - "transient" (just-applied toast):   amber dot + "<short toast>" for 3.5s, then re-derive
+ *
+ * Step 5 will add a real "published" state once KV-backed /api/apply is wired.
+ */
+const $saveStatus = document.getElementById("saveStatus");
+let saveStatusTimeout = null;
+
+function updateSaveStatus() {
+  const stack = loadDiffStack();
+  if (stack.length > 0) {
+    $saveStatus.classList.add("local");
+    $saveStatusText.textContent = "Local changes — not yet published";
+  } else {
+    $saveStatus.classList.remove("local");
+    $saveStatusText.textContent = "Saved";
+  }
+}
+
+function flashSaveStatus(msg) {
+  // Show a short toast, keep amber dot if we have local changes,
+  // then re-derive the steady-state text after 3.5s.
+  $saveStatusText.textContent = msg;
+  if (loadDiffStack().length > 0) {
+    $saveStatus.classList.add("local");
+  }
+  clearTimeout(saveStatusTimeout);
+  saveStatusTimeout = setTimeout(updateSaveStatus, 3500);
+}
+
+/* ---------- diff persistence + iframe replay (Step 1, B03 phase A) ----------
+ *
+ * Apply mutates the iframe DOM in-memory (patchIframePreview). That mutation
+ * dies on iframe reload because the preview is a static file. To make
+ * Apply persist across refresh, we also push every applied diff op onto a
+ * localStorage stack scoped to this customer. On every iframe load we replay
+ * the stack against the freshly-rendered DOM, restoring all prior changes.
+ *
+ * Step 5 will replace this with a KV-backed /api/apply Function that re-renders
+ * the preview server-side. Until then, the localStorage layer is the source
+ * of truth for "what's locally changed" — it powers the topbar truth-state and
+ * survives refresh.
+ *
+ * Storage key: "press:<customer-slug>:diffs"  (scoped per customer)
+ * Storage shape: JSON array of diff ops, in order applied
+ */
+
+const DIFF_STORAGE_KEY = "press:" + (currentSite?.meta?.customer_slug || "default") + ":diffs";
+
+function loadDiffStack() {
+  try {
+    const raw = localStorage.getItem(DIFF_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function pushDiffOps(ops) {
+  if (!Array.isArray(ops) || ops.length === 0) return;
+  const stack = loadDiffStack();
+  ops.forEach((op) => stack.push(op));
+  try { localStorage.setItem(DIFF_STORAGE_KEY, JSON.stringify(stack)); } catch (e) { console.warn("localStorage push failed:", e); }
+}
+
+function clearDiffStack() {
+  try { localStorage.removeItem(DIFF_STORAGE_KEY); } catch {}
+}
+
+// Replay every stored diff op against the iframe DOM. Called after iframe load.
+// Skips ops we don't know how to render (logged to console, not a hard error).
+function replayDiffsInIframe() {
+  const stack = loadDiffStack();
+  if (stack.length === 0) return;
+  const doc = $iframe.contentDocument;
+  if (!doc || !doc.body) return;
+  stack.forEach((op) => {
+    try { applyOpToIframe(doc, op); }
+    catch (e) { console.warn("Replay skipped op:", op, e); }
+  });
+}
+
+function applyOpToIframe(doc, op) {
+  if (op.op !== "set") return; // V1: only set is supported for replay; insert/remove/move are deferred
+  const path = op.path;
+  const value = op.value;
+
+  // Brand colors  CSS variables on iframe :root
+  if (path === "brand.colors.primary")     { doc.documentElement.style.setProperty("--primary", value); return; }
+  if (path === "brand.colors.accent")      { doc.documentElement.style.setProperty("--accent", value); return; }
+  if (path === "brand.colors.neutral_dark"){ doc.documentElement.style.setProperty("--neutral-dark", value); return; }
+  if (path === "brand.colors.neutral_light"){doc.documentElement.style.setProperty("--neutral-light", value); return;}
+
+  // Business name  header logo + footer brand
+  if (path === "business.name") {
+    doc.querySelectorAll(".brand-logo").forEach((el) => { el.textContent = value; });
+    doc.querySelectorAll(".footer-brand").forEach((el) => { el.textContent = value; });
+    return;
+  }
+
+  // Business tagline  footer-tagline element (if present)
+  if (path === "business.tagline") {
+    doc.querySelectorAll(".footer-tagline").forEach((el) => { el.textContent = value; });
+    return;
+  }
+
+  // Business address  footer-address element (if present)
+  if (path === "business.contact.address") {
+    doc.querySelectorAll(".footer-address, .footer-link.footer-address").forEach((el) => { el.textContent = value; });
+    return;
+  }
+
+  // Phone number  all phone buttons + footer tel: link
+  if (path === "business.contact.phone") {
+    const telHref = "tel:" + String(value).replace(/[^\d+]/g, "");
+    // Buttons that show "Call (NNN) NNN-NNNN" — replace the phone fragment in textContent
+    doc.querySelectorAll(".nav-cta, .hero-cta, .cta-btn").forEach((el) => {
+      const phoneRegex = /\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/;
+      // Walk text nodes so we don't blow away child SVG arrows
+      el.childNodes.forEach((n) => {
+        if (n.nodeType === 3 && phoneRegex.test(n.nodeValue)) {
+          n.nodeValue = n.nodeValue.replace(phoneRegex, value);
+        }
+      });
+      if (el.tagName === "A") el.setAttribute("href", telHref);
+    });
+    doc.querySelectorAll(".footer-link[href^='tel:']").forEach((el) => {
+      el.textContent = value;
+      el.setAttribute("href", telHref);
+    });
+    return;
+  }
+
+  // sections[N].props.<field>  tagged-section descendants
+  const sectionMatch = path.match(/^sections\[(\d+)\]\.props\.([\w_]+)$/);
+  if (sectionMatch) {
+    const idx = parseInt(sectionMatch[1], 10);
+    const prop = sectionMatch[2];
+    const section = doc.querySelector('[data-press-section="' + idx + '"]');
+    if (!section) return;
+    if (prop === "headline")    { const el = section.querySelector("h1"); if (el) el.textContent = value; return; }
+    if (prop === "subheadline") { const el = section.querySelector(".lead.hero-sub, .hero-sub, .lead"); if (el) el.textContent = value; return; }
+    if (prop === "heading")     { const el = section.querySelector("h2"); if (el) el.textContent = value; return; }
+    if (prop === "subheading")  { const el = section.querySelector(".cta-sub, .lead.cta-sub"); if (el) el.textContent = value; return; }
+    if (prop === "cta_label")   {
+      const btn = section.querySelector(".btn, .hero-cta, .cta-btn, .nav-cta");
+      if (btn) {
+        // Preserve any SVG icon inside the button
+        const svg = btn.querySelector("svg");
+        const txt = btn.firstChild;
+        if (txt && txt.nodeType === 3) txt.nodeValue = value + " ";
+        else { btn.insertBefore(doc.createTextNode(value + " "), btn.firstChild); }
+        if (svg && !btn.contains(svg)) btn.appendChild(svg);
+      }
+      return;
+    }
+    if (prop === "cta_href") {
+      const btn = section.querySelector("a.btn, a.hero-cta, a.cta-btn, a.nav-cta");
+      if (btn) btn.setAttribute("href", value);
+      return;
+    }
+  }
+
+  // Testimonials nested inside a section  sections[N].props.testimonials[M].<field>
+  const testMatch = path.match(/^sections\[(\d+)\]\.props\.testimonials\[(\d+)\]\.([\w_]+)$/);
+  if (testMatch) {
+    const sidx = parseInt(testMatch[1], 10);
+    const tidx = parseInt(testMatch[2], 10);
+    const prop = testMatch[3];
+    const section = doc.querySelector('[data-press-section="' + sidx + '"]');
+    if (!section) return;
+    const cards = section.querySelectorAll(".testimonial-card");
+    const card = cards[tidx];
+    if (!card) return;
+    if (prop === "quote")  { const el = card.querySelector(".quote, blockquote, p:not(.author):not(.role)"); if (el) el.textContent = value; return; }
+    if (prop === "author") { const el = card.querySelector(".author"); if (el) el.textContent = value; return; }
+    if (prop === "role")   { const el = card.querySelector(".role"); if (el) el.textContent = value; return; }
+  }
+
+  // Top-level services[N].<field>  service-card descendants
+  const serviceMatch = path.match(/^services\[(\d+)\]\.([\w_]+)$/);
+  if (serviceMatch) {
+    const idx = parseInt(serviceMatch[1], 10);
+    const prop = serviceMatch[2];
+    const cards = doc.querySelectorAll(".service-card");
+    const card = cards[idx];
+    if (!card) return;
+    if (prop === "name")        { const el = card.querySelector("h3, h4, .service-title"); if (el) el.textContent = value; return; }
+    if (prop === "description") { const el = card.querySelector("p, .service-desc"); if (el) el.textContent = value; return; }
+  }
+}
+
+/* ---------- preview chrome navigation (back/forward/reload) ---------- */
+
+const $navBack = document.getElementById("navBack");
+const $navForward = document.getElementById("navForward");
+const $navReload = document.getElementById("navReload");
+const INITIAL_IFRAME_SRC = $iframe.getAttribute("src");
+
+$navBack.addEventListener("click", () => {
+  try { $iframe.contentWindow.history.back(); } catch (e) { $iframe.src = INITIAL_IFRAME_SRC; }
+});
+$navForward.addEventListener("click", () => {
+  try { $iframe.contentWindow.history.forward(); } catch (e) { /* noop */ }
+});
+$navReload.addEventListener("click", () => {
+  // Always go back to the original Slatepress preview — protects the
+  // user when a stray click navigated the iframe away.
+  $iframe.src = INITIAL_IFRAME_SRC;
+});
+
+/* ---------- section + sub-section targeting (hover, click, drill-down) ----------
+ *
+ * Two levels of targeting:
+ *   - Level 1 (parent section): green hover + selected. Click any section in
+ *     the iframe — pill says "Editing: <label>". Sets selectedTarget.
+ *   - Level 2 (sub-element inside a selected parent): amber hover + selected.
+ *     Click sub-element AFTER parent is selected — pill says "Editing:
+ *     <child label>". Parent stays in faded green. Sets selectedSubTarget.
+ *
+ * Click outside any section clears both.
+ *
+ * Same-origin iframe  direct DOM access. Link clicks inside the iframe are
+ * intercepted (preventDefault) so accidental link presses don't navigate
+ * away from the customer's site mid-edit.
+ */
+
+const SECTION_SELECTORS = [
+  { selector: ".hero",         type: "hero",          label: "the headline area at the top" },
+  { selector: ".services",     type: "services_grid", label: "the list of services" },
+  { selector: ".testimonials", type: "testimonials",  label: "what customers are saying" },
+  { selector: ".cta-section",  type: "cta",           label: "the call-out section near the bottom" },
+  { selector: ".site-header",  type: "header",        label: "the top navigation bar" },
+  { selector: ".site-footer",  type: "footer",        label: "the footer at the bottom" },
+  { selector: ".gallery",      type: "gallery",       label: "the photo gallery" },
+  { selector: ".form",         type: "form",          label: "the contact form" },
+];
+
+// Per-parent-type sub-element selectors, in priority order. The first match
+// wins — so put more specific selectors before broader ones.
+const SUB_SELECTORS_BY_PARENT = {
+  hero: [
+    { selector: "h1",            kind: "headline",     label: () => "the main headline" },
+    { selector: ".lead",         kind: "subheadline",  label: () => "the subheadline" },
+    { selector: ".btn",          kind: "cta_button",   label: (el) => 'the "' + (el.textContent || "").trim().slice(0, 40) + '" button' },
+  ],
+  services_grid: [
+    { selector: ".service-card", kind: "service_card", label: (el) => 'the "' + (el.querySelector("h3")?.textContent || "service").trim().slice(0, 40) + '" service card' },
+  ],
+  testimonials: [
+    { selector: ".testimonial-card", kind: "testimonial_card", label: (el) => 'the testimonial from ' + (el.querySelector(".author")?.textContent || "this person").trim().slice(0, 40) },
+  ],
+  cta: [
+    { selector: "h2",            kind: "heading",      label: () => "the call-out heading" },
+    { selector: ".btn",          kind: "cta_button",   label: (el) => 'the "' + (el.textContent || "").trim().slice(0, 40) + '" button' },
+  ],
+  header: [
+    { selector: ".brand-logo",   kind: "header_logo",  label: () => "the logo / business name" },
+    { selector: ".nav-link",     kind: "nav_link",     label: (el) => 'the "' + (el.textContent || "").trim().slice(0, 30) + '" nav link' },
+    { selector: ".nav-cta",      kind: "header_phone", label: () => "the phone button at the top" },
+  ],
+  footer: [
+    { selector: ".footer-link",  kind: "footer_link",  label: (el) => 'the footer link "' + (el.textContent || "").trim().slice(0, 40) + '"' },
+  ],
+  gallery: [],
+  form: [],
+};
+
+let selectedTarget = null;     // { type, index, label }
+let selectedSubTarget = null;  // { kind, parentIndex, parentType, subIndex, label }
+const $targetPill = document.getElementById("targetPill");
+const $targetLabel = document.getElementById("targetLabel");
+const $targetPillClose = document.getElementById("targetPillClose");
+
+function setupSectionTargeting() {
+  const doc = $iframe.contentDocument;
+  if (!doc || !doc.body) return;
+  if (doc.getElementById("press-section-targeting-styles")) return; // already set
+
+  // Inject targeting styles once per iframe load
+  const style = doc.createElement("style");
+  style.id = "press-section-targeting-styles";
+  style.textContent = [
+    "[data-press-section] {",
+    "  cursor: pointer;",
+    "  transition: background-color 0.12s ease, outline-color 0.12s ease, box-shadow 0.12s ease;",
+    "  outline: 2px solid transparent;",
+    "  outline-offset: -2px;",
+    "}",
+    "[data-press-section]:hover {",
+    "  background-color: rgba(16, 185, 129, 0.06) !important;",
+    "  outline-color: rgba(16, 185, 129, 0.55);",
+    "}",
+    "[data-press-section].press-selected {",
+    "  background-color: rgba(16, 185, 129, 0.10) !important;",
+    "  outline-color: rgba(16, 185, 129, 0.85);",
+    "  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.15);",
+    "}",
+    "[data-press-section].press-parent-faded {",
+    "  background-color: rgba(16, 185, 129, 0.04) !important;",
+    "  outline-color: rgba(16, 185, 129, 0.45);",
+    "}",
+    "[data-press-section].press-selected [data-press-subsection],",
+    "[data-press-section].press-parent-faded [data-press-subsection] {",
+    "  cursor: pointer;",
+    "  transition: background-color 0.12s ease, outline-color 0.12s ease;",
+    "  outline: 2px solid transparent;",
+    "  outline-offset: -2px;",
+    "}",
+    "[data-press-section].press-selected [data-press-subsection]:hover,",
+    "[data-press-section].press-parent-faded [data-press-subsection]:hover {",
+    "  outline-color: rgba(245, 158, 11, 0.5);",
+    "}",
+    "[data-press-subsection].press-sub-selected {",
+    "  outline: 2px solid rgba(245, 158, 11, 1.0) !important;",
+    "  outline-offset: -2px;",
+    "  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18), 0 0 14px rgba(245, 158, 11, 0.30);",
+    "}",
+    /* ---- Step 2: inline text editing ---- */
+    "[data-press-text-edit] { cursor: text; }",
+    "[data-press-text-edit]:hover { cursor: text; }",
+    /* press-editing matches press-sub-selected — same amber border + glow halo
+       so the customer sees one consistent "this is your focus" treatment, no
+       matter whether the click landed in a directly-editable text field or an
+       AI-targetable container. */
+    "[data-press-text-edit].press-editing {",
+    "  outline: 2px solid rgba(245, 158, 11, 1.0) !important;",
+    "  outline-offset: -2px;",
+    "  cursor: text;",
+    "  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18), 0 0 14px rgba(245, 158, 11, 0.30);",
+    "}",
+    "[data-press-text-edit][contenteditable]:focus {",
+    "  outline: 2px solid rgba(245, 158, 11, 1.0) !important;",
+    "  caret-color: rgb(15, 23, 42);",
+    "}",
+    /* ---- Step 4 (A5): pulse highlight on AI-applied global changes ---- */
+    "@keyframes press-pulse-affected {",
+    "  0%   { outline-color: rgba(245, 158, 11, 0); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }",
+    "  20%  { outline-color: rgba(245, 158, 11, 0.95); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.20); }",
+    "  100% { outline-color: rgba(245, 158, 11, 0); box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }",
+    "}",
+    ".press-pulse-affected {",
+    "  outline: 2px solid transparent;",
+    "  outline-offset: 3px;",
+    "  border-radius: 4px;",
+    "  animation: press-pulse-affected 1.2s ease-out;",
+    "}",
+  ].join("\n");
+  doc.head.appendChild(style);
+
+  // Tag each known section + sub-elements (data attributes only — no per-element
+  // click listeners; we delegate from doc.body below).
+  let parentIdx = 0;
+  SECTION_SELECTORS.forEach((spec) => {
+    const els = Array.from(doc.querySelectorAll(spec.selector));
+    els.forEach((el) => {
+      el.setAttribute("data-press-section", String(parentIdx));
+      el.setAttribute("data-press-type", spec.type);
+      el.setAttribute("data-press-label", spec.label);
+
+      const subs = SUB_SELECTORS_BY_PARENT[spec.type] || [];
+      subs.forEach((subSpec) => {
+        const subEls = Array.from(el.querySelectorAll(subSpec.selector));
+        subEls.forEach((subEl, subIdx) => {
+          if (subEl.hasAttribute("data-press-subsection")) return;
+          subEl.setAttribute("data-press-subsection", subSpec.kind);
+          subEl.setAttribute("data-press-sub-index", String(subIdx));
+          subEl.setAttribute("data-press-sub-label", subSpec.label(subEl, subIdx));
+        });
+      });
+
+      parentIdx++;
+    });
+  });
+
+  // Tag text-bearing fields inside sections for inline edit (Step 2)
+  tagEditableTexts(doc);
+
+  // Intercept ALL link clicks inside the iframe so accidental link presses
+  // don't navigate the iframe away while the customer is editing.
+  doc.querySelectorAll("a[href]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+    }, true /* useCapture */);
+  });
+
+  // Single delegated click handler with four outcomes:
+  //   1. Already inline-editing the clicked element  let cursor placement happen
+  //   2. data-press-text-edit element  enter inline edit mode (no AI, no chat)
+  //   3. data-press-subsection element  AI sub-select (no two-click rule)
+  //   4. data-press-section element  AI parent-select
+  //   5. Click outside any tag  clear all selection
+  // Capture phase + stopPropagation beats any internal page handlers.
+  doc.body.addEventListener("click", (e) => {
+    // 1. Click inside the active editor — let the browser handle cursor placement
+    if (activelyEditing && activelyEditing.el && activelyEditing.el.contains(e.target)) {
+      return;
+    }
+    // Different element clicked — if there's an active edit, commit it first
+    if (activelyEditing) commitInlineEdit();
+
+    // 2. Inline text edit
+    const textEl = e.target.closest("[data-press-text-edit]");
+    if (textEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      enterInlineEdit(textEl);
+      return;
+    }
+
+    // 3. Container sub-element AI select (single click, no two-click rule)
+    const subEl = e.target.closest("[data-press-subsection]");
+    if (subEl) {
+      const parent = subEl.closest("[data-press-section]");
+      if (parent) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectSubElement(subEl, parent);
+        return;
+      }
+    }
+
+    // 4. Section parent AI select
+    const sectionEl = e.target.closest("[data-press-section]");
+    if (sectionEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      selectSection(sectionEl);
+      return;
+    }
+
+    // 5. Click outside any tagged thing — clear AI selection
+    clearSelection();
+  }, true /* capture */);
+}
+
+function selectSection(el) {
+  const doc = $iframe.contentDocument;
+  if (!doc) return;
+
+  // Clear any previous parent + sub state
+  doc.querySelectorAll(".press-selected, .press-parent-faded, .press-sub-selected")
+    .forEach((s) => s.classList.remove("press-selected", "press-parent-faded", "press-sub-selected"));
+  el.classList.add("press-selected");
+
+  selectedTarget = {
+    type: el.getAttribute("data-press-type"),
+    label: el.getAttribute("data-press-label"),
+    index: parseInt(el.getAttribute("data-press-section"), 10),
+  };
+  selectedSubTarget = null;
+  $targetLabel.textContent = selectedTarget.label;
+  $targetPill.classList.add("show");
+}
+
+function selectSubElement(subEl, parentEl) {
+  const doc = $iframe.contentDocument;
+  if (!doc) return;
+
+  // Parent visually fades to "context"; sub becomes the active selection
+  parentEl.classList.remove("press-selected");
+  parentEl.classList.add("press-parent-faded");
+  doc.querySelectorAll(".press-sub-selected").forEach((s) => s.classList.remove("press-sub-selected"));
+  subEl.classList.add("press-sub-selected");
+
+  selectedSubTarget = {
+    kind: subEl.getAttribute("data-press-subsection"),
+    parentIndex: parseInt(parentEl.getAttribute("data-press-section"), 10),
+    parentType: parentEl.getAttribute("data-press-type"),
+    subIndex: parseInt(subEl.getAttribute("data-press-sub-index"), 10),
+    label: subEl.getAttribute("data-press-sub-label"),
+  };
+  $targetLabel.textContent = selectedSubTarget.label;
+}
+
+/* ---------- inline text editing (Step 2) ----------
+ *
+ * Direct manipulation of text in the iframe — Word/Docs pattern. Click a
+ * text-bearing element, cursor lands, type to edit. Enter or click-outside
+ * commits; Esc reverts. NO AI roundtrip for text changes.
+ *
+ * The diff op is generated locally and pushed to the same localStorage stack
+ * Apply uses, so refresh persists the edit and the topbar truth-state lights
+ * up amber as expected. The chat panel stays for AI-shaped requests (color,
+ * layout, structural changes, ambiguous intent).
+ */
+
+let activelyEditing = null;
+
+function tagEditableTexts(doc) {
+  doc.querySelectorAll("[data-press-section]").forEach((section) => {
+    const sectionIdx = parseInt(section.getAttribute("data-press-section"), 10);
+    const type = section.getAttribute("data-press-type");
+
+    if (type === "hero") {
+      tagText(section.querySelector("h1"),
+        { kind: "headline", label: "the main headline",
+          path: "sections[" + sectionIdx + "].props.headline", multiline: false });
+      tagText(section.querySelector(".lead.hero-sub, .hero-sub, .lead"),
+        { kind: "subheadline", label: "the subheadline",
+          path: "sections[" + sectionIdx + "].props.subheadline", multiline: true });
+    }
+    if (type === "services_grid") {
+      tagText(section.querySelector("h2"),
+        { kind: "heading", label: "the section heading",
+          path: "sections[" + sectionIdx + "].props.heading", multiline: false });
+      Array.from(section.querySelectorAll(".service-card")).forEach((card, cardIdx) => {
+        tagText(card.querySelector("h3, h4, .service-title"),
+          { kind: "service_name", label: "service name",
+            path: "services[" + cardIdx + "].name", multiline: false });
+        tagText(card.querySelector("p, .service-desc"),
+          { kind: "service_description", label: "service description",
+            path: "services[" + cardIdx + "].description", multiline: true });
+      });
+    }
+    if (type === "testimonials") {
+      tagText(section.querySelector("h2"),
+        { kind: "heading", label: "the section heading",
+          path: "sections[" + sectionIdx + "].props.heading", multiline: false });
+      Array.from(section.querySelectorAll(".testimonial-card")).forEach((card, cardIdx) => {
+        tagText(card.querySelector(".quote, blockquote, p:not(.author):not(.role)"),
+          { kind: "testimonial_quote", label: "testimonial quote",
+            path: "sections[" + sectionIdx + "].props.testimonials[" + cardIdx + "].quote", multiline: true });
+        tagText(card.querySelector(".author"),
+          { kind: "testimonial_author", label: "testimonial author",
+            path: "sections[" + sectionIdx + "].props.testimonials[" + cardIdx + "].author", multiline: false });
+        tagText(card.querySelector(".role"),
+          { kind: "testimonial_role", label: "testimonial role",
+            path: "sections[" + sectionIdx + "].props.testimonials[" + cardIdx + "].role", multiline: false });
+      });
+    }
+    if (type === "cta") {
+      tagText(section.querySelector("h2"),
+        { kind: "heading", label: "the call-out heading",
+          path: "sections[" + sectionIdx + "].props.heading", multiline: false });
+      tagText(section.querySelector(".cta-sub, .lead.cta-sub"),
+        { kind: "subheading", label: "the line under the call-out heading",
+          path: "sections[" + sectionIdx + "].props.subheading", multiline: true });
+    }
+
+    // Step 3: header + footer
+    if (type === "header") {
+      tagText(section.querySelector(".brand-logo"),
+        { kind: "business_name", label: "your business name",
+          path: "business.name", multiline: false });
+    }
+    if (type === "footer") {
+      tagText(section.querySelector(".footer-brand"),
+        { kind: "business_name", label: "your business name (in the footer)",
+          path: "business.name", multiline: false });
+      tagText(section.querySelector(".footer-tagline"),
+        { kind: "footer_tagline", label: "the footer tagline",
+          path: "business.tagline", multiline: true });
+      tagText(section.querySelector(".footer-address, .footer-link.footer-address"),
+        { kind: "footer_address", label: "the footer address",
+          path: "business.contact.address", multiline: true });
+      // Footer tel link — editing just changes the displayed phone, but the
+      // commit handler also writes business.contact.phone + the href below.
+      const telLink = section.querySelector(".footer-link[href^='tel:']");
+      if (telLink) {
+        tagText(telLink,
+          { kind: "footer_phone", label: "the phone number",
+            path: "business.contact.phone", multiline: false, isPhone: true });
+      }
+    }
+  });
+
+  // Step 3: button labels — hero CTA, cta-section CTA, header phone button.
+  // Buttons contain an SVG icon child that shouldn't be exposed to
+  // contenteditable; isButton triggers the SVG-stash dance in enterInlineEdit.
+  // The header's nav-cta is just the phone number (no "Call " prefix), so it
+  // maps directly to business.contact.phone instead of sections[N].cta_label.
+  doc.querySelectorAll("[data-press-section]").forEach((section) => {
+    const sectionIdx = parseInt(section.getAttribute("data-press-section"), 10);
+    const type = section.getAttribute("data-press-type");
+
+    if (type === "header") {
+      // Header phone button — text IS the phone number, write directly to
+      // business.contact.phone. isPhone triggers tel-href + cross-page sync.
+      Array.from(section.querySelectorAll(".nav-cta, .btn")).forEach((btn) => {
+        if (btn.hasAttribute("data-press-text-edit")) return;
+        tagText(btn,
+          { kind: "header_phone_button", label: "the phone number at the top",
+            path: "business.contact.phone",
+            multiline: false, isButton: true, isPhone: true });
+      });
+      return;
+    }
+
+    if (type === "hero" || type === "cta") {
+      Array.from(section.querySelectorAll(".btn, .hero-cta, .cta-btn")).forEach((btn) => {
+        if (btn.hasAttribute("data-press-text-edit")) return;
+        tagText(btn,
+          { kind: "button_label", label: "the button text",
+            path: "sections[" + sectionIdx + "].props.cta_label",
+            multiline: false, isButton: true });
+      });
+    }
+  });
+}
+
+function tagText(el, info) {
+  if (!el) return;
+  if (el.hasAttribute("data-press-text-edit")) return;
+  el.setAttribute("data-press-text-edit", info.kind);
+  el.setAttribute("data-press-text-edit-path", info.path);
+  el.setAttribute("data-press-text-edit-label", info.label);
+  if (info.multiline) el.setAttribute("data-press-text-edit-multiline", "true");
+  if (info.isButton)  el.setAttribute("data-press-text-edit-button",  "true");
+  if (info.isPhone)   el.setAttribute("data-press-text-edit-phone",   "true");
+}
+
+function enterInlineEdit(el) {
+  if (activelyEditing && activelyEditing.el === el) return;
+  if (activelyEditing) commitInlineEdit();
+
+  const info = {
+    kind: el.getAttribute("data-press-text-edit"),
+    path: el.getAttribute("data-press-text-edit-path"),
+    label: el.getAttribute("data-press-text-edit-label"),
+    multiline: el.hasAttribute("data-press-text-edit-multiline"),
+    isButton:  el.hasAttribute("data-press-text-edit-button"),
+    isPhone:   el.hasAttribute("data-press-text-edit-phone"),
+  };
+
+  // Update the chat pill so the customer sees exactly what's targeted, even
+  // when they're directly typing into the element. Both flows (direct edit
+  // and chat-driven edit) target the same element — the pill reflects that.
+  const doc = $iframe.contentDocument;
+  if (doc) {
+    doc.querySelectorAll(".press-selected, .press-parent-faded, .press-sub-selected")
+      .forEach((s) => s.classList.remove("press-selected", "press-parent-faded", "press-sub-selected"));
+  }
+  const parentSection = el.closest("[data-press-section]");
+  if (parentSection) {
+    parentSection.classList.add("press-parent-faded");
+    selectedTarget = {
+      type: parentSection.getAttribute("data-press-type"),
+      label: parentSection.getAttribute("data-press-label"),
+      index: parseInt(parentSection.getAttribute("data-press-section"), 10),
+    };
+    selectedSubTarget = {
+      kind: info.kind,
+      parentIndex: selectedTarget.index,
+      parentType: selectedTarget.type,
+      subIndex: 0,
+      label: info.label,
+    };
+  } else {
+    selectedTarget = null;
+    selectedSubTarget = { kind: info.kind, parentIndex: 0, parentType: null, subIndex: 0, label: info.label };
+  }
+  $targetLabel.textContent = info.label;
+  $targetPill.classList.add("show");
+
+  // For buttons: protect any child SVG icon from the contenteditable cursor by
+  // marking it contenteditable="false". This keeps the SVG in the DOM (so the
+  // button doesn't visibly shrink), but tells the browser the cursor must not
+  // land on it and the user can't delete it. Restored on commit/revert.
+  if (info.isButton) {
+    const svg = el.querySelector("svg");
+    if (svg) {
+      el._pressProtectedSVG = svg;
+      svg.setAttribute("contenteditable", "false");
+    }
+  }
+
+  const originalText = info.multiline ? el.textContent : el.textContent.trim();
+
+  // contenteditable=plaintext-only blocks pasted markup (Word junk) and rich
+  // input — we just want a plain text field. Falls back gracefully on browsers
+  // that don't support plaintext-only (it'll behave like contenteditable=true).
+  el.setAttribute("contenteditable", "plaintext-only");
+  el.classList.add("press-editing");
+  el.dataset.pressOriginalText = originalText;
+
+  // Focus on next tick — lets the click event finish first so the cursor lands
+  // at the click position naturally.
+  setTimeout(() => {
+    el.focus();
+    // If browser didn't place cursor (rare), drop it at end of text
+    try {
+      const sel = $iframe.contentWindow.getSelection();
+      if (sel && sel.rangeCount === 0 && el.firstChild) {
+        const range = $iframe.contentDocument.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    } catch (e) { /* selection not available — ignore */ }
+  }, 0);
+
+  const keydownListener = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      commitInlineEdit();
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      revertInlineEdit();
+    }
+  };
+  // Blur fires when the user clicks elsewhere; small delay so a sibling click
+  // event has a chance to commit cleanly without race conditions.
+  const blurListener = () => {
+    setTimeout(() => {
+      if (activelyEditing && activelyEditing.el === el) commitInlineEdit();
+    }, 50);
+  };
+  el.addEventListener("keydown", keydownListener);
+  el.addEventListener("blur", blurListener);
+
+  activelyEditing = { el, originalText, info, keydownListener, blurListener };
+}
+
+function commitInlineEdit() {
+  if (!activelyEditing) return;
+  const { el, originalText, info, keydownListener, blurListener } = activelyEditing;
+  const newValue = info.multiline ? el.textContent : el.textContent.trim();
+
+  // Tear down editor state regardless of whether the value changed
+  el.removeAttribute("contenteditable");
+  el.classList.remove("press-editing");
+  el.removeEventListener("keydown", keydownListener);
+  el.removeEventListener("blur", blurListener);
+  delete el.dataset.pressOriginalText;
+  activelyEditing = null;
+
+  // Unprotect SVG (the cursor can land on it normally again outside edit mode).
+  // The SVG was never removed from the DOM — only marked contenteditable="false" —
+  // so there's nothing to re-append; just clean up the attribute.
+  if (info.isButton && el._pressProtectedSVG) {
+    el._pressProtectedSVG.removeAttribute("contenteditable");
+    delete el._pressProtectedSVG;
+  }
+
+  // No-op if unchanged
+  if (newValue === originalText) return;
+
+  // Empty value would visually blank the element forever — refuse the edit
+  // and restore the original. A customer fat-fingering Backspace shouldn't
+  // be able to silently destroy their headline.
+  if (newValue.length === 0) {
+    el.textContent = originalText;
+    return;
+  }
+
+  // Build the diff ops. Most edits emit a single op. Phone-bearing edits emit
+  // up to three so the visible text, the tel: href, and the global
+  // business.contact.phone all stay in sync.
+  const ops = [{ op: "set", path: info.path, value: newValue }];
+
+  // Phone magic: if this is a button label OR a footer phone link, see if the
+  // committed text contains a phone-number pattern. If so, also write
+  // business.contact.phone and (for buttons) the matching cta_href.
+  if (info.isButton || info.isPhone) {
+    const m = newValue.match(/\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/);
+    if (m) {
+      const phone = m[0];
+      // Update the global business phone (synced everywhere via replay logic)
+      if (info.path !== "business.contact.phone") {
+        ops.push({ op: "set", path: "business.contact.phone", value: phone });
+      }
+      // For button labels, also rewrite the matching cta_href so tap-to-call works
+      if (info.isButton && info.path.endsWith(".cta_label")) {
+        const hrefPath = info.path.replace(/\.cta_label$/, ".cta_href");
+        ops.push({ op: "set", path: hrefPath, value: "tel:" + phone.replace(/[^\d+]/g, "") });
+      }
+    }
+  }
+
+  pushDiffOps(ops);                               // persist via localStorage so refresh restores
+  ops.forEach((op) => applyOpToCurrentSite(op)); // keep in-memory siteJson fresh
+
+  // Cross-page visual sync: re-run the same replay logic that fires on iframe
+  // load, so any other DOM instances of the same schema field (e.g. footer
+  // brand syncing with header logo, all phone buttons updating together)
+  // refresh visually without waiting for a reload.
+  const doc = $iframe.contentDocument;
+  if (doc) ops.forEach((op) => { try { applyOpToIframe(doc, op); } catch (e) { console.warn("sync skip:", op, e); } });
+
+  history.unshift({
+    siteJson: structuredClone(currentSite),
+    narration: "Edited " + info.label,
+    timestamp: Date.now(),
+  });
+  renderHistory();
+  flashSaveStatus("Updated " + info.label);
+}
+
+function revertInlineEdit() {
+  if (!activelyEditing) return;
+  const { el, originalText, info, keydownListener, blurListener } = activelyEditing;
+  // For buttons: the SVG is still in the DOM (we only marked it
+  // contenteditable="false"), so setting textContent would wipe it. Walk text
+  // nodes instead and restore only the original text content.
+  if (info && info.isButton && el._pressProtectedSVG) {
+    // Replace text-bearing children with the original text, keep the SVG.
+    const svg = el._pressProtectedSVG;
+    Array.from(el.childNodes).forEach((n) => {
+      if (n !== svg) el.removeChild(n);
+    });
+    el.insertBefore(document.createTextNode(originalText + " "), svg);
+    svg.removeAttribute("contenteditable");
+    delete el._pressProtectedSVG;
+  } else {
+    el.textContent = originalText;
+  }
+  el.removeAttribute("contenteditable");
+  el.classList.remove("press-editing");
+  el.removeEventListener("keydown", keydownListener);
+  el.removeEventListener("blur", blurListener);
+  delete el.dataset.pressOriginalText;
+  activelyEditing = null;
+}
+
+// Apply a diff op against the in-memory currentSite so subsequent AI prompts
+// get the freshest text. Mirrors the server's applier but kept in JS-land.
+function applyOpToCurrentSite(op) {
+  if (op.op !== "set") return;
+  setSitePath(currentSite, op.path, op.value);
+}
+
+function setSitePath(obj, path, value) {
+  const re = /([^.[\]]+)|\[(\d+)\]/g;
+  const tokens = [];
+  let m;
+  while ((m = re.exec(path)) !== null) {
+    if (m[1]) tokens.push({ key: m[1] });
+    else if (m[2] !== undefined) tokens.push({ idx: parseInt(m[2], 10) });
+  }
+  if (tokens.length === 0) return;
+  let cur = obj;
+  for (let i = 0; i < tokens.length - 1; i++) {
+    const t = tokens[i];
+    cur = ("key" in t) ? cur[t.key] : cur[t.idx];
+    if (cur === undefined || cur === null) return;
+  }
+  const last = tokens[tokens.length - 1];
+  if ("key" in last) cur[last.key] = value;
+  else cur[last.idx] = value;
+}
+
+function clearSelection() {
+  const doc = $iframe.contentDocument;
+  if (doc) {
+    doc.querySelectorAll(".press-selected, .press-parent-faded, .press-sub-selected")
+      .forEach((s) => s.classList.remove("press-selected", "press-parent-faded", "press-sub-selected"));
+  }
+  $targetLabel.textContent = ""; // B13: don't leave stale label hanging
+  selectedTarget = null;
+  selectedSubTarget = null;
+  $targetPill.classList.remove("show");
+}
+
+// Re-setup on every iframe load (initial + after navigations / reloads).
+// Also replays any locally-applied diffs so refresh doesn't erase changes.
+function onIframeLoad() {
+  setupSectionTargeting();
+  replayDiffsInIframe();
+}
+$iframe.addEventListener("load", onIframeLoad);
+// In case the iframe is already loaded by the time this runs
+if ($iframe.contentDocument && $iframe.contentDocument.readyState === "complete") {
+  onIframeLoad();
+}
+$targetPillClose.addEventListener("click", clearSelection);
+
+/* ---------- mouse-wheel forwarding into iframe (B01) ----------
+ *
+ * Cross-context wheel events don't reliably scroll an iframe's inner document
+ * when the iframe is inside a flex/grid layout with multiple overflow contexts.
+ * Forward the parent-page wheel events directly to the iframe's contentWindow
+ * so the customer can scroll the preview naturally with their mouse.
+ */
+const $iframeWrap = document.getElementById("previewTab");
+$iframeWrap.addEventListener("wheel", (e) => {
+  if (!$iframe.contentWindow) return;
+  e.preventDefault();
+  $iframe.contentWindow.scrollBy({ top: e.deltaY, left: e.deltaX, behavior: "instant" });
+}, { passive: false });
+
+/* ---------- bootstrap ---------- */
+
+renderHistory();
+updateSaveStatus();   // derive topbar truth-state from localStorage on load
+$input.focus();
+</script>
+</body>
+</html>
