@@ -210,17 +210,17 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
   .final-cta{padding:64px 20px}
 }
 </style>
-<style id="press-section-targeting-styles">[data-press-section] {
+<style id="press-section-targeting-styles">body.editor-mode [data-press-section] {
   cursor: pointer;
   transition: background-color 0.12s ease, outline-color 0.12s ease, box-shadow 0.12s ease;
   outline: 2px solid transparent;
   outline-offset: -2px;
 }
-[data-press-section]:hover {
+body.editor-mode [data-press-section]:hover {
   background-color: rgba(16, 185, 129, 0.06) !important;
   outline-color: rgba(16, 185, 129, 0.55);
 }
-[data-press-section].press-selected {
+body.editor-mode [data-press-section].press-selected {
   background-color: rgba(16, 185, 129, 0.10) !important;
   outline-color: rgba(16, 185, 129, 0.85);
   box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.15);
@@ -268,7 +268,7 @@ h1{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.15;color:
   border-radius: 4px;
   animation: press-pulse-affected 1.2s ease-out;
 }</style></head>
-<body>
+<body><script id="editor-mode-detect-v1">if(window!==window.parent){document.documentElement.classList.add('editor-mode');document.addEventListener('DOMContentLoaded',function(){if(document.body)document.body.classList.add('editor-mode');});}</script>
 
 <header class="topnav" id="topnav">
   <div class="topnav-inner">
