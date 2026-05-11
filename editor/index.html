@@ -206,7 +206,7 @@
       <span id="saveStatusText">All changes saved</span>
     </span>
     <button class="btn btn-ghost" id="downloadBtn" title="Download a snapshot of your site.json">Download backup</button>
-    <button class="btn btn-primary" id="publishBtn">Publish · coming soon</button>
+    <button class="btn btn-primary" id="publishBtn">Publish</button>
   </div>
 
   <!-- main -->
@@ -2252,6 +2252,53 @@ $iframeWrap.addEventListener("wheel", (e) => {
 renderHistory();
 updateSaveStatus();   // derive topbar truth-state from localStorage on load
 $input.focus();
+</script>
+
+<script>
+// Phase 2: Publish handler — POSTs modified iframe HTML to /api/editor/publish
+(function() {
+  function init() {
+    var btn = document.getElementById('publishBtn');
+    var status = document.getElementById('saveStatus');
+    var statusText = document.getElementById('saveStatusText');
+    if (!btn) return;
+    btn.addEventListener('click', async function() {
+      var iframe = document.getElementById('previewIframe');
+      if (!iframe || !iframe.contentDocument) {
+        alert('Preview iframe not loaded yet.');
+        return;
+      }
+      var modifiedHtml = '<!doctype html>\n' + iframe.contentDocument.documentElement.outerHTML;
+      var originalText = btn.textContent;
+      btn.textContent = 'Publishing...';
+      btn.disabled = true;
+      try {
+        var res = await fetch('/api/editor/publish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: 'index.html', content: modifiedHtml }),
+          credentials: 'include'
+        });
+        var json = await res.json();
+        if (res.ok && json.ok) {
+          btn.textContent = 'Published \u2713';
+          if (statusText) statusText.textContent = 'Published — deploying (~30s)';
+          setTimeout(function() { btn.textContent = 'Publish'; btn.disabled = false; }, 3000);
+        } else {
+          btn.textContent = 'Publish failed';
+          alert('Publish failed: ' + (json.err || res.status));
+          setTimeout(function() { btn.textContent = originalText; btn.disabled = false; }, 3000);
+        }
+      } catch (e) {
+        btn.textContent = 'Publish failed';
+        alert('Publish error: ' + e.message);
+        setTimeout(function() { btn.textContent = originalText; btn.disabled = false; }, 3000);
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
 </script>
 </body>
 </html>
