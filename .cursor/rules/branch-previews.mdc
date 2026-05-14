@@ -1,0 +1,17 @@
+---
+description: Never push directly to main on slatepress-site - branch previews mandatory
+alwaysApply: true
+---
+
+# Branch previews are mandatory
+
+This repo auto-deploys to production (`slatepress.co`) on every push to `main`. To prevent breaking the live site:
+
+- Every code change goes to a feature branch FIRST (`fix/...`, `feature/...`, `polish/...`).
+- Cloudflare Pages auto-deploys feature branches to `<branch-slug>.slatepress-site.pages.dev` (slashes in branch names become dashes).
+- Anthony reviews the preview URL before merging to `main`.
+- Only README.md and backup-only commits to slatepress-ops are exempt.
+
+When Claude makes changes here, the default workflow is: create branch -> commit -> push -> surface preview URL -> wait for Anthony's go-ahead before merging to main.
+
+This rule was forged on 2026-05-11 after 5+ hours lost to a broken live site from a direct-to-main push.

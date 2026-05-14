@@ -1,0 +1,50 @@
+---
+description: Slatepress visual language - cream/ink/amber editorial style
+globs: ["**/*.css", "**/*.html"]
+---
+
+# Slatepress design system
+
+## Brand tokens
+
+Use these color tokens only. Do not introduce new hex codes without consulting the `premium-web-designer` Claude skill.
+
+```
+/* Surfaces */
+--cream:       #F5F1E8   /* page canvas - the default surface */
+--cream-deep:  #EBE5D4   /* alternating sections, subtle wells */
+--white:       #FFFFFF   /* cards, modals, form fields */
+
+/* Hairlines and rules */
+--hairline:    #C9C2B1   /* 1px borders, dividers, input outlines */
+
+/* Text */
+--ink:         #14181F   /* primary text, near-black with cool undertone */
+--ink-soft:    #2A2F39   /* secondary text */
+--muted:       #6E6B66   /* tertiary text, labels, eyebrows */
+
+/* Accent - used sparingly, never as decoration */
+--amber:       #C2720D   /* primary accent - ochre, on CTAs and ::selection */
+--amber-lt:    #E8A84D   /* highlight variant, hover, subtle emphasis */
+```
+
+## Type stack
+
+- `--f-serif`: `'Fraunces', Georgia, serif` - display + editorial body
+- `--f-sans`: `'Inter', system-ui, sans-serif` - UI, buttons, dense interface text
+- `--f-mono`: `'JetBrains Mono', ui-monospace, monospace` - eyebrows, labels, code, tabular data
+
+## Cardinal rules
+
+- **Cream is the page canvas, NOT pure white.** Pure `#FFF` is reserved for elevated surfaces (cards, modals, form fields). A pure-white page background is a thoughtless-design tell.
+- **One accent color, one job.** Amber appears on primary CTAs, `::selection`, focus rings, and at most one emphasis moment per viewport. Never as decoration or area fill.
+- **No gradient buttons, no carousels, no Lorem ipsum, no emoji in production UI.**
+- **Generous whitespace.** Section padding: 96px mobile, 128px desktop minimum.
+- **High contrast.** Body text against canvas should hit WCAG AAA (7:1 ratio). Tertiary text never below AA (4.5:1).
+- **Max two type weights per page**, e.g. Fraunces 400 + JetBrains Mono 400. Three is the upper limit.
+
+## When designing or reviewing UI
+
+Defer to the `premium-web-designer` Claude skill (installed globally at `~/.claude/skills/premium-web-designer/`). It encodes the full visual language including the type scale, spacing tokens, motion rules, and quality checklist.
+
+The skill fires automatically when Claude Code is asked to design, redesign, review, or polish any Slatepress surface.

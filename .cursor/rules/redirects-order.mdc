@@ -1,0 +1,45 @@
+---
+description: Cloudflare Pages _redirects file conventions - rule order matters
+globs: ["_redirects"]
+---
+
+# _redirects file conventions
+
+## Rule order matters
+
+Cloudflare Pages evaluates `_redirects` top-to-bottom and stops at the first match. **Specific path rules MUST come BEFORE splat rules.**
+
+Wrangler flags performance warnings if a specific path (`/plumbing_002`, `/method`) sits below a splat (`/dash/*`, `/blog/*`) - meaning the specific rule never fires because the splat caught it first.
+
+Reorder rules so specific paths come first:
+
+```
+# Specific exact paths
+/some-specific-path /destination 301
+/another-exact-path https://external.com/ 301
+
+# Then splats
+/some-path/* /catch-all-dest 301
+```
+
+## Comment every new rule with date + reason
+
+```
+# 2026-05-13: deck content + studio retired during portfolio rebrand. Old URLs redirect to root.
+/blog / 301
+/blog/* / 301
+```
+
+When the rule's reason isn't obvious 6 months later, the comment is what tells future-you (or future-Claude) whether the rule still applies.
+
+## Wildcards vs splat captures
+
+- `/path/*` matches any path under `/path/` (greedy).
+- Use `:splat` in the destination ONLY if you need to forward the captured part. Most redirects we use go to fixed destinations (`/` or another exact URL), so `:splat` is rarely needed.
+
+## Status codes
+
+- `301` for permanent redirects (preferred for retired content).
+- `302` for temporary redirects.
+- `200` for rewrites (serves the destination's content while keeping the original URL in the browser bar) - currently used only for the `/dash/*` SPA pattern.
+- `410` for explicitly Gone content (rare; SEO-aggressive signal to drop from indexes).

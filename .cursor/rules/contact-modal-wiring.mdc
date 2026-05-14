@@ -1,0 +1,35 @@
+---
+description: Preserve the contact-modal wiring on every index.html edit
+globs: ["index.html"]
+---
+
+# Contact modal wiring - preserve on every edit
+
+The slatepress.co homepage uses a critical contact-modal pattern. Several wires are easy to break when redesigning the hero or any CTA. The contact form is the funnel entrance - breaking these wires means prospects can't reach it.
+
+## Required HTML attributes
+
+- Every CTA button intended to open the contact modal MUST have a `data-contact-modal` attribute.
+- The launch film section requires `id="filmVideo"` on the video element and `id="filmPoster"` on the poster fallback image.
+
+## Required script reference
+
+- `<script src="assets/contact-modal.js"></script>` MUST be present in the page, typically near the closing `</body>` tag.
+
+## What can break it
+
+- Hero redesigns that replace CTAs with new buttons but forget the `data-contact-modal` attribute.
+- "Cleanup" passes that remove what look like unused script tags.
+- Renaming the film video element IDs when changing the video.
+
+## Verification after any index.html edit
+
+Run these greps before committing:
+
+```
+grep -c "data-contact-modal" index.html  # should match the number of contact CTAs
+grep "contact-modal.js" index.html       # should return one line
+grep "filmVideo\|filmPoster" index.html  # should return both IDs
+```
+
+If any of these go to zero, the contact funnel is broken. Fix before pushing.
