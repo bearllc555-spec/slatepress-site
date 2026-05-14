@@ -1,50 +1,69 @@
 ---
-description: Slatepress visual language - cream/ink/amber editorial style
+description: Slatepress visual language - canonical brand tokens for slatepress-site repo
 globs: ["**/*.css", "**/*.html"]
 ---
 
-# Slatepress design system
+# Slatepress design system (slatepress-site repo)
 
-## Brand tokens
+This rule encodes the canonical brand tokens for **slatepress.co** specifically. Each SlatePress vertical-brand repo has its own `:root` block with its own tokens; this rule is repo-scoped and applies only to slatepress-site edits.
 
-Use these color tokens only. Do not introduce new hex codes without consulting the `premium-web-designer` Claude skill.
+The source of truth for these tokens is the `:root` block at the top of `index.html`. If they ever drift, this rule should be updated to match - the live file wins.
 
-```
-/* Surfaces */
---cream:       #F5F1E8   /* page canvas - the default surface */
---cream-deep:  #EBE5D4   /* alternating sections, subtle wells */
---white:       #FFFFFF   /* cards, modals, form fields */
+## Canonical tokens
 
-/* Hairlines and rules */
---hairline:    #C9C2B1   /* 1px borders, dividers, input outlines */
+```css
+:root {
+  /* Backgrounds */
+  --bg:         #FFFFFF;   /* page canvas - pure white */
+  --bg-soft:    #FAFAFA;   /* secondary surface */
+  --bg-card:    #F7F7F5;   /* card surfaces, subtle warm tint */
 
-/* Text */
---ink:         #14181F   /* primary text, near-black with cool undertone */
---ink-soft:    #2A2F39   /* secondary text */
---muted:       #6E6B66   /* tertiary text, labels, eyebrows */
+  /* Text */
+  --ink:        #1C1B1F;   /* primary text, near-black with subtle warm undertone */
+  --ink-soft:   #5C5C66;   /* secondary text */
+  --slate:      #85858C;   /* tertiary text */
+  --slate-light:#9CA3AF;   /* quaternary muted text */
 
-/* Accent - used sparingly, never as decoration */
---amber:       #C2720D   /* primary accent - ochre, on CTAs and ::selection */
---amber-lt:    #E8A84D   /* highlight variant, hover, subtle emphasis */
+  /* Borders / rules */
+  --rule:       #E8E8E8;   /* default 1px borders, dividers */
+  --rule-soft:  #F0F0F0;   /* subtle dividers */
+  --rule-strong:#1C1B1F;   /* emphasized borders (matches --ink) */
+
+  /* Brand accent */
+  --blue:       #2563EB;   /* PRIMARY BRAND BLUE - logo "/" + primary CTAs */
+  --blue-deep:  #1D4ED8;   /* hover state for blue */
+  --blue-soft:  #EFF6FF;   /* light blue tint for backgrounds/badges */
+
+  /* Semantic */
+  --emerald:    #059669;   /* success / live-status (the "DIGITAL MARKETING DISTRIBUTION PARTNER" green dot) */
+
+  /* Layout */
+  --max:        1080px;    /* content max-width */
+}
 ```
 
 ## Type stack
 
-- `--f-serif`: `'Fraunces', Georgia, serif` - display + editorial body
-- `--f-sans`: `'Inter', system-ui, sans-serif` - UI, buttons, dense interface text
-- `--f-mono`: `'JetBrains Mono', ui-monospace, monospace` - eyebrows, labels, code, tabular data
+**Inter only.** Single sans-serif throughout. No display serif, no monospace by default. If a special case requires another face, raise the question before adding.
 
-## Cardinal rules
+```css
+font-family: 'Inter', -apple-system, system-ui, sans-serif;
+```
 
-- **Cream is the page canvas, NOT pure white.** Pure `#FFF` is reserved for elevated surfaces (cards, modals, form fields). A pure-white page background is a thoughtless-design tell.
-- **One accent color, one job.** Amber appears on primary CTAs, `::selection`, focus rings, and at most one emphasis moment per viewport. Never as decoration or area fill.
+## Cardinal rules for slatepress-site
+
+- **Pure white canvas (`--bg`).** Backgrounds step down to `--bg-soft` for alternating sections and `--bg-card` for cards. Off-white or cream backgrounds are wrong for this site.
+- **Brand blue (`--blue` #2563EB) is the one accent.** It appears on the logo's `/`, primary CTAs, `::selection`, focus rings, and at most one emphasis moment per viewport. No second accent. The emerald is reserved for live-status indicators only (e.g., the eyebrow's pulsing dot), not as a decorative color.
+- **No new hex codes.** If a component needs a color not in the `:root` block, raise it as a design-system question before adding. Drift across pages is the failure mode.
 - **No gradient buttons, no carousels, no Lorem ipsum, no emoji in production UI.**
-- **Generous whitespace.** Section padding: 96px mobile, 128px desktop minimum.
-- **High contrast.** Body text against canvas should hit WCAG AAA (7:1 ratio). Tertiary text never below AA (4.5:1).
-- **Max two type weights per page**, e.g. Fraunces 400 + JetBrains Mono 400. Three is the upper limit.
+- **High contrast.** Body text against `--bg` should hit WCAG AAA (7:1 ratio). `--slate-light` (#9CA3AF) is borderline on white - use only for non-essential tertiary text.
 
-## When designing or reviewing UI
+## When designing or reviewing UI in this repo
 
-Defer to the `premium-web-designer` Claude skill (installed globally at `~/.claude/skills/premium-web-designer/`). It encodes the full visual language including the type scale, spacing tokens, motion rules, and quality checklist.
+Defer to the `premium-web-designer` Claude skill (installed globally at `~/.claude/skills/premium-web-designer/`). It encodes the universal taste rules and the workflow for loading brand tokens. This rule supplies the brand-specific tokens it will load for slatepress-site.
 
-The skill fires automatically when Claude Code is asked to design, redesign, review, or polish any Slatepress surface.
+When `premium-web-designer` fires, it should:
+1. Ask "What are we designing today?"
+2. On the answer "slatepress.co" or any slatepress-site edit, load the tokens above.
+3. Apply universal taste principles on top.
+4. Produce code that references the brand's variable names (`--blue`, `--ink`, `--bg-card`) directly - never invent token names.
